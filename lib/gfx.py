@@ -1,7 +1,7 @@
 import curses
 import traceback, sys
 
-_screen = curses.initscr()
+_screen = None
 _keymap = {
 	curses.KEY_DOWN : "down",
 	curses.KEY_UP   : "up",
@@ -52,7 +52,7 @@ def draw(x, y, char, window):
 	c = ord(char)
 	h, w = _screen.getmaxyx()
 	if x >= 0 and x < w and y >= 0 and y < h and (x,y)!=(w-1,h-1):
-		_screen.addch(y, x, c)
+		window.addch(y, x, c)
 
 def refresh():
 	global _screen

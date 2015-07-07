@@ -1,2 +1,3 @@
 # Delve
-A console roguelike
+A console roguelike project written in **Python** using the **curses**
+library.
