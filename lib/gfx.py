@@ -53,7 +53,6 @@ def draw(x, y, char, ventana):
 	h, w = _screen.getmaxyx()
 	if x >= 0 and x < w and y >= 0 and y < h and (x,y)!=(w-1,h-1):
 		ventana.addch(x, y, c)
-		ventana.refresh()
 
 def refresh():
 	global _screen
@@ -65,7 +64,7 @@ def clear():
 	if _screen:
 		_screen.erase()
 
-class ventana:
+class Ventana:
 	def __init__(self, x, y, pos_x = 0, pos_y = 0):
 		self.win = curses.newwin(y, 2*x, pos_y, 2*pos_x)
 	def addch(self, x, y, c):
@@ -76,15 +75,27 @@ class ventana:
 if __name__ == '__main__':
 	try:
 		start()
-		win = ventana(20, 20)
+		win = Ventana(20, 20)
+		myMap = ['.'*20]*20
+		myPosition = [10, 10]
 		while 1:
-			for i in range(19):
-				for j in range(19):
-					draw(i, j, '#', win)
+			for i in range(len(myMap[0])):
+				for j in range(len(myMap)):
+					draw(i, j, '.', win)
+			draw(myPosition[0], myPosition[1], '@', win)
+			win.refresh()
 			refresh()
 			q = get_input()
 			if q == 'q':
 				break
+			elif q == 'right':
+				myPosition[0] += 1
+			elif q == 'left':
+				myPosition[0] -= 1
+			elif q == 'up':
+				myPosition[1] -= 1
+			elif q == 'down':
+				myPosition[1] += 1
 		stop()
 	except:
 		stop()
