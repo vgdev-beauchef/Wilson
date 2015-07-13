@@ -48,28 +48,44 @@ def get_input():
 		elif c in _keymap: return _keymap[c]
 	return None
 
-def draw(x, y, char, window):
+def draw(x, y, char, ventana):
 	c = ord(char)
 	h, w = _screen.getmaxyx()
 	if x >= 0 and x < w and y >= 0 and y < h and (x,y)!=(w-1,h-1):
-		window.addch(y, x, c)
+		ventana.addch(x, y, c)
+		ventana.refresh()
 
 def refresh():
 	global _screen
 	if _screen:
-		_screen.napms(20)
+		curses.napms(20)
 
 def clear():
 	global _screen
 	if _screen:
 		_screen.erase()
 
+class ventana:
+	def __init__(self, x, y, pos_x = 0, pos_y = 0):
+		self.win = curses.newwin(y, 2*x, pos_y, 2*pos_x)
+	def addch(self, x, y, c):
+		self.win.addch(y, 2*x, c)
+	def refresh(self):
+		self.win.refresh()
+
 if __name__ == '__main__':
-	win = curses.newwin(10, 10, 10, 10)
 	try:
 		start()
+		win = ventana(20, 20)
 		while 1:
-			draw(5, 5, '@', win)
+			for i in range(19):
+				for j in range(19):
+					draw(i, j, '#', win)
+			refresh()
+			q = get_input()
+			if q == 'q':
+				break
+		stop()
 	except:
 		stop()
 		print (traceback.format_exc())
