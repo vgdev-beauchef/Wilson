@@ -1,9 +1,9 @@
 from Player import Player
-import gfx
+import gfx, mapGen
 import random
 class World(object):
 	def __init__(self, width, height):
-		self.grid = ['#' * width] * height
+		self.grid = mapGen.mapGenerator(width, height)
 		self.window = gfx.Ventana(20, 20)
 		self.player = Player('')
 
@@ -22,9 +22,9 @@ class World(object):
 			for j in range(h):
 				if iniX >= 0 and iniY >= 0 and\
 				   iniX <= self.window.width and iniY <= self.window.height:
-					cha = '#' #self.grid[iniX][iniY]
+					cha = self.grid[iniX][iniY]
 				else:
-					cha = '.'
+					cha = ' '
 
 				if i == xCenter and j == yCenter:
 					cha = '@'
