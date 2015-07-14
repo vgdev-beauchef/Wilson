@@ -55,3 +55,9 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# PyCharm project folder
+.idea/
+
+# Pydev project folder
+.settings/
