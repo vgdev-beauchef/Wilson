@@ -67,6 +67,8 @@ def clear():
 class Ventana:
 	def __init__(self, x, y, pos_x = 0, pos_y = 0):
 		self.win = curses.newwin(y, 2*x, pos_y, 2*pos_x)
+		self.width = x
+		self.height = y
 	def addch(self, x, y, c):
 		self.win.addch(y, 2*x, c)
 	def refresh(self):

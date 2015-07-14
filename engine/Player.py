@@ -23,7 +23,7 @@ class Player(object):
 			'WIS': 0,
 			'CHA': 0
 		}
-		self.position = [0, 0];
+		self.position = [10, 10];
 
 	def rollStats(self):
 		self.abilities['STR'] = d6(3)

@@ -1,20 +1,19 @@
 from gfx import *
 import sys, traceback
+import world, Player
 class UI:
 	def __init__(self):
-		self.world = Ventana(20, 20)
+		self.world = world.World(50, 50)
 		self.log = Ventana(20, 5, 0, 21)
 		self.info = Ventana(20, 40, 21, 0)
 
 if __name__ == '__main__':
 	try:
 		start()
+		ui = UI()
 		while 1:
-			ui = UI()
-			world = ['#'*20]*20
-			for i in range(len(world[0])):
-						for j in range(len(world)):
-							draw(i, j, '#', ui.world)
+			ui.world.drawMap()
+
 			log = ['%'*20]*5
 			for i in range(len(log[0])):
 						for j in range(len(log)):
@@ -22,8 +21,7 @@ if __name__ == '__main__':
 			info = ['$'*20]*26
 			for i in range(len(info[0])):
 						for j in range(len(info)):
-							draw(i, j, '@', ui.info)
-			ui.world.refresh()
+							draw(i, j, '$', ui.info)
 			ui.log.refresh()
 			ui.info.refresh()
 
