@@ -8,7 +8,6 @@ class World(object):
 		self.player = Player('')
 
 	def drawMap(self):
-		#definir esquina
 		xCenter = self.player.position[0]
 		yCenter = self.player.position[1]
 
@@ -24,9 +23,9 @@ class World(object):
 				   iniX <= self.window.width and iniY <= self.window.height:
 					cha = self.grid[iniX][iniY]
 				else:
-					cha = ' '
+					cha = 'X'
 
-				if i == xCenter and j == yCenter:
+				if i == w/2 and j == h/2:
 					cha = '@'
 
 				self.window.addch(i, j, cha)
