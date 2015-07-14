@@ -12,7 +12,7 @@ def d6DropLowest(n):
 		arr.append(random.randint(1, 6))
 	arr = sorted(arr)
 	return sum(arr[1:])
-class Player(Object):
+class Player(object):
 	def __init__(self, name):
 		self.name = name
 		self.abilities = {
@@ -23,6 +23,7 @@ class Player(Object):
 			'WIS': 0,
 			'CHA': 0
 		}
+		self.position = [0, 0];
 
 	def rollStats(self):
 		self.abilities['STR'] = d6(3)
