@@ -1,9 +1,12 @@
 from gfx import *
-import sys, traceback
-import world, Player
+import sys
+import traceback
+import world
+import Player
 
 
 class UI:
+
     def __init__(self):
         self.world = world.World(50, 50)
         self.log = Ventana(20, 5, 0, 21)
@@ -42,10 +45,11 @@ if __name__ == '__main__':
 
             # INPUT
             q = get_input()
-            if q == 'q': break
+            if q == 'q':
+                break
             ui.movement(q)
         stop()
     except:
         stop()
-        print (traceback.format_exc())
+        print(traceback.format_exc())
         sys.exit(-1)
