@@ -4,13 +4,27 @@ import traceback
 import world
 import Player
 
+_logWindowWidth = 25
+_logWindowHeight = 4
+_logWindowXPos = 0
+_logWindowYPos = 26
+
+_infoWindowWidth = 15
+_infoWindowHeight = 30
+_infoWindowXPos = 26
+_infoWindowYPos = 0
+
 
 class UI:
 
     def __init__(self):
         self.world = world.World(50, 50)
-        self.log = Ventana(20, 5, 0, 21)
-        self.info = Ventana(20, 40, 21, 0)
+        self.log = Ventana(
+            _logWindowWidth, _logWindowHeight,
+            _logWindowXPos, _logWindowYPos)
+        self.info = Ventana(
+            _infoWindowWidth, _infoWindowHeight,
+            _infoWindowXPos, _infoWindowYPos)
 
     def movement(self, ginput):
         if ginput == 'left':
@@ -31,12 +45,12 @@ if __name__ == '__main__':
             ui.world.drawMap()
 
             # LOG
-            log = ['%' * 20] * 5
+            log = ['%' * _logWindowWidth] * _logWindowHeight
             for i in range(len(log[0])):
                 for j in range(len(log)):
                     draw(i, j, '%', ui.log)
             # INFO
-            info = ['$' * 20] * 26
+            info = ['$' * _infoWindowWidth] * _infoWindowHeight
             for i in range(len(info[0])):
                 for j in range(len(info)):
                     draw(i, j, '$', ui.info)
@@ -53,3 +67,5 @@ if __name__ == '__main__':
         stop()
         print(traceback.format_exc())
         sys.exit(-1)
+sys.exit(-1)
+sys.exit(-1)

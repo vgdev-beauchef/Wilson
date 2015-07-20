@@ -1,12 +1,17 @@
 from Player import Player
-import gfx, mapGen
+import gfx
+import mapGen
 import random
+
+_windowX = 25
+_windowY = 25
 
 
 class World(object):
+
     def __init__(self, width, height):
         self.grid = mapGen.mapGenerator(width, height)
-        self.window = gfx.Ventana(20, 20)
+        self.window = gfx.Ventana(_windowX, _windowY)
         self.player = Player('')
 
     def drawMap(self):
@@ -21,7 +26,8 @@ class World(object):
         for i in range(w):
             iniY = yCenter - w / 2
             for j in range(h):
-                if iniY >= 0 and 0 <= iniX <= self.window.width and iniY <= self.window.height:
+                if iniY >= 0 and 0 <= iniX <= self.window.width and\
+                        iniY <= self.window.height:
                     cha = self.grid[iniX][iniY]
                 else:
                     cha = 'X'
