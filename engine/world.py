@@ -10,7 +10,7 @@ _windowY = 25
 class World(object):
 
     def __init__(self, width, height):
-        self.grid = mapGen.mapGenerator(width, height)
+        self.grid = mapGen.mapGenerator2(width, height)
         self.window = gfx.Ventana(_windowX, _windowY)
         self.player = Player('')
 
