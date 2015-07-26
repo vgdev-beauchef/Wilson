@@ -2,6 +2,7 @@ from Player import Player
 import gfx
 import mapGen
 import random
+from entities import *
 
 _windowX = 25
 _windowY = 25
@@ -34,8 +35,17 @@ class World(object):
 
                 if i == w / 2 and j == h / 2:
                     cha = '@'
-
-                self.window.addch(i, j, cha)
+                if cha == '@':
+                    color = 4
+                elif cha == '#':
+                    color = 5
+                elif cha == '.':
+                    color = 3
+                elif cha == '~':
+                    color = 6
+                else:
+                    color = 1
+                self.window.addch(i, j, cha, color)
                 iniY += 1
             iniX += 1
         self.window.refresh()

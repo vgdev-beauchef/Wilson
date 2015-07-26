@@ -24,7 +24,18 @@ def start():
         _screen.timeout(0)
         _screen.scrollok(False)
         curses.start_color()
+        curses.use_default_colors()
 
+        for i in range(0, curses.COLORS):
+            curses.init_pair(i + 1, i, -1)
+
+# 0 default color
+# 1 black
+# 2 red
+# 3 yellow
+# 4 green
+#
+#
 
 def stop():
     global _screen
@@ -55,11 +66,11 @@ def get_input():
     return None
 
 
-def draw(x, y, char, ventana):
+def draw(x, y, char, ventana, color = 0):
     c = ord(char)
     h, w = _screen.getmaxyx()
     if x >= 0 and x < w and y >= 0 and y < h and (x, y) != (w - 1, h - 1):
-        ventana.addch(x, y, c)
+        ventana.addch(x, y, c, color)
 
 
 def refresh():
@@ -80,8 +91,9 @@ class Ventana:
         self.width = x
         self.height = y
 
-    def addch(self, x, y, c):
-        self.win.addch(y, 2 * x, c)
+    def addch(self, x, y, c, color = 0):
+        if x >= 0 and x < self.width and y >= 0 and y < self.height and (x, y) != (self.width - 1, self.height - 1):
+            self.win.addch(y, 2 * x, c, curses.color_pair(color))
 
     def refresh(self):
         self.win.refresh()

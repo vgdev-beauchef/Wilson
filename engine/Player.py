@@ -1,5 +1,5 @@
 import random
-
+from entities import Entity
 
 def d6(n):
     suma = 0
@@ -16,8 +16,12 @@ def d6DropLowest(n):
     return sum(arr[1:])
 
 
-class Player(object):
+class Player(Entity):
     def __init__(self, name):
+        character = '@'
+        color = 2
+        passable = True
+
         self.name = name
         self.abilities = {
             'STR': 0,
