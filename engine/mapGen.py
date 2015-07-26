@@ -1,6 +1,7 @@
 import random
 import noise
 import time
+from cellularMapGen import generateMap
 
 
 def mapGenerator(width, height):
@@ -43,3 +44,6 @@ def mapGenerator2(width, height):
 
         grid.append(fila)
     return grid
+
+def mapGenerator3(width, height):
+    return generateMap(width, height)

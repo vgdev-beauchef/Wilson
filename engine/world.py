@@ -11,7 +11,7 @@ _windowY = 25
 class World(object):
 
     def __init__(self, width, height):
-        self.grid = mapGen.mapGenerator2(width, height)
+        self.grid = mapGen.mapGenerator3(width, height)
         self.window = gfx.Ventana(_windowX, _windowY)
         self.player = Player('')
 
@@ -35,6 +35,7 @@ class World(object):
 
                 if i == w / 2 and j == h / 2:
                     cha = '@'
+
                 if cha == '@':
                     color = 4
                 elif cha == '#':

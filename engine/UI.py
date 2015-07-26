@@ -18,7 +18,7 @@ _infoWindowYPos = 0
 class UI:
 
     def __init__(self):
-        self.world = world.World(50, 50)
+        self.world = world.World(200, 200)
         self.log = Ventana(
             _logWindowWidth, _logWindowHeight,
             _logWindowXPos, _logWindowYPos)
