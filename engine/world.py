@@ -15,6 +15,32 @@ class World(object):
         self.window = gfx.Ventana(_windowX, _windowY)
         self.player = Player('')
 
+    def scrollingMapX(self):
+        p = self.player.position[0]
+        s = self.window.width
+        hs = s / 2
+        m = len(self.grid)
+
+        if p < hs:
+            return 0
+        elif p > m - hs:
+            return m - s
+        else:
+            return p - hs
+
+    def scrollingMapY(self):
+        p = self.player.position[1]
+        s = self.window.height
+        hs = s / 2
+        m = len(self.grid[0])
+
+        if p < hs:
+            return 0
+        elif p > m - hs:
+            return m - s
+        else:
+            return p - hs
+
     def drawMap(self):
         xCenter = self.player.position[0]
         yCenter = self.player.position[1]
@@ -22,24 +48,29 @@ class World(object):
         w = self.window.width
         h = self.window.height
 
-        iniX = xCenter - w / 2
+        cameraX = self.scrollingMapX()
+        cameraWidth = _windowX + cameraX
+        cameraY = self.scrollingMapY()
+        cameraHeight = _windowY + cameraY
 
         for i in range(w):
-            iniY = yCenter - w / 2
             for j in range(h):
-                if iniY >= 0 and 0 <= iniX <= self.window.width and\
-                        iniY <= self.window.height:
-                    cha = self.grid[iniX][iniY]
-                else:
-                    cha = 'X'
 
-                if i == w / 2 and j == h / 2:
+                x = i + cameraX
+                y = j + cameraY
+
+                try:
+                    cha = self.grid[x][y]
+                except:
+                    pass
+
+                if x == xCenter and y == yCenter:
                     cha = '@'
 
                 if cha == '@':
                     color = 4
                 elif cha == '#':
-                    color = 5
+                    color = 7
                 elif cha == '.':
                     color = 3
                 elif cha == '~':
@@ -47,6 +78,4 @@ class World(object):
                 else:
                     color = 1
                 self.window.addch(i, j, cha, color)
-                iniY += 1
-            iniX += 1
         self.window.refresh()

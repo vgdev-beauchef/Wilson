@@ -1,6 +1,7 @@
 import random
 from entities import Entity
 
+
 def d6(n):
     suma = 0
     for i in range(n):
@@ -17,6 +18,7 @@ def d6DropLowest(n):
 
 
 class Player(Entity):
+
     def __init__(self, name):
         character = '@'
         color = 2
@@ -31,7 +33,7 @@ class Player(Entity):
             'WIS': 0,
             'CHA': 0
         }
-        self.position = [10, 10];
+        self.position = [random.randint(0, 10), random.randint(0, 10)]
 
     def rollStats(self):
         self.abilities['STR'] = d6(3)
