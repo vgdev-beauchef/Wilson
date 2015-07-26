@@ -27,13 +27,13 @@ class UI:
             _infoWindowXPos, _infoWindowYPos)
 
     def movement(self, ginput):
-        if ginput == 'left':
+        if ginput == 'left' and self.world.grid[self.world.player.position[0] - 1][self.world.player.position[1] - 1] != '#':
             self.world.player.position[0] -= 1
-        elif ginput == 'right':
+        elif ginput == 'right' and self.world.grid[self.world.player.position[0] + 1][self.world.player.position[1]] != '#':
             self.world.player.position[0] += 1
-        elif ginput == 'up':
+        elif ginput == 'up' and self.world.grid[self.world.player.position[0]][self.world.player.position[1] - 1] != '#':
             self.world.player.position[1] -= 1
-        elif ginput == 'down':
+        elif ginput == 'down' and self.world.grid[self.world.player.position[0]][self.world.player.position[1] + 1] != '#':
             self.world.player.position[1] += 1
 
 
