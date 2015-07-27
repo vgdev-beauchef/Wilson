@@ -1,8 +1,9 @@
 import random
-_chanceToStartAlive = 0.45
+_chanceToStartAlive = 0.4
 deathLimit = 3
-birthLimit = 5
+birthLimit = 4
 numberOfSteps = 4
+
 
 def initialiseMap(grid):
     width = len(grid)
@@ -14,6 +15,7 @@ def initialiseMap(grid):
                 grid[i][j] = True
 
     return grid
+
 
 def doSimulationStep(oldGrid):
     width = len(oldGrid)
@@ -37,7 +39,6 @@ def doSimulationStep(oldGrid):
     return newGrid
 
 
-
 def countAliveNeighbours(grid, x, y):
     width = len(grid)
     height = len(grid[0])
@@ -54,6 +55,7 @@ def countAliveNeighbours(grid, x, y):
             elif grid[neighbour_x][neighbour_y]:
                 count += 1
     return count
+
 
 def generateMap(width, height):
     gridMap = [[0 for x in range(width)] for x in range(height)]
