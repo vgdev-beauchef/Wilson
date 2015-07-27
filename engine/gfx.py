@@ -1,5 +1,6 @@
 import curses
-import traceback, sys
+import traceback
+import sys
 
 _screen = None
 _keymap = {
@@ -37,6 +38,7 @@ def start():
 #
 #
 
+
 def stop():
     global _screen
     if _screen:
@@ -66,7 +68,7 @@ def get_input():
     return None
 
 
-def draw(x, y, char, ventana, color = 0):
+def draw(x, y, char, ventana, color=0):
     c = ord(char)
     h, w = _screen.getmaxyx()
     if x >= 0 and x < w and y >= 0 and y < h and (x, y) != (w - 1, h - 1):
@@ -86,14 +88,14 @@ def clear():
 
 
 class Ventana:
+
     def __init__(self, x, y, pos_x=0, pos_y=0):
         self.win = curses.newwin(y, 2 * x, pos_y, 2 * pos_x)
         self.width = x
         self.height = y
 
-    def addch(self, x, y, c, color = 0):
-        if x >= 0 and x < self.width and y >= 0 and y < self.height and (x, y) != (self.width - 1, self.height - 1):
-            self.win.addch(y, 2 * x, c, curses.color_pair(color))
+    def addch(self, x, y, c, color=0):
+        self.win.addch(y, 2 * x, c, curses.color_pair(color))
 
     def refresh(self):
         self.win.refresh()
@@ -126,5 +128,5 @@ if __name__ == '__main__':
         stop()
     except:
         stop()
-        print (traceback.format_exc())
+        print(traceback.format_exc())
         sys.exit(-1)
