@@ -2,16 +2,19 @@ from Player import Player
 import gfx
 import mapGen
 import random
+import math
 from entities import *
 
 _windowX = 25
 _windowY = 25
+_viewRadius = 5
 
 
 class World(object):
 
     def __init__(self, width, height):
         self.grid = mapGen.mapGenerator3(width, height)
+        self.vgrid = [[False for x in range(width)] for x in range(height)]
         self.window = gfx.Ventana(_windowX, _windowY)
         self.player = Player('')
 
@@ -41,6 +44,25 @@ class World(object):
         else:
             return p - hs
 
+    def fov(self):
+        width = len(self.grid)
+        height = len(self.grid[0])
+        self.vgrid = [[False for x in range(width)] for x in range(height)]
+        for i in range(360):
+            x = math.cos(i * 0.01745)
+            y = math.sin(i * 0.01745)
+            self.doFov(x, y)
+
+    def doFov(self, x, y):
+        ox = self.player.position[0] + 0.5
+        oy = self.player.position[1] + 0.5
+        for i in range(_viewRadius):
+            self.vgrid[int(ox)][int(oy)] = True
+            if self.grid[int(ox)][int(oy)] == '#':
+                return
+            ox += x
+            oy += y
+
     def drawMap(self):
         xCenter = self.player.position[0]
         yCenter = self.player.position[1]
@@ -52,6 +74,8 @@ class World(object):
         cameraWidth = _windowX + cameraX
         cameraY = self.scrollingMapY()
         cameraHeight = _windowY + cameraY
+
+        self.fov()
 
         for i in range(w):
             for j in range(h):
@@ -77,5 +101,8 @@ class World(object):
                     color = 6
                 else:
                     color = 1
-                self.window.addch(i, j, cha, color)
+                if self.vgrid[x][y]:
+                    self.window.addch(i, j, cha, color)
+                else:
+                    self.window.addch(i, j, ' ')
         self.window.refresh()
