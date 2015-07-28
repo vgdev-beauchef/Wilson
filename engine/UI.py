@@ -1,4 +1,5 @@
 from gfx import *
+import debug
 import sys
 import traceback
 import world
@@ -27,18 +28,21 @@ class UI:
             _infoWindowXPos, _infoWindowYPos)
 
     def movement(self, ginput):
-        if ginput == 'left' and self.world.grid[self.world.player.position[0] - 1][self.world.player.position[1] - 1] != '#':
+        px = self.world.player.position[0]
+        py = self.world.player.position[1]
+        if ginput == 'left' and (self.world.grid[px - 1][py] != '#' or debug.debug):
             self.world.player.position[0] -= 1
-        elif ginput == 'right' and self.world.grid[self.world.player.position[0] + 1][self.world.player.position[1]] != '#':
+        elif ginput == 'right' and (self.world.grid[px + 1][py] != '#' or debug.debug):
             self.world.player.position[0] += 1
-        elif ginput == 'up' and self.world.grid[self.world.player.position[0]][self.world.player.position[1] - 1] != '#':
+        elif ginput == 'up' and (self.world.grid[px][py - 1] != '#' or debug.debug):
             self.world.player.position[1] -= 1
-        elif ginput == 'down' and self.world.grid[self.world.player.position[0]][self.world.player.position[1] + 1] != '#':
+        elif ginput == 'down' and (self.world.grid[px][py + 1] != '#' or debug.debug):
             self.world.player.position[1] += 1
 
 
 if __name__ == '__main__':
     try:
+        debug.debug = True
         start()
         ui = UI()
         while 1:
@@ -61,6 +65,8 @@ if __name__ == '__main__':
             q = get_input()
             if q == 'q':
                 break
+            elif q == 'enter':
+                debug.debug = not debug.debug
             ui.movement(q)
         stop()
     except:

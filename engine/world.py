@@ -3,6 +3,7 @@ import gfx
 import mapGen
 import random
 import math
+import debug
 from entities import *
 
 _windowX = 25
@@ -101,7 +102,7 @@ class World(object):
                     color = 6
                 else:
                     color = 1
-                if self.vgrid[x][y]:
+                if self.vgrid[x][y] or debug.debug:
                     self.window.addch(i, j, cha, color)
                 else:
                     self.window.addch(i, j, ' ')

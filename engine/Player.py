@@ -33,7 +33,7 @@ class Player(Entity):
             'WIS': 0,
             'CHA': 0
         }
-        self.position = [random.randint(0, 10), random.randint(0, 10)]
+        self.position = [random.randint(0, 50), random.randint(0, 50)]
 
     def rollStats(self):
         self.abilities['STR'] = d6(3)
