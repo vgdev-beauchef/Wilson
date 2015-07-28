@@ -1,8 +1,8 @@
 import random
-_chanceToStartAlive = 0.4
-deathLimit = 3
+_chanceToStartAlive = 0.40
+deathLimit = 2
 birthLimit = 4
-numberOfSteps = 4
+numberOfSteps = 6
 
 
 def initialiseMap(grid):
