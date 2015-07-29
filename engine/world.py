@@ -8,7 +8,7 @@ from entities import *
 
 _windowX = 25
 _windowY = 25
-_viewRadius = 5
+_viewRadius = 4
 
 
 class World(object):
@@ -16,6 +16,7 @@ class World(object):
     def __init__(self, width, height):
         self.grid = mapGen.mapGenerator3(width, height)
         self.vgrid = [[False for x in range(width)] for x in range(height)]
+        self.memgrid = [[False for x in range(width)] for x in range(height)]
         self.window = gfx.Ventana(_windowX, _windowY)
         self.player = Player('')
 
@@ -102,8 +103,14 @@ class World(object):
                     color = 6
                 else:
                     color = 1
+
+                if self.vgrid[x][y] and cha == '#':
+                    self.memgrid[x][y] = True
+
                 if self.vgrid[x][y] or debug.debug:
                     self.window.addch(i, j, cha, color)
+                elif self.memgrid[x][y]:
+                    self.window.addch(i, j, cha, 5)
                 else:
                     self.window.addch(i, j, ' ')
         self.window.refresh()
