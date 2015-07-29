@@ -8,7 +8,7 @@ from entities import *
 
 _windowX = 25
 _windowY = 25
-_viewRadius = 5
+_viewRadius = 4
 
 
 class World(object):

@@ -73,5 +73,4 @@ if __name__ == '__main__':
         stop()
         print(traceback.format_exc())
         sys.exit(-1)
-sys.exit(-1)
-sys.exit(-1)
+sys.exit(0)
