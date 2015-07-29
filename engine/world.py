@@ -1,4 +1,4 @@
-from Player import Player
+from Player import *
 import gfx
 import mapGen
 import random
@@ -18,10 +18,10 @@ class World(object):
         self.vgrid = [[False for x in range(width)] for x in range(height)]
         self.memgrid = [[False for x in range(width)] for x in range(height)]
         self.window = gfx.Ventana(_windowX, _windowY)
-        self.player = Player('')
+        #self.player = Player('')
 
     def scrollingMapX(self):
-        p = self.player.position[0]
+        p = getPlayPos()[0]
         s = self.window.width
         hs = s / 2
         m = len(self.grid)
@@ -34,7 +34,7 @@ class World(object):
             return p - hs
 
     def scrollingMapY(self):
-        p = self.player.position[1]
+        p = getPlayPos()[1]
         s = self.window.height
         hs = s / 2
         m = len(self.grid[0])
@@ -56,8 +56,8 @@ class World(object):
             self.doFov(x, y)
 
     def doFov(self, x, y):
-        ox = self.player.position[0] + 0.5
-        oy = self.player.position[1] + 0.5
+        ox = getPlayPos()[0] + 0.5
+        oy = getPlayPos()[1] + 0.5
         for i in range(_viewRadius):
             self.vgrid[int(ox)][int(oy)] = True
             if self.grid[int(ox)][int(oy)] == '#':
@@ -66,8 +66,8 @@ class World(object):
             oy += y
 
     def drawMap(self):
-        xCenter = self.player.position[0]
-        yCenter = self.player.position[1]
+        xCenter = getPlayPos()[0]
+        yCenter = getPlayPos()[1]
 
         w = self.window.width
         h = self.window.height

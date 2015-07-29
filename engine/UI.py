@@ -28,20 +28,21 @@ class UI:
             _infoWindowXPos, _infoWindowYPos)
 
     def movement(self, ginput):
-        px = self.world.player.position[0]
-        py = self.world.player.position[1]
+        px = Player.getPlayPos()[0]
+        py = Player.getPlayPos()[1]
         if ginput == 'left' and (self.world.grid[px - 1][py] != '#' or debug.debug):
-            self.world.player.position[0] -= 1
+            Player.getPlayPos()[0] -= 1
         elif ginput == 'right' and (self.world.grid[px + 1][py] != '#' or debug.debug):
-            self.world.player.position[0] += 1
+            Player.getPlayPos()[0] += 1
         elif ginput == 'up' and (self.world.grid[px][py - 1] != '#' or debug.debug):
-            self.world.player.position[1] -= 1
+            Player.getPlayPos()[1] -= 1
         elif ginput == 'down' and (self.world.grid[px][py + 1] != '#' or debug.debug):
-            self.world.player.position[1] += 1
+            Player.getPlayPos()[1] += 1
 
 
 if __name__ == '__main__':
     try:
+        Player.initPlayer('dummy')
         debug.debug = True
         start()
         ui = UI()
