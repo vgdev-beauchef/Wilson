@@ -70,6 +70,9 @@ if __name__ == '__main__':
             for i in range(len(log[0])):
                 for j in range(len(log)):
                     draw(i, j, '%', ui.log, 5)
+
+            write(0, 0, 'asdasdasdasdasd', ui.log,2)
+
             # INFO
             info = ['$' * _infoWindowWidth] * _infoWindowHeight
             for i in range(len(info[0])):

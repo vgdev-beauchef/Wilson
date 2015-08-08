@@ -74,6 +74,12 @@ def draw(x, y, char, ventana, color=0):
     if x >= 0 and x < w and y >= 0 and y < h and (x, y) != (w - 1, h - 1):
         ventana.addch(x, y, c, color)
 
+def write(x, y, string, ventana, color=0):
+    h, w = _screen.getmaxyx()
+    length = len(string)
+    if x >= 0 and x + length < w and y >= 0 and y < h and (x, y) != (w - 1, h - 1):
+        ventana.addstr(x, y, string, color)
+
 
 def refresh():
     global _screen
@@ -96,6 +102,9 @@ class Ventana:
 
     def addch(self, x, y, c, color=0):
         self.win.addch(y, 2 * x, c, curses.color_pair(color))
+
+    def addstr(self, x, y, string, color=0):
+        self.win.addstr(y, x, string, curses.color_pair(color))
 
     def refresh(self):
         self.win.refresh()
