@@ -26,7 +26,7 @@ _openWindowYPos = 20
 class UI:
 
     def __init__(self):
-        self.world = world.World(200, 200)
+        self.world = world.World()
         self.log = Log.Log()
         self.info = Ventana(
             _infoWindowWidth, _infoWindowHeight,
