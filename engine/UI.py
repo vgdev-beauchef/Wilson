@@ -5,15 +5,25 @@ import traceback
 import world
 import Player
 
-_logWindowWidth = 25
-_logWindowHeight = 4
+_logWindowWidth = 32
+_logWindowHeight = 11
 _logWindowXPos = 0
-_logWindowYPos = 26
+_logWindowYPos = 19
 
-_infoWindowWidth = 15
-_infoWindowHeight = 30
-_infoWindowXPos = 26
+_infoWindowWidth = 10
+_infoWindowHeight = 10
+_infoWindowXPos = 33
 _infoWindowYPos = 0
+
+_inveWindowWidth = 10
+_inveWindowHeight = 10
+_inveWindowXPos = 33
+_inveWindowYPos = 10
+
+_opeWindowWidth = 10
+_opeWindowHeight = 10
+_opeWindowXPos = 33
+_openWindowYPos = 20
 
 
 class UI:
@@ -26,6 +36,12 @@ class UI:
         self.info = Ventana(
             _infoWindowWidth, _infoWindowHeight,
             _infoWindowXPos, _infoWindowYPos)
+        self.inventory = Ventana(
+            _inveWindowWidth, _inveWindowHeight,
+            _inveWindowXPos, _inveWindowYPos)
+        self.operations = Ventana(
+            _opeWindowWidth, _opeWindowHeight,
+            _opeWindowXPos, _openWindowYPos)
 
     def movement(self, ginput):
         px = Player.getPlayPos()[0]
@@ -58,9 +74,25 @@ if __name__ == '__main__':
             info = ['$' * _infoWindowWidth] * _infoWindowHeight
             for i in range(len(info[0])):
                 for j in range(len(info)):
-                    draw(i, j, '$', ui.info, 5)
+                    draw(i, j, '$', ui.info, 6)
+
+
+            #INVENTORY
+            inv = ['I' * _inveWindowWidth] * _inveWindowHeight
+            for i in range(len(inv[0])):
+                for j in range(len(inv)):
+                    draw(i, j, 'I', ui.inventory, 7)
+
+            #OPERATIONS
+            ope = ['O' * _opeWindowWidth] * _opeWindowHeight
+            for i in range(len(ope[0])):
+                for j in range(len(ope)):
+                    draw(i, j, 'O', ui.operations, 8)
+
+            ui.operations.refresh()
             ui.log.refresh()
             ui.info.refresh()
+            ui.inventory.refresh()
 
             # INPUT
             q = get_input()

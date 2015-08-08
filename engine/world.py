@@ -6,8 +6,8 @@ import math
 import debug
 from entities import *
 
-_windowX = 25
-_windowY = 25
+_windowX = 32
+_windowY = 18
 _viewRadius = 4
 
 
