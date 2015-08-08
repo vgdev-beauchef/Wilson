@@ -5,11 +5,7 @@ import traceback
 import world
 import Player
 import Log
-
-_infoWindowWidth = 10
-_infoWindowHeight = 10
-_infoWindowXPos = 33
-_infoWindowYPos = 0
+import Info
 
 _inveWindowWidth = 10
 _inveWindowHeight = 10
@@ -27,9 +23,7 @@ class UI:
     def __init__(self):
         self.world = world.World(200, 200)
         self.log = Log.Log()
-        self.info = Ventana(
-            _infoWindowWidth, _infoWindowHeight,
-            _infoWindowXPos, _infoWindowYPos)
+        self.info = Info.Info()
         self.inventory = Ventana(
             _inveWindowWidth, _inveWindowHeight,
             _inveWindowXPos, _inveWindowYPos)
@@ -48,6 +42,10 @@ class UI:
             Player.getPlayPos()[1] -= 1
         elif ginput == 'down' and (self.world.grid[px][py + 1] != '#' or debug.debug):
             Player.getPlayPos()[1] += 1
+        elif ginput == '[':
+            Player.modifyHunger(-1)
+        elif ginput == ']':
+            Player.modifyHunger(1)
 
 
 if __name__ == '__main__':
@@ -63,10 +61,7 @@ if __name__ == '__main__':
             ui.log.draw()
 
             # INFO
-            info = ['$' * _infoWindowWidth] * _infoWindowHeight
-            for i in range(len(info[0])):
-                for j in range(len(info)):
-                    draw(i, j, '$', ui.info, 6)
+            ui.info.draw()
 
 
             #INVENTORY
@@ -83,7 +78,6 @@ if __name__ == '__main__':
 
             ui.operations.refresh()
             ui.log.refresh()
-            ui.info.refresh()
             ui.inventory.refresh()
 
             # INPUT
