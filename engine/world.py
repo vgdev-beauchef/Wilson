@@ -4,6 +4,7 @@ import mapGen
 import random
 import math
 import debug
+import matrix
 from entities import *
 
 _windowX = 32
@@ -13,8 +14,10 @@ _viewRadius = 4
 
 class World(object):
 
-    def __init__(self, width, height):
-        self.grid = mapGen.mapGenerator3(width, height)
+    def __init__(self):
+        self.grid = matrix.maptoMatrix("mapa1.txt")
+        height = len(self.grid[0])
+        width = len(self.grid)
         self.vgrid = [[False for x in range(width)] for x in range(height)]
         self.memgrid = [[False for x in range(width)] for x in range(height)]
         self.window = gfx.Ventana(_windowX, _windowY)
