@@ -1,9 +1,9 @@
 def maptoMatrix(f):
     matrix =[]
     linea = []
-    orig = '../resources/maps/' + f 
+    orig = "resources/maps/" + f
     string = open(orig, 'r')
-    
+
     for line in string.readlines():
         for a in line:
             if a != '\n':
@@ -12,14 +12,3 @@ def maptoMatrix(f):
         linea = []
 
     return matrix
-
-
-
-
-
-
-
-
-			
-
-	
