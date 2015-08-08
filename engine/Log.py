@@ -17,5 +17,7 @@ class Log:
             for j in range(len(log)):
                 draw(i, j, '%', self.window, 5)
 
+        write(0, 0, 'Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an.', self.window,2)
+
     def refresh(self):
         self.window.refresh()

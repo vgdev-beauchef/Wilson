@@ -4,11 +4,7 @@ import sys
 import traceback
 import world
 import Player
-
-_logWindowWidth = 32
-_logWindowHeight = 11
-_logWindowXPos = 0
-_logWindowYPos = 19
+import Log
 
 _infoWindowWidth = 10
 _infoWindowHeight = 10
@@ -30,9 +26,7 @@ class UI:
 
     def __init__(self):
         self.world = world.World(200, 200)
-        self.log = Ventana(
-            _logWindowWidth, _logWindowHeight,
-            _logWindowXPos, _logWindowYPos)
+        self.log = Log.Log()
         self.info = Ventana(
             _infoWindowWidth, _infoWindowHeight,
             _infoWindowXPos, _infoWindowYPos)
@@ -66,12 +60,7 @@ if __name__ == '__main__':
             ui.world.drawMap()
 
             # LOG
-            log = ['%' * _logWindowWidth] * _logWindowHeight
-            for i in range(len(log[0])):
-                for j in range(len(log)):
-                    draw(i, j, '%', ui.log, 5)
-
-            write(0, 0, 'asdasdasdasdasd', ui.log,2)
+            ui.log.draw()
 
             # INFO
             info = ['$' * _infoWindowWidth] * _infoWindowHeight
