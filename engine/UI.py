@@ -71,7 +71,7 @@ if __name__ == '__main__':
                 for j in range(len(log)):
                     draw(i, j, '%', ui.log, 5)
 
-            write(0, 0, 'asdasdasdasdasd', ui.log,2)
+            write(0, 0, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris convallis elit non lacus commodo, nec elementum tortor iaculis. Mauris sed urna justo. Donec ipsum neque, porta id metus et, cursus semper enim. Suspendisse pretium non mi id molestie. Cras facilisis, nibh sit amet dapibus pulvinar, tortor libero maximus est, a pulvinar neque nisl faucibus lacus. Cras ut justo efficitur, fermentum sem a, viverra enim. Nullam condimentum ullamcorper nisl. Fusce rhoncus tincidunt viverra.', ui.log,2)
 
             # INFO
             info = ['$' * _infoWindowWidth] * _infoWindowHeight
