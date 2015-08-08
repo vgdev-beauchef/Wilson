@@ -5,6 +5,7 @@ import traceback
 import world
 import Player
 import Log
+import Inventory
 
 _infoWindowWidth = 10
 _infoWindowHeight = 10
@@ -30,9 +31,7 @@ class UI:
         self.info = Ventana(
             _infoWindowWidth, _infoWindowHeight,
             _infoWindowXPos, _infoWindowYPos)
-        self.inventory = Ventana(
-            _inveWindowWidth, _inveWindowHeight,
-            _inveWindowXPos, _inveWindowYPos)
+        self.inventory = Inventory.Inventory()
         self.operations = Ventana(
             _opeWindowWidth, _opeWindowHeight,
             _opeWindowXPos, _openWindowYPos)
@@ -70,10 +69,7 @@ if __name__ == '__main__':
 
 
             #INVENTORY
-            inv = ['I' * _inveWindowWidth] * _inveWindowHeight
-            for i in range(len(inv[0])):
-                for j in range(len(inv)):
-                    draw(i, j, 'I', ui.inventory, 7)
+            ui.inventory.draw()
 
             #OPERATIONS
             ope = ['O' * _opeWindowWidth] * _opeWindowHeight
