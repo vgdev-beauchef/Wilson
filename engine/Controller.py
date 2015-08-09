@@ -26,9 +26,11 @@ class Controller:
 		self.ope = _ope
 		self.intro = _intro
 
+
 		self.dayCount = 0
 		self.stepCount = 0
-		self.dayCountLimit = 30
+		self.dayCountLimit = 60
+		self.nightTimeLimit = 30
 		self.dayTime = 0
 		self.flag = False
 
@@ -46,6 +48,8 @@ class Controller:
 
 		self.info.setTimeToDusk(self.dayCountLimit)
 		#self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
+
+		self.mapDisp = False
 
 	def movement(self, ginput):
 		px = Player.getPlayPos()[0]
@@ -205,6 +209,16 @@ class Controller:
 		pxf = Player.getPlayPos()[0]
 		pyf = Player.getPlayPos()[1]
 
+		if self.mapDisp:
+			#TODO
+			if ginput=='m':
+				self.mapDisp = False
+			return
+
+		if ginput=='m':
+			#TODO
+			return
+			
 		if (ginput=='left' or ginput=='right' or ginput=='up' or ginput=='down') and (pxi!=pxf or pyi!=pyf) and not debug.debug:
 			self.dayCount+=1
 			self.stepCount+=1
@@ -213,6 +227,10 @@ class Controller:
 			Player.modifyHunger(-1)
 			if self.stepCount==46:
 				self.log.add_event("Uf... La ultima vez que camine tanto fue ese dia que fuimos de campamento con mi esposa. Recuerdo lo mucho que se reia al verme cojear mientras ella corria por las cuestas.")
+
+			if self.dayCount>self.nightTimeLimit:
+				pass
+
 			if self.dayCount>self.dayCountLimit:
 				self.dayCount=0
 				self.log.increase_day()
