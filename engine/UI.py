@@ -19,9 +19,10 @@ _inveWindowYPos = 10
 
 class UI:
 
-    def __init__(self, _world, _log, _info, _inventory, _ope):
+    def __init__(self, _world, _log, _info, _inventory, _ope, _mach):
         self.world = _world
         self.log = _log
+        self.machine = _mach
 
         self.info = _info
         self.inventory = _inventory
@@ -29,7 +30,7 @@ class UI:
 
     def draw(self):
         self.world.drawMap()
-
+        
         # LOG
         self.log.draw()
 

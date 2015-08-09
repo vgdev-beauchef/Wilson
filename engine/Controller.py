@@ -10,18 +10,22 @@ import Item
 import Info
 #import musicPlayer
 import optionsUI
+import StateMachine
 
 class Controller:
 
-	def __init__(self, _world, _log, _info, _inventory, _ope):
+	def __init__(self, _world, _log, _info, _inventory, _ope, _mach):
+		self.machine = _mach
 		self.world = _world
 		self.log = _log
 		self.info = _info
 		self.inventory = _inventory
 		self.ope = _ope
 		self.dayCount = 0
+		self.stepCount = 0
 		self.dayCountLimit = 30
 		self.dayTime = 0
+		self.flag = False
 
 		self.info.setTimeToDusk(self.dayCountLimit)
 
@@ -81,10 +85,18 @@ class Controller:
 
 		if ginput=='left' or ginput=='right' or ginput=='up' or ginput=='down':
 			self.dayCount+=1
+			self.stepCount+=1
 			#self.log.add_event(ginput)
 			self.info.setTime(self.dayCount)
 			Player.modifyHunger(-1)
+			if self.stepCount==46:
+				self.log.add_event("Uf... La ultima vez que camine tanto fue ese dia que fuimos de campamento con mi esposa. Recuerdo lo mucho que se reia al verme cojear mientras ella corria por las cuestas.")
 			if self.dayCount>self.dayCountLimit:
 				self.dayCount=0
 				self.log.increase_day()
+				self.machine.changeState(self.log)
+				self.flag = False
+			elif self.dayCount>4*self.dayCountLimit/5 and not self.flag:
+				self.machine.changeState(self.log)
+				self.flag = True
 
