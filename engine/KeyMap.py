@@ -21,18 +21,18 @@ class KeyMap:
         # first column
 
         write(3, 2, "@ Personaje", self.window, 226)
-        write(3, 3, "# Roca", self.window, 95)
+        write(3, 3, u"\u2588 Roca", self.window, 95)
         write(3, 4, ". Arena", self.window, 227)
-        write(3, 5, "~ Agua prof", self.window, 21)
-        write(3, 6, "/ Pasto", self.window, 83)
+        write(3, 5, u"\u2248 Agua prof", self.window, 21)
+        write(3, 6, u"\u0e45 Pasto", self.window, 83)
 
         # second column
 
         write(16, 2, "* Objeto", self.window, 129)
-        write(16, 3, "O Cueva", self.window, 233)
-        write(16, 4, "- Agua", self.window, 124)
-        write(16, 5, "Y Palmera", self.window, 41)
-        write(16, 6, "T Arbol", self.window, 29)
+        write(16, 3, u"\u22d2 Cueva", self.window, 246)
+        write(16, 4, "~ Agua", self.window, 124)
+        write(16, 5, u"\u1f33 Palmera", self.window, 41)
+        write(16, 6, u"\u1f34 Arbol", self.window, 29)
 
         # third column
 
