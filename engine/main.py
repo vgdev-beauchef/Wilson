@@ -12,18 +12,22 @@ import musicPlayer
 import optionsUI
 import UI
 import Controller
+import Screen
 import os
-import IntroScreen
 import time
+import pygame
 
 if __name__ == '__main__':
-
     if os.environ["COLORTERM"] ==  "gnome-terminal":
         os.environ["TERM"] = "xterm-256color"
 
 
     try:
         #musicPlayer.musicWrapper('resources/tracks/track_01.mid')
+        pygame.init()
+        pygame.mixer.music.load('resources/tracks/mainloop.wav')
+        pygame.mixer.music.play(-1, 0.0)
+
         Player.initPlayer('dummy')
         debug.debug = True
         start()
@@ -34,7 +38,7 @@ if __name__ == '__main__':
         info = Info.Info()
         inventory = Inventory.Inventory()
         ope = optionsUI.optionsUI()
-        intro = IntroScreen.IntroScreen()
+        intro = Screen.Screen()
 
         ui = UI.UI(world, log, info, inventory, ope)
         controller = Controller.Controller(world, log, info, inventory, ope)
@@ -77,5 +81,5 @@ if __name__ == '__main__':
         stop()
         print(traceback.format_exc())
         sys.exit(-1)
+pygame.mixer.music.stop()
 sys.exit(0)
-

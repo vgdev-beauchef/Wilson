@@ -97,25 +97,25 @@ class World(object):
                     cha = '@'
 
                 if cha == '@':          #Personaje
-                    color = 4
+                    color = 226
                 elif cha == '#':        #Roca
-                    color = 9
+                    color = 95
                 elif cha == '.':        #Arena
-                    color = 4
+                    color = 227
                 elif cha == '~':        #Agua profunda
-                    color = 7
+                    color = 21
                 elif cha == '/':        #Pasto
-                    color = 3
+                    color = 83
                 elif cha == '*':        #Objeto
-                    color = 5
+                    color = 197
                 elif cha == 'O':        #Cueva
-                    color = 6
+                    color = 233
                 elif cha == '-':        #agua no profunda
-                    color = 7
+                    color = 124
                 elif cha == 'Y':        #palmera
-                    color = 2
+                    color = 41
                 elif cha == 'T':        #arbol
-                    color = 3
+                    color = 29
                 else:
                     color = 1
 
