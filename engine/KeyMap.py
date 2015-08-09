@@ -36,9 +36,9 @@ class KeyMap:
 
         # third column
 
-        write(27, 2, "A Manzana", self.window, 197)
-        write(27, 3, "J Jabali", self.window, 167)
-        write(27, 4, "W Cuchillo", self.window, 248)
+        write(27, 2, "a Manzana", self.window, 197)
+        write(27, 3, "j Jabali", self.window, 167)
+        write(27, 4, "w Cuchillo", self.window, 248)
         write(27, 5, "X Relev. Obj", self.window, 162)
 
         return
