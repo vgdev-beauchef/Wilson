@@ -15,70 +15,25 @@ def getPlayPos():
     if _player:
         return _player.position
 
+def getHunger():
+    global _player
+    if _player:
+        return (_player.hunger, _player.maxHunger)
 
-def d6(n):
-    suma = 0
-    for i in range(n):
-        suma += random.randint(1, 6)
-    return suma
-
-
-def d6DropLowest(n):
-    arr = []
-    for i in range(n + 1):
-        arr.append(random.randint(1, 6))
-    arr = sorted(arr)
-    return sum(arr[1:])
-
+def modifyHunger(n):
+    global _player
+    if _player:
+        if _player.hunger + n <= _player.maxHunger and\
+           _player.hunger + n >= 0:
+           _player.hunger += n
 
 class Player(Entity):
-
     def __init__(self, name):
         character = '@'
         color = 2
         passable = True
-
         self.name = name
-        self.abilities = {
-            'STR': 0,
-            'DEX': 0,
-            'CON': 0,
-            'INT': 0,
-            'WIS': 0,
-            'CHA': 0
-        }
         self.position = [random.randint(0, 50), random.randint(0, 50)]
-
-    def rollStats(self):
-        self.abilities['STR'] = d6(3)
-        self.abilities['DEX'] = d6(3)
-        self.abilities['CON'] = d6(3)
-        self.abilities['INT'] = d6(3)
-        self.abilities['WIS'] = d6(3)
-        self.abilities['CHA'] = d6(3)
-
-    def rollStatsEasy(self):
-        self.abilities['STR'] = d6DropLowest(3)
-        self.abilities['DEX'] = d6DropLowest(3)
-        self.abilities['CON'] = d6DropLowest(3)
-        self.abilities['INT'] = d6DropLowest(3)
-        self.abilities['WIS'] = d6DropLowest(3)
-        self.abilities['CHA'] = d6DropLowest(3)
-
-    def __str__(self):
-        return 'Name: ' + self.name + '\n' + \
-               'STR: ' + str(self.abilities['STR']) + '\n' + \
-               'DEX: ' + str(self.abilities['DEX']) + '\n' + \
-               'CON: ' + str(self.abilities['CON']) + '\n' + \
-               'INT: ' + str(self.abilities['INT']) + '\n' + \
-               'WIS: ' + str(self.abilities['WIS']) + '\n' + \
-               'CHA: ' + str(self.abilities['CHA']) + '\n' + \
-               'Mean: ' + str(sum(self.abilities.values()) / 6)
-
-
-if __name__ == '__main__':
-    pl = Player('GengiBro')
-    pl.rollStats()
-    print(pl)
-    pl.rollStatsEasy()
-    print(pl)
+        self.maxHunger = 100
+        self.hunger = 50
+        self.sanity = 10
