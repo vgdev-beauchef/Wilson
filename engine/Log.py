@@ -31,6 +31,7 @@ class Log:
     def draw(self):
 
         self.clean()
+
         write(23, 0, "J     <Dia "+str(self.day_displayed+1)+">     L", self.window, 0)
         write(25, 0, "<-", self.window, 222)
         write(38, 0, "->", self.window, 222)
@@ -128,9 +129,27 @@ def row_number(line):
 def parser(line, line_size):
 
     size = len(line)
-    len_size = line_size
+    len_size = line_size-1
 
-    return_list = [line[i:i+len_size] for i in range(0, size, len_size)]
+    #return_list = [line[i:i+len_size] for i in range(0, size, len_size)]
+
+    return_list = []
+    current_line = ''
+    split = line.split(' ')
+
+    for i in range(len(split)):
+        word_size = len(split[i])
+        if len(current_line)+word_size <=len_size:
+            if(current_line==''):
+                current_line = split[i]
+            else:
+                current_line = current_line+' '+split[i]
+        else:
+            return_list.append(current_line)
+            current_line=split[i]
+
+    if not current_line=='':
+        return_list.append(current_line)
 
     return return_list
 
