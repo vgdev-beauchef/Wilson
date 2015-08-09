@@ -227,9 +227,35 @@ class Controller:
 			#TODO
 			self.key_map.visibility(True)
 			return
-			
+
 		if (ginput=='left' or ginput=='right' or ginput=='up' or ginput=='down') and (pxi!=pxf or pyi!=pyf) and not debug.debug:
 			self.dayCount+=1
+			if self.dayCount < self.dayCountLimit/3:
+				world._viewRadius = 13
+			elif self.dayCount < self.dayCountLimit*2/3:
+				world._viewRadius = 10
+			else:
+				world._viewRadius = 7
+			if self.dayCount < self.dayCountLimit*2/3:
+				world.tiles['rock']      = world.colors['gray']
+				world.tiles['sand']      = world.colors['sand']
+				world.tiles['deep']      = world.colors['deep-blue']
+				world.tiles['grass']     = world.colors['grass']
+				world.tiles['obj']       = world.colors['fucsia']
+				world.tiles['cave']      = world.colors['dark']
+				world.tiles['shallow']   = world.colors['shallow-blue']
+				world.tiles['palm']      = world.colors['palm']
+				world.tiles['tree']      = world.colors['tree']
+			else:
+				world.tiles['rock']      = world.colors['gray-night']
+				world.tiles['sand']      = world.colors['sand-night']
+				world.tiles['deep']      = world.colors['deep-blue-night']
+				world.tiles['grass']     = world.colors['grass-night']
+				world.tiles['obj']       = world.colors['fucsia-night']
+				world.tiles['cave']      = world.colors['dark-night']
+				world.tiles['shallow']   = world.colors['shallow-blue-night']
+				world.tiles['palm']      = world.colors['palm-night']
+				world.tiles['tree']      = world.colors['tree-night']
 			self.stepCount+=1
 			#self.log.add_event(ginput)
 			self.info.setTime(self.dayCount)
