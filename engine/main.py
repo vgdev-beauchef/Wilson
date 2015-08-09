@@ -41,7 +41,7 @@ if __name__ == '__main__':
         intro = Screen.Screen()
 
         ui = UI.UI(world, log, info, inventory, ope)
-        controller = Controller.Controller(world, log, info, inventory, ope)
+        controller = Controller.Controller(world, log, info, inventory, ope, intro)
 
         manzana = Item.Item('comida', 1, 'hola')
         cuchillo = Item.Item('cuchillo', 2, 'hola')
