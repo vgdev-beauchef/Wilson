@@ -16,7 +16,7 @@ class Inventory:
         self.max = 5
 
     def draw(self):
-        inv = ['I' * self.width] * self.height
+        #inv = ['I' * self.width] * self.height
         # for i in range(len(inv[0])):
         #     for j in range(len(inv)):
         #         draw(i, j, 'I', self.window, 7)
@@ -26,7 +26,7 @@ class Inventory:
         newlist = sorted(self.items.keys(), key=lambda x: x.id)
         k = 1
         for key in newlist:
-            string = key.name +" : "+ str(self.items[key])
+            string = "[" + str(k) + "] " +key.name +" : "+ str(self.items[key])
             write(1, k, string, self.window, 0)
             k = k+2
 
@@ -38,7 +38,7 @@ class Inventory:
             if (key.id==id):
                 return key;
         return None
-
+        
     def addItem(self, item):
         if(len(self.items)<self.max):
             if(item in self.items):

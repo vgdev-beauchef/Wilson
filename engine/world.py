@@ -9,7 +9,7 @@ from entities import *
 
 _windowX = 32
 _windowY = 18
-_viewRadius = 10
+_viewRadius = 13
 
 colors = {
     'black'         : 0,
@@ -25,15 +25,36 @@ colors = {
     'sand'          : 227,
     'deep-blue'     : 21,
     'grass'         : 83,
-    'fucsia'        : 197,
+    'fucsia'        : 129,
     'dark'          : 233,
     'shallow-blue'  : 124,
     'palm'          : 41,
     'tree'          : 29,
+    'gray-night'    : 236,
+    'sand-night'    : 71,
+    'deep-blue-night':18,
+    'grass-night'   : 30,
+    'fucsia-night'  : 197,
+    'dark-night'    : 17,
+    'shallow-blue-night': 28,
+    'palm-night'    : 29,
+    'tree-night'    : 23,
     'apple'         : 197,
     'fallen_palm'   : 162,
     'boar'          : 167,
     'metal'         : 248
+}
+tiles = {
+    'person'    : colors['pink'],
+    'rock'      : colors['gray'],
+    'sand'      : colors['sand'],
+    'deep'      : colors['deep-blue'],
+    'grass'     : colors['grass'],
+    'obj'       : colors['fucsia'],
+    'cave'      : colors['dark'],
+    'shallow'   : colors['shallow-blue'],
+    'palm'      : colors['palm'],
+    'tree'      : colors['tree']
 }
 
 
@@ -132,25 +153,25 @@ class World(object):
                     cha = '@'
 
                 if cha == '@':          #Personaje
-                    color = colors['pink']
+                    color = tiles['person']
                 elif cha == '#':        #Roca
-                    color = colors['gray']
+                    color = tiles['rock']
                 elif cha == '.':        #Arena
-                    color = colors['sand']
+                    color = tiles['sand']
                 elif cha == '~':        #Agua profunda
-                    color = colors['deep-blue']
+                    color = tiles['deep']
                 elif cha == '/':        #Pasto
-                    color = colors['grass']
+                    color = tiles['grass']
                 elif cha == '*':        #Objeto
-                    color = colors['fucsia']
+                    color = tiles['obj']
                 elif cha == 'O':        #Cueva
-                    color = colors['dark']
+                    color = tiles['cave']
                 elif cha == '-':        #agua no profunda
-                    color = colors['shallow-blue']
+                    color = tiles['shallow']
                 elif cha == 'Y':        #palmera
-                    color = colors['palm']
+                    color = tiles['palm']
                 elif cha == 'T':        #arbol
-                    color = colors['tree']
+                    color = tiles['tree']
                 elif cha == 'a':        #manzana
                     color = colors['apple']
                 elif cha == 'X':        #evento interesante

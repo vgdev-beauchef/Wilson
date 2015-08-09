@@ -16,7 +16,7 @@ import pygame.mixer as mixer
 
 class Controller:
 
-	def __init__(self, _world, _log, _info, _inventory, _ope, _mach, _intro, _ui):
+	def __init__(self, _world, _log, _info, _inventory, _ope, _mach, _intro, _ui, _keyMap):
 		self.ui = _ui
 		self.machine = _mach
 		self.world = _world
@@ -25,6 +25,7 @@ class Controller:
 		self.inventory = _inventory
 		self.ope = _ope
 		self.intro = _intro
+		self.key_map = _keyMap
 
 
 		self.dayCount = 0
@@ -48,7 +49,7 @@ class Controller:
 		self.cueva = False
 
 		self.info.setTimeToDusk(self.dayCountLimit)
-		#self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
+		self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
 
 		self.mapDisp = False
 
@@ -224,18 +225,45 @@ class Controller:
 		pxf = Player.getPlayPos()[0]
 		pyf = Player.getPlayPos()[1]
 
-		if self.mapDisp:
+		if self.key_map.is_visible():
 			#TODO
 			if ginput=='m':
-				self.mapDisp = False
+				self.key_map.visibility(False)
 			return
 
 		if ginput=='m':
 			#TODO
+			self.key_map.visibility(True)
 			return
-			
+
 		if (ginput=='left' or ginput=='right' or ginput=='up' or ginput=='down') and (pxi!=pxf or pyi!=pyf) and not debug.debug:
 			self.dayCount+=1
+			if self.dayCount < self.dayCountLimit/3:
+				world._viewRadius = 13
+			elif self.dayCount < self.dayCountLimit*2/3:
+				world._viewRadius = 10
+			else:
+				world._viewRadius = 7
+			if self.dayCount < self.dayCountLimit*2/3:
+				world.tiles['rock']      = world.colors['gray']
+				world.tiles['sand']      = world.colors['sand']
+				world.tiles['deep']      = world.colors['deep-blue']
+				world.tiles['grass']     = world.colors['grass']
+				world.tiles['obj']       = world.colors['fucsia']
+				world.tiles['cave']      = world.colors['dark']
+				world.tiles['shallow']   = world.colors['shallow-blue']
+				world.tiles['palm']      = world.colors['palm']
+				world.tiles['tree']      = world.colors['tree']
+			else:
+				world.tiles['rock']      = world.colors['gray-night']
+				world.tiles['sand']      = world.colors['sand-night']
+				world.tiles['deep']      = world.colors['deep-blue-night']
+				world.tiles['grass']     = world.colors['grass-night']
+				world.tiles['obj']       = world.colors['fucsia-night']
+				world.tiles['cave']      = world.colors['dark-night']
+				world.tiles['shallow']   = world.colors['shallow-blue-night']
+				world.tiles['palm']      = world.colors['palm-night']
+				world.tiles['tree']      = world.colors['tree-night']
 			self.stepCount+=1
 			#self.log.add_event(ginput)
 			self.info.setTime(self.dayCount)
