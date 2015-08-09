@@ -10,15 +10,19 @@ import Item
 import Info
 #import musicPlayer
 import optionsUI
+import Screen
+import time
 
 class Controller:
 
-	def __init__(self, _world, _log, _info, _inventory, _ope):
+	def __init__(self, _world, _log, _info, _inventory, _ope, _intro):
 		self.world = _world
 		self.log = _log
 		self.info = _info
 		self.inventory = _inventory
 		self.ope = _ope
+		self.intro = _intro
+
 		self.dayCount = 0
 		self.dayCountLimit = 30
 		self.dayTime = 0
@@ -96,4 +100,11 @@ class Controller:
 			if self.dayCount>self.dayCountLimit:
 				self.dayCount=0
 				self.log.increase_day()
+			self.deadCondition()
+
+	def deadCondition(self):
+		if(Player.getHunger()[0]<=0):
+			self.intro.game_over_screen()
+			time.sleep(5)
+			exit(0)
 
