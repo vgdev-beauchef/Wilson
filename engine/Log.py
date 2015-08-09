@@ -111,16 +111,16 @@ class Log:
             log_file.write("\n\n")
         log_file.close()
 
-    def row_number(line):
-        n = int(len(line) // 62)+1
-        return n
+def row_number(line):
+    n = int(len(line) // 62)+1
+    return n
 
-    def parser(line, line_size):
+def parser(line, line_size):
 
-        size = len(line)
-        len_size = line_size
+    size = len(line)
+    len_size = line_size
 
-        return_list = [line[i:i+len_size] for i in range(0, size, len_size)]
+    return_list = [line[i:i+len_size] for i in range(0, size, len_size)]
 
-        return return_list
+    return return_list
 
