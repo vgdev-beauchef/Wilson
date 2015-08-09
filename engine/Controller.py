@@ -8,11 +8,11 @@ import Log
 import Inventory
 import Item
 import Info
-#import musicPlayer
+import musicPlayer
 import optionsUI
 import StateMachine
 import time
-#import pygame.mixer as mixer
+import pygame.mixer as mixer
 
 class Controller:
 
@@ -50,7 +50,7 @@ class Controller:
 		self.escape = False
 
 		self.info.setTimeToDusk(self.dayCountLimit)
-		#self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
+		self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
 
 		self.mapDisp = False
 
@@ -65,7 +65,7 @@ class Controller:
 
 		def check(key):
 			if not ((key != '#' and key != 'T' and key != 'Y' and key != '~') or debug.debug):
-				#self.hit_sound.play()
+				self.hit_sound.play()
 				return False
 			return True
 
@@ -125,16 +125,16 @@ class Controller:
 
 		if pos=='a' and not self.option_flag['A']:
 			self.log.add_event("Encontre una manzana")
-			option = "que hacer con la manzana?"
-			yes_answer = "guardarla"
-			no_aswer = "comerla"
+			option = "Que hacer con la manzana?"
+			yes_answer = "Guardarla"
+			no_aswer = "Comerla"
 			self.option_flag['A'] = True
 			self.world.grid[80][170]  = '-'
 		elif pos=='j' and not self.option_flag['J']:
 			self.log.add_event("Hay una cria de jabali alla... si la mato ahora tengo alimento facil, pero es tan solo un pequena criatura... como podria yo...? ")
-			option = "que hacer?"
-			yes_answer = "matarla"
-			no_aswer = "dejarla huir"
+			option = "Que hacer?"
+			yes_answer = "Matarla"
+			no_aswer = "Dejarla huir"
 			self.option_flag['J'] = True
 			self.world.grid[93][139] = '/'
 		elif pos=='w' and not self.option_flag['W']:
@@ -145,17 +145,17 @@ class Controller:
 			self.world.grid[105][123] = '.'
 			return
 		elif pos=='O' and not self.option_flag['O'] and not self.cueva:
-			self.log.add_event("Oh, una cueva!! Se escuchan ruidos desde adentro...sera un algun animal?? un oso? Entro?")
-			option = "que hacer?"
-			yes_answer = "entrar"
-			no_aswer = "ignorar"
+			self.log.add_event("Oh, una cueva!! Se escuchan ruidos desde adentro...sera un algun animal?? Un oso? Entro?")
+			option = "Que hacer?"
+			yes_answer = "Entrar"
+			no_aswer = "Ignorar"
 			self.option_flag['O'] = True
 			self.cueva = True
 		elif pos=='X' and not self.option_flag['X']:
 			self.log.add_event("Me encuentro junto a una enorme palmera caida. No seria muy dificil usarla para construir una balsa...")
-			option = "que hacer con la palmera?"
-			yes_answer = "construir balsa"
-			no_aswer = "ignorar balsa"
+			option = "Que hacer con la palmera?"
+			yes_answer = "Construir balsa"
+			no_aswer = "Ignorar balsa"
 			self.option_flag['X'] = True
 			self.world.grid[89][101] = '.'
 
@@ -298,7 +298,7 @@ class Controller:
 			self.info.setTime(self.dayCount)
 			Player.modifyHunger(-1)
 			if self.stepCount==46:
-				self.log.add_event("Uf... La ultima vez que camine tanto fue ese dia que fuimos de campamento con mi esposa. Recuerdo lo mucho que se reia al verme cojear mientras ella corria por las cuestas.")
+				self.log.add_event("Uf... la ultima vez que camine tanto fue ese dia que fuimos de campamento con mi esposa. Recuerdo lo mucho que se reia al verme cojear mientras ella corria por las cuestas.")
 
 			if self.dayCount>self.nightTimeLimit:
 				pass
@@ -324,7 +324,7 @@ class Controller:
 			#time.sleep(3)
 		if percentage ==5 and not self.hunger_flag_0:
 			self.hunger_flag_0 = True
-			self.log.add_event("No se cuanto mas me pueda mover... Necesito comer algo")
+			self.log.add_event("No se cuanto mas me pueda mover... necesito comer algo")
 
 		elif percentage == 25 and not self.hunger_flag_2:
 			self.hunger_flag_2 = True
@@ -346,13 +346,13 @@ class Controller:
 
 	def killedByBear(self):
 		if self._killedByBear:
-			self.log.add_event("Esto fue... demasiado para ... mi")
+			self.log.add_event("Esto fue... demasiado para ... mi",197)
 			self.log.add_event("Presiona enter para continuar")
 		return self._killedByBear
 
 	def deadCondition(self):
 		if(Player.getHunger()[0]<=0):
-			self.log.add_event("Creo que no me siento bien... *cae*")
+			self.log.add_event("Creo que no me siento bien... *cae*",250)
 			self.log.add_event("Presiona enter para continuar")
 			return True
 		return False
