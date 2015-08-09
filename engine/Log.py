@@ -11,30 +11,34 @@ class Log:
         self.yPos = 19
         self.window = Ventana(self.width, self.height, self.xPos, self.yPos)
         self.day = 0
+        self.day_displayed = 0
         self.diary_index = 0
         self.diary = list()
-        self.diary.append("banana")
-        self.diary.append("???")
+        # Day zero
+        self.diary.append(list())
+        self.page = self.diary[0]
+        self.page.append("banana")
+        self.page.append("???")
 
-        self.diary.append("Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.")
-        self.diary.append("Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.")
+        self.page.append("Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.")
+        self.page.append("Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.")
 
     def clean(self):
-        for i in range(1, 11):
+        for i in range(0, 11):
             empty_string = " "*63
             write(0, i, empty_string, self.window, 0)
 
     def draw(self):
 
         self.clean()
-        write(1, 0, "<Dia "+str(self.day)+">", self.window, 0)
+        write(1, 0, "<Dia "+str(self.day_displayed)+">", self.window, 0)
         i = self.diary_index
         index = 10
         while i < self.diary_index+10:
             color = 3
-            if i >= len(self.diary) or index < 1:
+            if i >= len(self.page) or index < 1:
                 break
-            line = ">"+self.diary[i]
+            line = ">"+self.page[i]
             lines = parser(line, 62)
 
             rows = row_number(line)
@@ -59,14 +63,17 @@ class Log:
         self.window.refresh()
 
     def add_event(self, string):
-        self.diary.insert(0, string)
+        self.page.insert(0, string)
 
 
     def increase_day(self):
         self.day += 1
+        self.diary.append(list())
+        self.page = self.diary[len(self.diary)-1]
+        self.day_displayed = self.day
 
     def scroll_up(self):
-        if (self.diary_index + 1) >= len(self.diary):
+        if (self.diary_index + 1) >= len(self.page):
             return
         else:
             self.diary_index += 1
@@ -76,6 +83,24 @@ class Log:
             return
         else:
             self.diary_index -= 1
+
+    def next_day(self):
+        day_index = self.day_displayed + 1
+        if day_index >= len(self.diary):
+            return
+        else:
+            self.page = self.diary[day_index]
+            self.diary_index = 0
+            self.day_displayed += 1
+
+    def prev_day(self):
+        day_index = self.day_displayed - 1
+        if day_index < 0:
+            return
+        else:
+            self.page = self.diary[day_index]
+            self.diary_index = 0
+            self.day_displayed -= 1
 
 def row_number(line):
         n = int(len(line) // 62)+1
