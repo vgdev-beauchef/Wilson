@@ -95,6 +95,12 @@ class Controller:
 
 		if (ginput=='left' or ginput=='right' or ginput=='up' or ginput=='down') and (pxi!=pxf or pyi!=pyf) and not debug.debug:
 			self.dayCount+=1
+			if self.dayCount < self.dayCountLimit/3:
+				world._viewRadius = 13
+			elif self.dayCount < self.dayCountLimit*2/3:
+				world._viewRadius = 10
+			else:
+				world._viewRadius = 7
 			self.stepCount+=1
 			#self.log.add_event(ginput)
 			self.info.setTime(self.dayCount)
