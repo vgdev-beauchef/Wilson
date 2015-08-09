@@ -12,8 +12,13 @@ import musicPlayer
 import optionsUI
 import UI
 import Controller
+import os
 
 if __name__ == '__main__':
+
+    if os.environ["COLORTERM"] ==  "gnome-terminal":
+        os.environ["TERM"] = "xterm-256color"
+
 
     try:
         #musicPlayer.musicWrapper('resources/tracks/track_01.mid')
