@@ -10,9 +10,9 @@ class optionsUI(object):
 	def __init__(self):
 		self.window = Ventana(_opeWindowWidth, _opeWindowHeight,
 							  _opeWindowXPos, _openWindowYPos)
-		self.intro = 'Decision: 1 o 2?'
-		self.yesOption = 'Si (y)'
-		self.noOption = 'No (n)'
+		self.intro = ''
+		self.yesOption = ''
+		self.noOption = ''
 
 
 	def draw(self):
@@ -25,8 +25,10 @@ class optionsUI(object):
 			line += 1
 
 		line += 1
-		self.updateOption('(Y)'+ self.yesOption, line)
-		self.updateOption('(N)' + self.noOption, line + 2)
+
+		if not self.yesOption=="":
+			self.updateOption('(y)'+ self.yesOption, line)
+			self.updateOption('(n)' + self.noOption, line + 2)
 
 		self.window.refresh()
 
@@ -39,6 +41,6 @@ class optionsUI(object):
 		self.noOption = c
 
 	def clearWindow(self):
-		clean_string = " " * 20
+		clean_string = " " * 19
 		for i in range(10):
 			write(0,i,clean_string,self.window,0)
