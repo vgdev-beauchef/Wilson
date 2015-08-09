@@ -68,7 +68,7 @@ if __name__ == '__main__':
 
 
             #INVENTORY
-            ui.inventory.draw()
+            # ui.inventory.draw()
 
             #OPERATIONS
             ope = ['O' * _opeWindowWidth] * _opeWindowHeight
