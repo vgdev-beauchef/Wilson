@@ -28,13 +28,35 @@ class Controller:
 	def movement(self, ginput):
 		px = Player.getPlayPos()[0]
 		py = Player.getPlayPos()[1]
-		if ginput == 'left' and (self.world.grid[px - 1][py] != '#' or debug.debug):
+
+		left = self.world.grid[px - 1][py]
+		right = self.world.grid[px + 1][py]
+		up = self.world.grid[px][py - 1]
+		down = self.world.grid[px][py + 1]
+
+		if ginput == 'left' and ((left != '#' and\
+								  left != 'T' and\
+								  left != 'Y' and\
+								  left != '~') or\
+		                          debug.debug):
 			Player.getPlayPos()[0] -= 1
-		elif ginput == 'right' and (self.world.grid[px + 1][py] != '#' or debug.debug):
+		elif ginput == 'right' and ((right != '#' and\
+								  right != 'T' and\
+								  right != 'Y' and\
+								  right != '~') or\
+		                          debug.debug):
 			Player.getPlayPos()[0] += 1
-		elif ginput == 'up' and (self.world.grid[px][py - 1] != '#' or debug.debug):
+		elif ginput == 'up' and ((up != '#' and\
+								  up != 'T' and\
+								  up != 'Y' and\
+								  up != '~') or\
+		                          debug.debug):
 			Player.getPlayPos()[1] -= 1
-		elif ginput == 'down' and (self.world.grid[px][py + 1] != '#' or debug.debug):
+		elif ginput == 'down' and ((down != '#' and\
+								  down != 'T' and\
+								  down != 'Y' and\
+								  down != '~') or\
+		                          debug.debug):
 			Player.getPlayPos()[1] += 1
 		elif ginput == '[':
 			Player.modifyHunger(-1)
