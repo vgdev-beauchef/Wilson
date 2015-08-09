@@ -34,9 +34,10 @@ class Inventory:
         self.window.refresh()
 
     def getItem(self, id):
-	for key in self.items.keys():
-	    if (key.id==id):
-		return key;	
+        for key in self.items.keys():
+            if (key.id==id):
+                return key;
+        return None
 
     def addItem(self, item):
         if(len(self.items)<self.max):

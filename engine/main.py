@@ -77,7 +77,7 @@ if __name__ == '__main__':
                     break
             else: break
 
-        while not controller.deadCondition():
+        while not controller.deadCondition() and not controller.killedByBear():
             ui.draw()
 
             # INPUT

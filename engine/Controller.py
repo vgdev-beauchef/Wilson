@@ -33,6 +33,7 @@ class Controller:
 		self.nightTimeLimit = 30
 		self.dayTime = 0
 		self.flag = False
+		self._killedByBear = False
 
 		self.hunger_flag_0 = False
 		self.hunger_flag_1 = False
@@ -47,7 +48,7 @@ class Controller:
 		self.cueva = False
 
 		self.info.setTimeToDusk(self.dayCountLimit)
-		self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
+		#self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
 
 		self.mapDisp = False
 
@@ -79,9 +80,11 @@ class Controller:
 		elif ginput == ']':
 			Player.modifyHunger(1)
 		elif ginput == '1':
-			self.log.add_event(Player.useItem(self.inventory.getItem(1), self.inventory))
+			if not self.inventory.getItem(1) is None:
+				self.log.add_event(Player.useItem(self.inventory.getItem(1), self.inventory))
 		elif ginput == '2':
-			self.log.add_event(Player.useItem(self.inventory.getItem(2), self.inventory))
+			if not self.inventory.getItem(2) is None:
+				self.log.add_event(Player.useItem(self.inventory.getItem(2), self.inventory))
 
 
 	def manage_log(self, ginput):
@@ -121,6 +124,8 @@ class Controller:
 			self.option_flag['J'] = True
 		elif pos=='w' and not self.option_flag['W']:
 			self.log.add_event("Oh! increiblemente he encontrado un cuchillo... se ve muy antiguo, quizas sea de algun pirata. Me podria servir asi que lo guardare.")
+			c = Item.Item("cuchillo",2,'0')
+			self.inventory.addItem(c)
 			self.option_flag['W'] = True
 			return
 		elif pos=='O' and not self.option_flag['O'] and not self.cueva:
@@ -147,11 +152,14 @@ class Controller:
 				q = get_input()
 				if oso:
 					if q == 'y':
-						self.log.add_event('Logre matarlo !! La cueva me servira de refugio. Ademas podre utilizar su piel como abrigo. Creo que esta noche podre dormir tranquilo. Descansare pues ha sido un dia muy agitado.')
-						c = Item.Item('comida',1,'0')
-						self.inventory.addItem(c)
-						self.inventory.addItem(c)
-						self.inventory.addItem(c)
+						if self.inventory.getItem(2) is None:
+							self._killedByBear = True
+						else:
+							self.log.add_event('Logre matarlo !! La cueva me servira de refugio. Ademas podre utilizar su piel como abrigo. Creo que esta noche podre dormir tranquilo. Descansare pues ha sido un dia muy agitado.')
+							c = Item.Item('comida',1,'0')
+							self.inventory.addItem(c)
+							self.inventory.addItem(c)
+							self.inventory.addItem(c)
 						break
 					elif q == 'n':
 						self.log.add_event('No puedo pelear contra ese oso. Es mejor que huya')
@@ -278,6 +286,11 @@ class Controller:
 		if percentage>=50 and self.hunger_flag_3:
 			self.hunger_flag_3 = False
 
+
+	def killedByBear(self):
+		if self._killedByBear:
+			self.log.add_event("Esto fue... demasiado para ... mi")
+		return self._killedByBear
 
 	def deadCondition(self):
 		if(Player.getHunger()[0]<=0):
