@@ -100,11 +100,11 @@ class Controller:
 			if self.dayCount>self.dayCountLimit:
 				self.dayCount=0
 				self.log.increase_day()
-			self.deadCondition()
 
 	def deadCondition(self):
 		if(Player.getHunger()[0]<=0):
 			self.intro.game_over_screen()
 			time.sleep(5)
-			exit(0)
+			return True
+		return False
 

@@ -66,7 +66,7 @@ if __name__ == '__main__':
                 intro.refresh()
                 break
 
-        while 1:
+        while not controller.deadCondition():
             ui.draw()
 
             # INPUT
