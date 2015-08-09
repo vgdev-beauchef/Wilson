@@ -30,6 +30,10 @@ class Controller:
 		self.dayTime = 0
 		self.flag = False
 
+		self.hunger_flag_1 = False
+		self.hunger_flag_2 = False
+		self.hunger_flag_3 = False
+
 		self.info.setTimeToDusk(self.dayCountLimit)
 
 	def movement(self, ginput):
@@ -112,6 +116,24 @@ class Controller:
 			elif self.dayCount>4*self.dayCountLimit/5 and not self.flag:
 				self.machine.changeState(self.log)
 				self.flag = True
+
+		percentage = Player.getHunger()[0]
+		if percentage <= 0 and not self.hunger_flag_1:
+			self.log.add_event("Creo que no me siento bien... *cae*")
+			self.hunger_flag_1 = True
+		elif percentage == 25 and not self.hunger_flag_2:
+			self.hunger_flag_2 = True
+			self.log.add_event("Me esta empezando a doler el estomago")
+
+		elif percentage == 49 and not self.hunger_flag_3:
+			self.hunger_flag_3 = True
+			self.hunger_flag_2 = False
+			self.log.add_event("Tengo un poco de hambre, deberia comer algo")
+
+		else:
+			self.hunger_flag_3 = False
+			self.hunger_flag_2 = False
+
 
 
 	def deadCondition(self):
