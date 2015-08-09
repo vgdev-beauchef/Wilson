@@ -30,8 +30,8 @@ class Controller:
 
 		self.dayCount = 0
 		self.stepCount = 0
-		self.dayCountLimit = 60
-		self.nightTimeLimit = 30
+		self.dayCountLimit = 80
+		self.nightTimeLimit = 40
 		self.dayTime = 0
 		self.flag = False
 		self._killedByBear = False
@@ -175,7 +175,7 @@ class Controller:
 						self.option_flag['O']=False
 						oso = False
 						break
-					
+
 				if q =='y':
 					if pos=='O' and not flag:
 						self.log.add_event('Entre a la cueva')
@@ -201,7 +201,7 @@ class Controller:
 						self.inventory.addItem(c)
 						break
 					flag = True
-					
+
 				elif q == 'n':
 					if pos =='O' and not flag:
 						self.log.add_event('Decidi no entrar a la cueva')
@@ -215,7 +215,7 @@ class Controller:
 						c = Item.Item('comida',1,'0')
 						self.inventory.addItem(c)
 						Player.useItem(c, self.inventory)
-					flag = True	
+					flag = True
 					break
 				q=''
 			self.ope.clearWindow()
