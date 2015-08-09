@@ -41,10 +41,25 @@ class UI:
         elif ginput == ']':
             Player.modifyHunger(1)
 
+        elif ginput == 'i':
+            self.log.scroll_up()
+        elif ginput == 'k':
+            self.log.scroll_down()
+        elif ginput == 'j':
+            self.log.prev_day()
+        elif ginput == 'l':
+            self.log.next_day()
+
+        elif ginput == '1':
+            self.log.increase_day()
+        elif ginput == '2':
+            self.log.add_event("Elephant")
+
+
 
 if __name__ == '__main__':
     try:
-        musicPlayer.musicWrapper('resources/tracks/track_01.mid')
+        #musicPlayer.musicWrapper('resources/tracks/track_01.mid')
         Player.initPlayer('dummy')
         debug.debug = True
         start()
