@@ -186,7 +186,7 @@ class Controller:
 							self.log.add_event('El olor de la cueva me recuerda a los enormes perros que cuidaban las ovejas de mi abuelo y como yo dormia abrazado a ellos. Casi puedo sentir su agradable calor.')
 							self.ope.setOption("","","")
 							self.ui.draw()
-							time.sleep(3)
+							time.sleep(5)
 							self.dayCount = self.dayCountLimit  
 						break
 					elif q == 'n':

@@ -9,7 +9,7 @@ from entities import *
 
 _windowX = 32
 _windowY = 18
-_viewRadius = 10
+_viewRadius = 13
 
 colors = {
     'black'         : 0,
@@ -169,7 +169,7 @@ class World(object):
                 elif cha == '*':        #Objeto
                     color = tiles['obj']
                 elif cha == 'O':        #Cueva
-                    color = tiles['dark']
+                    color = tiles['cave']
                     cha = u'\u22d2'
                 elif cha == '-':        #agua no profunda
                     color = tiles['shallow']
