@@ -15,11 +15,6 @@ _inveWindowHeight = 10
 _inveWindowXPos = 33
 _inveWindowYPos = 10
 
-_opeWindowWidth = 10
-_opeWindowHeight = 10
-_opeWindowXPos = 33
-_openWindowYPos = 20
-
 
 class UI:
 
@@ -29,10 +24,6 @@ class UI:
 
         self.info = Info.Info()
         self.inventory = Inventory.Inventory()
-
-        self.operations = Ventana(
-            _opeWindowWidth, _opeWindowHeight,
-            _opeWindowXPos, _openWindowYPos)
 
     def movement(self, ginput):
         px = Player.getPlayPos()[0]
