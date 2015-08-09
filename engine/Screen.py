@@ -7,8 +7,8 @@ import codecs
 class Screen:
 
     def __init__(self):
-        orig = "resources/intro/intro.txt"
-        with codecs.open(orig, 'r', "utf-8") as text:
+        intro_source = "resources/ascii_images/intro.txt"
+        with codecs.open(intro_source, 'r', "utf-8") as text:
             array = []
             index = -1
             current = []
