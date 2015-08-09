@@ -25,8 +25,8 @@ class Screen:
             self.vgew = array[1]
             self.wilson = array[2]
 
-            self.width = 42
-            self.height = 28
+            self.width = 44
+            self.height = 30
             self.xPos = 0
             self.yPos = 0
             self.window = Ventana(self.width, self.height, self.xPos, self.yPos)
@@ -63,5 +63,5 @@ class Screen:
 
     def clean(self):
         for i in range(0, self.height):
-            empty_string = " "*80
+            empty_string = " "*(2*self.width-1)
             write(0, i, empty_string, self.window, 0)
