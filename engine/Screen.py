@@ -35,6 +35,10 @@ class Screen:
             self.draw_array(self.ascii_art["game_over"])
         elif view == 5:
             self.draw_array(self.ascii_art["credits"])
+        elif view == 6:
+            self.draw_array(self.ascii_art["prologo"])
+        elif view == 7:
+            self.draw_array(self.ascii_art["epilogo"])
 
     def draw_array(self, array):
         for i in range(0, len(array)):

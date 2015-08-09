@@ -73,11 +73,20 @@ if __name__ == '__main__':
                 intro.refresh()
                 q = get_input()
                 if q == 'enter':
+                    break
+            else: break
+        while 1:
+            if not debug.debug:
+                intro.draw(6)
+                intro.refresh()
+                q = get_input()
+                if q == 'enter':
                     intro.clean()
-                    intro.refresh()
                     intro.refresh()
                     break
             else: break
+
+
 
         while not controller.deadCondition():
             ui.draw()
