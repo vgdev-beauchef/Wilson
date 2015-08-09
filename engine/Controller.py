@@ -132,7 +132,7 @@ class Controller:
 			yes_answer = "Guardarla"
 			no_aswer = "Comerla"
 			self.option_flag['A'] = True
-			self.world.grid[80][170]  = '-'
+			self.world.grid[80][170]  = '.'
 		elif pos=='j' and not self.option_flag['J']:
 			self.log.add_event("Hay una cria de jabali alla... si la mato ahora tengo alimento facil, pero es tan solo un pequena criatura... como podria yo...? ")
 			option = "Que hacer?"
