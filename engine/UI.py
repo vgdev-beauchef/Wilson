@@ -57,51 +57,20 @@ class UI:
         elif ginput == '2':
             self.log.add_event("Elephant")
 
+    def draw(self):
+        self.world.drawMap()
 
+        # LOG
+        self.log.draw()
 
-if __name__ == '__main__':
-    try:
-        #musicPlayer.musicWrapper('resources/tracks/track_01.mid')
-        Player.initPlayer('dummy')
-        debug.debug = True
-        start()
-        ui = UI()
+        # INFO
+        self.info.draw()
 
-        manzana = Item.Item('comida', 1, 'hola')
-        cuchillo = Item.Item('cuchillo', 2, 'hola')
-        ui.inventory.addItem(manzana)
-        ui.inventory.addItem(manzana)
-        ui.inventory.addItem(cuchillo)
+        #INVENTORY
+        self.inventory.draw()
 
-        while 1:
-            ui.world.drawMap()
+        #OPERATIONS
+        self.ope.draw()
 
-            # LOG
-            ui.log.draw()
-
-            # INFO
-            ui.info.draw()
-
-
-            #INVENTORY
-            ui.inventory.draw()
-
-            #OPERATIONS
-            ui.ope.draw()
-
-            ui.log.refresh()
-            ui.inventory.refresh()
-
-            # INPUT
-            q = get_input()
-            if q == 'q':
-                break
-            elif q == 'enter':
-                debug.debug = not debug.debug
-            ui.movement(q)
-        stop()
-    except:
-        stop()
-        print(traceback.format_exc())
-        sys.exit(-1)
-sys.exit(0)
+        self.log.refresh()
+        self.inventory.refresh()
