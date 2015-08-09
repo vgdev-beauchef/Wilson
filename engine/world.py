@@ -25,7 +25,7 @@ colors = {
     'sand'          : 227,
     'deep-blue'     : 21,
     'grass'         : 83,
-    'fucsia'        : 197,
+    'fucsia'        : 129,
     'dark'          : 233,
     'shallow-blue'  : 124,
     'palm'          : 41,
@@ -38,7 +38,11 @@ colors = {
     'dark-night'    : 17,
     'shallow-blue-night': 28,
     'palm-night'    : 29,
-    'tree-night'    : 23
+    'tree-night'    : 23,
+    'apple'         : 197,
+    'fallen_palm'   : 162,
+    'boar'          : 167,
+    'metal'         : 248
 }
 tiles = {
     'person'    : colors['pink'],
@@ -63,7 +67,7 @@ class World(object):
         self.grid[93][139]  = 'j'
         self.grid[105][123] = 'w'
         self.grid[115][112] = 'O'
-        self.grid[89][101]  = 'Y'
+        self.grid[89][101]  = 'X'
 
         height = len(self.grid[0])
         width = len(self.grid)
@@ -168,6 +172,14 @@ class World(object):
                     color = tiles['palm']
                 elif cha == 'T':        #arbol
                     color = tiles['tree']
+                elif cha == 'a':        #manzana
+                    color = colors['apple']
+                elif cha == 'X':        #evento interesante
+                    cha = colors['fallen_palm']
+                elif cha == 'j':        #jabali
+                    color = colors['boar']
+                elif cha == 'w':        #cuchillo
+                    color = colors['metal']
                 else:
                     color = 1
 

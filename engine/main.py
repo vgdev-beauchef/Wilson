@@ -17,8 +17,14 @@ import os
 import time
 import pygame
 import StateMachine
+import KeyMap
 
 if __name__ == '__main__':
+
+    try:
+        debug.debug = sys.argv[1] == "-d"
+    except:
+        debug.debug = False
 
     os.environ["TERM"] = "xterm-256color"
 
@@ -29,7 +35,6 @@ if __name__ == '__main__':
         pygame.mixer.music.play(-1, 0.0)
 
         Player.initPlayer('dummy')
-        debug.debug = True
         start()
 
         #Initilization
@@ -40,18 +45,19 @@ if __name__ == '__main__':
         inventory = Inventory.Inventory()
         ope = optionsUI.optionsUI()
         intro = Screen.Screen()
+        key_map = KeyMap.KeyMap(42, 18)
 
-        machine.changeState(log);
+        machine.changeState(log)
 
-        ui = UI.UI(world, log, info, inventory, ope, machine)
-        controller = Controller.Controller(world, log, info, inventory, ope, machine, intro)
+        ui = UI.UI(world, log, info, inventory, ope, machine, key_map)
+        controller = Controller.Controller(world, log, info, inventory, ope, machine, intro, ui, key_map)
 
 
-        manzana = Item.Item('comida', 1, 'hola')
-        cuchillo = Item.Item('cuchillo', 2, 'hola')
-        ui.inventory.addItem(manzana)
-        ui.inventory.addItem(manzana)
-        ui.inventory.addItem(cuchillo)
+        #manzana = Item.Item('comida', 1, 'hola')
+        #cuchillo = Item.Item('cuchillo', 2, 'hola')
+        #ui.inventory.addItem(manzana)
+        #ui.inventory.addItem(manzana)
+        #ui.inventory.addItem(cuchillo)
 
         wait_time = 3
         if not debug.debug:
@@ -81,10 +87,6 @@ if __name__ == '__main__':
             if q == 'q':
                 stop()
                 sys.exit(0)
-            elif q == 'd':
-                intro.game_over_screen()
-                time.sleep(5)
-                break
 
             elif q == 'enter':
                 debug.debug = not debug.debug
