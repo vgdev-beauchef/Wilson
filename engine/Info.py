@@ -34,14 +34,14 @@ class Info(object):
 
     def timeBar(self):
         percentage = 100 * self.time / self.timeToDusk
-        bar = 'D'
+        bar = u'\u2600'
         star = math.floor(percentage * 18 / 100)
         for i in range(18):
             if i == star:
                  bar += '*'
             else:
                 bar += '.'
-        return bar + 'N'
+        return bar + u'\u263d'
 
     def setTime(self, _time):
         self.time = _time

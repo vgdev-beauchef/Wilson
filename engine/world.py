@@ -26,7 +26,7 @@ colors = {
     'deep-blue'     : 21,
     'grass'         : 83,
     'fucsia'        : 129,
-    'dark'          : 233,
+    'dark'          : 246,
     'shallow-blue'  : 124,
     'palm'          : 41,
     'tree'          : 29,
@@ -135,22 +135,29 @@ class World(object):
                     color = colors['pink']
                 elif cha == '#':        #Roca
                     color = colors['gray']
+                    cha = u'\u2588'
                 elif cha == '.':        #Arena
                     color = colors['sand']
                 elif cha == '~':        #Agua profunda
                     color = colors['deep-blue']
+                    cha = u'\u2248'
                 elif cha == '/':        #Pasto
                     color = colors['grass']
+                    cha = u'\u0e45'
                 elif cha == '*':        #Objeto
                     color = colors['fucsia']
                 elif cha == 'O':        #Cueva
                     color = colors['dark']
+                    cha = u'\u22d2'
                 elif cha == '-':        #agua no profunda
                     color = colors['shallow-blue']
+                    cha = '~'
                 elif cha == 'Y':        #palmera
                     color = colors['palm']
+                    cha = u'\u1f33'
                 elif cha == 'T':        #arbol
                     color = colors['tree']
+                    cha = u'\u1f34'
                 elif cha == 'a':        #manzana
                     color = colors['apple']
                 elif cha == 'X':        #evento interesante
@@ -162,10 +169,7 @@ class World(object):
                 else:
                     color = 1
 
-                if self.vgrid[x][y] and (cha == '#' or\
-                                         cha == 'Y' or\
-                                         cha == 'T' or\
-                                         cha == 'O'):
+                if self.vgrid[x][y]:
                     self.memgrid[x][y] = True
 
                 if self.vgrid[x][y] or debug.debug:
