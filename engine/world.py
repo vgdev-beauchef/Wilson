@@ -25,7 +25,7 @@ colors = {
     'sand'          : 227,
     'deep-blue'     : 21,
     'grass'         : 83,
-    'fucsia'        : 197,
+    'fucsia'        : 129,
     'dark'          : 233,
     'shallow-blue'  : 124,
     'palm'          : 41,
