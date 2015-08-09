@@ -28,10 +28,12 @@ class Controller:
 
 		self.dayCount = 0
 		self.stepCount = 0
-		self.dayCountLimit = 30
+		self.dayCountLimit = 60
+		self.nightTimeLimit = 30
 		self.dayTime = 0
 		self.flag = False
 
+		self.hunger_flag_0 = False
 		self.hunger_flag_1 = False
 		self.hunger_flag_2 = False
 		self.hunger_flag_3 = False
@@ -112,6 +114,10 @@ class Controller:
 			Player.modifyHunger(-1)
 			if self.stepCount==46:
 				self.log.add_event("Uf... La ultima vez que camine tanto fue ese dia que fuimos de campamento con mi esposa. Recuerdo lo mucho que se reia al verme cojear mientras ella corria por las cuestas.")
+
+			if self.dayCount>self.nightTimeLimit:
+				pass
+
 			if self.dayCount>self.dayCountLimit:
 				self.dayCount=0
 				self.log.increase_day()
@@ -122,24 +128,35 @@ class Controller:
 				self.machine.changeState(self.log)
 				self.flag = True
 
+		self.showHungerMessages()
+		self.resetHungerFlags()
+
+
+	def showHungerMessages(self):
 		percentage = Player.getHunger()[0]
 		if percentage <= 0 and not self.hunger_flag_1:
-
 			self.hunger_flag_1 = True
 			#time.sleep(3)
+		if percentage ==5 and not self.hunger_flag_0:
+			self.hunger_flag_0 = True
+			self.log.add_event("No se cuanto mas me pueda mover... Necesito comer algo")
+
 		elif percentage == 25 and not self.hunger_flag_2:
 			self.hunger_flag_2 = True
 			self.log.add_event("Me esta empezando a doler el estomago")
 
 		elif percentage == 49 and not self.hunger_flag_3:
 			self.hunger_flag_3 = True
-			self.hunger_flag_2 = False
 			self.log.add_event("Tengo un poco de hambre, deberia comer algo")
 
-		elif percentage>=50:
-			self.hunger_flag_3 = False
+	def resetHungerFlags(self):
+		percentage = Player.getHunger()[0]
+		if percentage>=6 and self.hunger_flag_0:
+			self.hunger_flag_0 = False
+		if percentage>=26 and self.hunger_flag_2:
 			self.hunger_flag_2 = False
-
+		if percentage>=50 and self.hunger_flag_3:
+			self.hunger_flag_3 = False
 
 
 	def deadCondition(self):
