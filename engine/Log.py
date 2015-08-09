@@ -62,13 +62,18 @@ class Log:
         self.window.refresh()
 
     def add_event(self, string):
+        self.page = self.diary[len(self.diary)-1]
         self.page.insert(0, string)
+        self.diary_index = 0
+        self.day_displayed = self.day
+
 
     def increase_day(self):
         self.day += 1
         self.diary.append(list())
         self.page = self.diary[len(self.diary)-1]
         self.day_displayed = self.day
+        self.diary_index = 0
 
     def scroll_up(self):
         if (self.diary_index + 1) >= len(self.page):

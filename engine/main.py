@@ -42,10 +42,15 @@ if __name__ == '__main__':
         ope = optionsUI.optionsUI()
         intro = Screen.Screen()
 
+<<<<<<< HEAD
         machine.changeState(log);
 
         ui = UI.UI(world, log, info, inventory, ope, machine)
         controller = Controller.Controller(world, log, info, inventory, ope, machine)
+=======
+        ui = UI.UI(world, log, info, inventory, ope)
+        controller = Controller.Controller(world, log, info, inventory, ope, intro)
+>>>>>>> 03ed6e45129757ccce2c2e216a2ca7b3727f662a
 
         manzana = Item.Item('comida', 1, 'hola')
         cuchillo = Item.Item('cuchillo', 2, 'hola')
@@ -77,9 +82,14 @@ if __name__ == '__main__':
             q = get_input()
             if q == 'q':
                 break
+            elif q == 'd':
+                intro.game_over_screen()
+                time.sleep(5)
+                break
+
             elif q == 'enter':
                 debug.debug = not debug.debug
-            controller.movement(q)
+            controller.manage(q)
         stop()
     except:
         stop()

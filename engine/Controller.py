@@ -10,17 +10,28 @@ import Item
 import Info
 #import musicPlayer
 import optionsUI
+<<<<<<< HEAD
 import StateMachine
 
 class Controller:
 
 	def __init__(self, _world, _log, _info, _inventory, _ope, _mach):
 		self.machine = _mach
+=======
+import Screen
+import time
+
+class Controller:
+
+	def __init__(self, _world, _log, _info, _inventory, _ope, _intro):
+>>>>>>> 03ed6e45129757ccce2c2e216a2ca7b3727f662a
 		self.world = _world
 		self.log = _log
 		self.info = _info
 		self.inventory = _inventory
 		self.ope = _ope
+		self.intro = _intro
+
 		self.dayCount = 0
 		self.stepCount = 0
 		self.dayCountLimit = 30
@@ -83,7 +94,16 @@ class Controller:
 		elif ginput == '2':
 			self.log.add_event("Elephant")
 
-		if ginput=='left' or ginput=='right' or ginput=='up' or ginput=='down':
+	def manage(self, ginput):
+		pxi = Player.getPlayPos()[0]
+		pyi = Player.getPlayPos()[1]
+
+		self.movement(ginput)
+
+		pxf = Player.getPlayPos()[0]
+		pyf = Player.getPlayPos()[1]
+
+		if (ginput=='left' or ginput=='right' or ginput=='up' or ginput=='down') and (pxi!=pxf or pyi!=pyf) and not debug.debug:
 			self.dayCount+=1
 			self.stepCount+=1
 			#self.log.add_event(ginput)
@@ -99,4 +119,12 @@ class Controller:
 			elif self.dayCount>4*self.dayCountLimit/5 and not self.flag:
 				self.machine.changeState(self.log)
 				self.flag = True
+
+			self.deadCondition()
+
+	def deadCondition(self):
+		if(Player.getHunger()[0]<=0):
+			self.intro.game_over_screen()
+			time.sleep(5)
+			exit(0)
 
