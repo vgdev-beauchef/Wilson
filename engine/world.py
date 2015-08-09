@@ -37,6 +37,13 @@ class World(object):
 
     def __init__(self):
         self.grid = matrix.maptoMatrix('mapa4.txt')
+
+        self.grid[81][174]  = 'a'
+        self.grid[93][139]  = 'j'
+        self.grid[105][123] = 'w'
+        self.grid[115][112] = 'O'
+        self.grid[89][101]  = 'Y'
+        
         height = len(self.grid[0])
         width = len(self.grid)
         self.vgrid = [[False for x in range(width)] for x in range(height)]
@@ -140,7 +147,10 @@ class World(object):
                 else:
                     color = 1
 
-                if self.vgrid[x][y] and (cha == '#'):
+                if self.vgrid[x][y] and (cha == '#' or\
+                                         cha == 'Y' or\
+                                         cha == 'T' or\
+                                         cha == 'O'):
                     self.memgrid[x][y] = True
 
                 if self.vgrid[x][y] or debug.debug:

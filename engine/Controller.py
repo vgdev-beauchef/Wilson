@@ -27,7 +27,8 @@ class Controller:
 
 		self.dayCount = 0
 		self.stepCount = 0
-		self.dayCountLimit = 30
+		self.dayCountLimit = 60
+		self.nightTimeLimit = 30
 		self.dayTime = 0
 		self.flag = False
 
@@ -99,6 +100,10 @@ class Controller:
 			Player.modifyHunger(-1)
 			if self.stepCount==46:
 				self.log.add_event("Uf... La ultima vez que camine tanto fue ese dia que fuimos de campamento con mi esposa. Recuerdo lo mucho que se reia al verme cojear mientras ella corria por las cuestas.")
+
+			if self.dayCount>self.nightTimeLimit:
+				pass
+
 			if self.dayCount>self.dayCountLimit:
 				self.dayCount=0
 				self.log.increase_day()
