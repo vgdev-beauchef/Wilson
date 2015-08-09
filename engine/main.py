@@ -87,10 +87,6 @@ if __name__ == '__main__':
             if q == 'q':
                 stop()
                 sys.exit(0)
-            elif q == 'd':
-                intro.game_over_screen()
-                time.sleep(5)
-                break
 
             elif q == 'enter':
                 debug.debug = not debug.debug
