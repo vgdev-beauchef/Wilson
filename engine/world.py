@@ -175,7 +175,7 @@ class World(object):
                 elif cha == 'a':        #manzana
                     color = colors['apple']
                 elif cha == 'X':        #evento interesante
-                    cha = colors['fallen_palm']
+                    color = colors['fallen_palm']
                 elif cha == 'j':        #jabali
                     color = colors['boar']
                 elif cha == 'w':        #cuchillo
