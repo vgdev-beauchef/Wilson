@@ -9,7 +9,7 @@ from entities import *
 
 _windowX = 32
 _windowY = 18
-_viewRadius = 13
+_viewRadius = 10
 
 colors = {
     'black'         : 0,
@@ -30,6 +30,7 @@ colors = {
     'shallow-blue'  : 124,
     'palm'          : 41,
     'tree'          : 29,
+<<<<<<< HEAD
     'gray-night'    : 236,
     'sand-night'    : 71,
     'deep-blue-night':18,
@@ -39,22 +40,12 @@ colors = {
     'shallow-blue-night': 28,
     'palm-night'    : 29,
     'tree-night'    : 23,
+=======
+>>>>>>> backColor
     'apple'         : 197,
     'fallen_palm'   : 162,
     'boar'          : 167,
     'metal'         : 248
-}
-tiles = {
-    'person'    : colors['pink'],
-    'rock'      : colors['gray'],
-    'sand'      : colors['sand'],
-    'deep'      : colors['deep-blue'],
-    'grass'     : colors['grass'],
-    'obj'       : colors['fucsia'],
-    'cave'      : colors['dark'],
-    'shallow'   : colors['shallow-blue'],
-    'palm'      : colors['palm'],
-    'tree'      : colors['tree']
 }
 
 
@@ -153,29 +144,36 @@ class World(object):
                     cha = '@'
 
                 if cha == '@':          #Personaje
-                    color = tiles['person']
+                    color = colors['pink']
                 elif cha == '#':        #Roca
-                    color = tiles['rock']
+                    color = colors['gray']
+                    cha = u'\u2588'
                 elif cha == '.':        #Arena
-                    color = tiles['sand']
+                    color = colors['sand']
                 elif cha == '~':        #Agua profunda
-                    color = tiles['deep']
+                    color = colors['deep-blue']
+                    cha = u'\u2248'
                 elif cha == '/':        #Pasto
-                    color = tiles['grass']
+                    color = colors['grass']
+                    cha = u'\u0e45'
                 elif cha == '*':        #Objeto
-                    color = tiles['obj']
+                    color = colors['fucsia']
                 elif cha == 'O':        #Cueva
-                    color = tiles['cave']
+                    color = colors['dark']
+                    cha = u'\u22d2'
                 elif cha == '-':        #agua no profunda
-                    color = tiles['shallow']
+                    color = colors['shallow-blue']
+                    cha = '~'
                 elif cha == 'Y':        #palmera
-                    color = tiles['palm']
+                    color = colors['palm']
+                    cha = u'\u1f33'
                 elif cha == 'T':        #arbol
-                    color = tiles['tree']
+                    color = colors['tree']
+                    cha = u'\u1f34'
                 elif cha == 'a':        #manzana
                     color = colors['apple']
                 elif cha == 'X':        #evento interesante
-                    cha = colors['fallen_palm']
+                    color = colors['fallen_palm']
                 elif cha == 'j':        #jabali
                     color = colors['boar']
                 elif cha == 'w':        #cuchillo
@@ -183,10 +181,7 @@ class World(object):
                 else:
                     color = 1
 
-                if self.vgrid[x][y] and (cha == '#' or\
-                                         cha == 'Y' or\
-                                         cha == 'T' or\
-                                         cha == 'O'):
+                if self.vgrid[x][y]:
                     self.memgrid[x][y] = True
 
                 if self.vgrid[x][y] or debug.debug:
