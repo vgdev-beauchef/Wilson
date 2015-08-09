@@ -12,11 +12,12 @@ import Info
 import optionsUI
 import StateMachine
 import time
-import pygame.mixer as mixer
+#import pygame.mixer as mixer
 
 class Controller:
 
-	def __init__(self, _world, _log, _info, _inventory, _ope, _mach, _intro):
+	def __init__(self, _world, _log, _info, _inventory, _ope, _mach, _intro, _ui):
+		self.ui = _ui
 		self.machine = _mach
 		self.world = _world
 		self.log = _log
@@ -25,9 +26,11 @@ class Controller:
 		self.ope = _ope
 		self.intro = _intro
 
+
 		self.dayCount = 0
 		self.stepCount = 0
-		self.dayCountLimit = 30
+		self.dayCountLimit = 60
+		self.nightTimeLimit = 30
 		self.dayTime = 0
 		self.flag = False
 
@@ -35,9 +38,18 @@ class Controller:
 		self.hunger_flag_1 = False
 		self.hunger_flag_2 = False
 		self.hunger_flag_3 = False
+		self.option_flag = dict()
+		self.option_flag['A'] = False
+		self.option_flag['J'] = False
+		self.option_flag['W'] = False
+		self.option_flag['O'] = False
+		self.option_flag['X'] = False
+		self.cueva = False
 
 		self.info.setTimeToDusk(self.dayCountLimit)
-		self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
+		#self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
+
+		self.mapDisp = False
 
 	def movement(self, ginput):
 		px = Player.getPlayPos()[0]
@@ -82,16 +94,131 @@ class Controller:
 		elif ginput == 'l':
 			self.log.next_day()
 
+	def manage_place(self):
+		px = Player.getPlayPos()[0]
+		py = Player.getPlayPos()[1]
+
+		pos = self.world.grid[px][py]
+		option = ""
+		yes_answer = ""
+		no_aswer = ""
+		flag = False
+
+		if pos!='O':
+			self.cueva = False
+
+		if pos=='A' and not self.option_flag['A']:
+			self.log.add_event("Encontre una manzana")
+			option = "que hacer con la manzana?"
+			yes_answer = "guardarla"
+			no_aswer = "comerla"
+			self.option_flag['A'] = True
+		elif pos=='J' and not self.option_flag['J']:
+			self.log.add_event("Hay una cria de jabali alla... si la mato ahora tengo alimento facil, pero es tan solo un pequena criatura... como podria yo...? ")
+			option = "que hacer?"
+			yes_answer = "matarla"
+			no_aswer = "dejarla huir"
+			self.option_flag['J'] = True
+		elif pos=='W' and not self.option_flag['W']:
+			self.log.add_event("Oh! increiblemente he encontrado un cuchillo... se ve muy antiguo, quizas sea de algun pirata. Me podria servir asi que lo guardare.")
+			self.option_flag['W'] = True
+			return
+		elif pos=='O' and not self.option_flag['O'] and not self.cueva:
+			self.log.add_event("Oh, una cueva!! Se escuchan ruidos desde adentro...sera un algun animal?? un oso? Entro?")
+			option = "que hacer?"
+			yes_answer = "entrar"
+			no_aswer = "ignorar"
+			self.option_flag['O'] = True
+			self.cueva = True
+		elif pos=='X' and not self.option_flag['X']:
+			self.log.add_event("Me encuentro junto a una enorme palmera caida. No seria muy dificil usarla para construir una balsa...")
+			option = "que hacer con la palmera?"
+			yes_answer = "construir balsa"
+			no_aswer = "ignorar balsa"
+			self.option_flag['X'] = True
+
+		if not option=="":
+			self.ope.clearWindow()
+			self.ope.setOption(option, yes_answer, no_aswer)
+			oso = False
+
+			while 1:
+				self.ui.draw()
+				q = get_input()
+				if oso:
+					if q == 'y':
+						self.log.add_event('Logre matarlo !! La cueva me servira de refugio. Ademas podre utilizar su piel como abrigo. Creo que esta noche podre dormir tranquilo. Descansare pues ha sido un dia muy agitado.')
+						break
+					elif q == 'n':
+						self.log.add_event('No puedo pelear contra ese oso. Es mejor que huya')
+						self.option_flag['O']=False
+						oso = False
+						break
+					
+				if q =='y':
+					if pos=='O' and not flag:
+						self.log.add_event('Entre a la cueva')
+						self.log.add_event('Aparece un oso salvaje!!!')
+						self.ope.clearWindow()
+						self.ope.setOption('Que hacer?', 'Atacar', 'Huir')
+						oso = True
+						continue
+					elif pos == 'X' and not flag:
+						self.log.add_event('Decidi ocupar la palmera como balsa')
+						break
+
+					elif pos == 'J' and not flag:
+						self.log.add_event('Decidi matar al jabali')
+						self.inventory.addItem(Item.item('comida',1,'0'))
+						self.inventory.addItem(Item.item('comida',1,'0'))
+						break
+
+					elif pos == 'A' and not flag:
+						self.log.add_event('Guarde la manzana')
+						self.inventory.addItem(Item.item('comida',1,'0'))
+						break
+					flag = True
+					
+				elif q == 'n':
+					if pos =='O' and not flag:
+						self.log.add_event('Decidi no entrar a la cueva')
+						self.option_flag['O']=False
+					elif pos == 'X' and not flag:
+						self.log.add_event('Deje la palmera en la playa')
+					elif pos == 'J' and not flag:
+						self.log.add_event('Deje a la cria tranquila')
+					elif pos == 'A' and not flag:
+						self.log.add_event('Comi la manzana')
+						self.inventory.addItem(Item.item('comida',1,'0'))
+						Player.useItem(Item.item('comida',1, '0'), self.inventory)
+					flag = True	
+					break
+				q=''
+			self.ope.clearWindow()
+			self.ope.setOption("", "", "")
+			flag = False
+
 	def manage(self, ginput):
 		pxi = Player.getPlayPos()[0]
 		pyi = Player.getPlayPos()[1]
 
 		self.movement(ginput)
+		self.manage_place()
 		self.manage_log(ginput)
 
 		pxf = Player.getPlayPos()[0]
 		pyf = Player.getPlayPos()[1]
 
+		if self.mapDisp:
+			#TODO
+			if ginput=='m':
+				self.mapDisp = False
+			return
+
+		if ginput=='m':
+			#TODO
+			return
+			
 		if (ginput=='left' or ginput=='right' or ginput=='up' or ginput=='down') and (pxi!=pxf or pyi!=pyf) and not debug.debug:
 			self.dayCount+=1
 			self.stepCount+=1
@@ -100,6 +227,10 @@ class Controller:
 			Player.modifyHunger(-1)
 			if self.stepCount==46:
 				self.log.add_event("Uf... La ultima vez que camine tanto fue ese dia que fuimos de campamento con mi esposa. Recuerdo lo mucho que se reia al verme cojear mientras ella corria por las cuestas.")
+
+			if self.dayCount>self.nightTimeLimit:
+				pass
+
 			if self.dayCount>self.dayCountLimit:
 				self.dayCount=0
 				self.log.increase_day()
