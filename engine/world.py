@@ -25,11 +25,15 @@ colors = {
     'sand'          : 227,
     'deep-blue'     : 21,
     'grass'         : 83,
-    'fucsia'        : 197,
+    'fucsia'        : 129,
     'dark'          : 233,
     'shallow-blue'  : 124,
     'palm'          : 41,
-    'tree'          : 29
+    'tree'          : 29,
+    'apple'         : 197,
+    'fallen_palm'   : 162,
+    'boar'          : 167,
+    'metal'         : 248
 }
 
 
@@ -42,7 +46,7 @@ class World(object):
         self.grid[93][139]  = 'j'
         self.grid[105][123] = 'w'
         self.grid[115][112] = 'O'
-        self.grid[89][101]  = 'Y'
+        self.grid[89][101]  = 'X'
 
         height = len(self.grid[0])
         width = len(self.grid)
@@ -147,6 +151,14 @@ class World(object):
                     color = colors['palm']
                 elif cha == 'T':        #arbol
                     color = colors['tree']
+                elif cha == 'a':        #manzana
+                    color = colors['apple']
+                elif cha == 'X':        #evento interesante
+                    cha = colors['fallen_palm']
+                elif cha == 'j':        #jabali
+                    color = colors['boar']
+                elif cha == 'w':        #cuchillo
+                    color = colors['metal']
                 else:
                     color = 1
 
