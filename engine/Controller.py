@@ -79,7 +79,16 @@ class Controller:
 		elif ginput == '2':
 			self.log.add_event("Elephant")
 
-		if ginput=='left' or ginput=='right' or ginput=='up' or ginput=='down':
+	def manage(self, ginput):
+		pxi = Player.getPlayPos()[0]
+		pyi = Player.getPlayPos()[1]
+
+		self.movement(ginput)
+
+		pxf = Player.getPlayPos()[0]
+		pyf = Player.getPlayPos()[1]
+
+		if (ginput=='left' or ginput=='right' or ginput=='up' or ginput=='down') and (pxi!=pxf or pyi!=pyf) and not debug.debug:
 			self.dayCount+=1
 			#self.log.add_event(ginput)
 			self.info.setTime(self.dayCount)

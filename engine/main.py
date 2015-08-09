@@ -71,7 +71,7 @@ if __name__ == '__main__':
                 break
             elif q == 'enter':
                 debug.debug = not debug.debug
-            controller.movement(q)
+            controller.manage(q)
         stop()
     except:
         stop()
