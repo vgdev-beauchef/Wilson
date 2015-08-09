@@ -27,8 +27,8 @@ class optionsUI(object):
 		line += 1
 
 		if not self.yesOption=="":
-			self.updateOption('(Y)'+ self.yesOption, line)
-			self.updateOption('(N)' + self.noOption, line + 2)
+			self.updateOption('(y)'+ self.yesOption, line)
+			self.updateOption('(n)' + self.noOption, line + 2)
 
 		self.window.refresh()
 
