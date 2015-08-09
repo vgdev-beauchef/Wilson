@@ -13,6 +13,8 @@ _keymap = {
     -1: None
 }
 
+locale.setlocale(locale.LC_ALL, "")
+code = locale.getpreferredencoding()
 
 def start():
     global _screen
@@ -27,9 +29,6 @@ def start():
         _screen.scrollok(False)
         curses.start_color()
         curses.use_default_colors()
-
-        locale.setlocale(locale.LC_ALL, '')
-        code = locale.getpreferredencoding()
 
         for i in range(0, curses.COLORS):
             curses.init_pair(i + 1, i, -1)
@@ -105,9 +104,15 @@ class Ventana:
         self.height = y
 
     def addch(self, x, y, c, color=0):
-        self.win.addch(y, 2 * x, c, curses.color_pair(color))
+        if isinstance(c, unicode):
+            c = c.encode(code)
+            self.win.addstr(y, 2 * x, c, curses.color_pair(color))
+        else:
+            self.win.addch(y, 2 * x, c, curses.color_pair(color))
 
     def addstr(self, x, y, string, color=0):
+        if isinstance(string, unicode):
+            string = string.encode(code)
         self.win.addstr(y, x, string, curses.color_pair(color))
 
     def refresh(self):
