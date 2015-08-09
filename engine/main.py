@@ -12,6 +12,8 @@ import musicPlayer
 import optionsUI
 import UI
 import Controller
+import IntroScreen
+import time
 
 if __name__ == '__main__':
 
@@ -27,6 +29,7 @@ if __name__ == '__main__':
         info = Info.Info()
         inventory = Inventory.Inventory()
         ope = optionsUI.optionsUI()
+        intro = IntroScreen.IntroScreen()
 
         ui = UI.UI(world, log, info, inventory, ope)
         controller = Controller.Controller(world, log, info, inventory, ope)
@@ -36,6 +39,31 @@ if __name__ == '__main__':
         ui.inventory.addItem(manzana)
         ui.inventory.addItem(manzana)
         ui.inventory.addItem(cuchillo)
+
+        start_milli_time = int(round(time.time() * 1000))
+        wait_time = 3000
+        while 1:
+            intro.draw(1)
+            intro.refresh()
+            current_milli_time = int(round(time.time() * 1000))
+            if (current_milli_time - start_milli_time) >= wait_time:
+                break
+        start_milli_time = int(round(time.time() * 1000))
+        while 1:
+            intro.draw(2)
+            intro.refresh()
+            current_milli_time = int(round(time.time() * 1000))
+            if (current_milli_time - start_milli_time) >= wait_time:
+                break
+        while 1:
+            intro.draw(3)
+            intro.refresh()
+            q = get_input()
+            if q == 'enter':
+                intro.clean()
+                intro.refresh()
+                intro.refresh()
+                break
 
         while 1:
             ui.draw()
