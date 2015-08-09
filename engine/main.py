@@ -21,9 +21,9 @@ import StateMachine
 if __name__ == '__main__':
 
     try:
-        debug.debug = sys.argv[1]=="-d"
+        debug.debug = sys.argv[1] == "-d"
     except:
-        debug.debug = True
+        debug.debug = False
 
     os.environ["TERM"] = "xterm-256color"
 

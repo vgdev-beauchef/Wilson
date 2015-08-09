@@ -19,11 +19,18 @@ class Info(object):
         self.timeToDusk = 10
 
     def draw(self):
-        gfx.write(0, 0, 'Saciedad', self.window)
+        self.clearWindow()
+        sc = 'Saciedad ' + str(Player.getHunger()[0]) + '/' + str(Player.getHunger()[1])
+        gfx.write(0, 0, sc, self.window)
         gfx.write(0, 1, hungerBar(), self.window, 2)
         gfx.write(0, 2, 'Hora', self.window)
         gfx.write(0, 3, self.timeBar(), self.window, 4)
         self.window.refresh()
+
+    def clearWindow(self):
+		clean_string = " " * 19
+		for i in range(10):
+			gfx.write(0,i,clean_string,self.window,0)
 
     def timeBar(self):
         percentage = 100 * self.time / self.timeToDusk
