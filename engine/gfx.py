@@ -108,7 +108,6 @@ class Ventana:
         self.win.addch(y, 2 * x, c, curses.color_pair(color))
 
     def addstr(self, x, y, string, color=0):
-        encoded = string.encode('utf-8')
         self.win.addstr(y, x, string, curses.color_pair(color))
 
     def refresh(self):
