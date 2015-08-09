@@ -126,7 +126,7 @@
 ||                                                                                ||
 ||       Martin Fica                                                              ||
 ||                                                                                ||
-||       Sebastian Gonzalez           MUSICA:                                     ||
+||       Sebastian Gonzalez           MÚSICA:                                     ||
 ||                                                                                ||
 ||       Patricio Isbej                                                           ||
 ||                                    Felipe Sandoval                             ||
@@ -155,8 +155,8 @@
 ||   |-|                                                                    |-|   ||
 ||   |-|                                                                    |-|   ||
 ||   |-|                                                                    |-|   ||
-||   |-|   Escribo estas palabras con la esperanza de que alguien mas las   |-|   ||
-||   |-|   lea en un futuro. Extranyo, seas quien seas, te confio mi        |-|   ||
+||   |-|   Escribo estas palabras con la esperanza de que alguien más las   |-|   ||
+||   |-|   lea en un futuro. Extraño, seas quien seas, te confío mi         |-|   ||
 ||   |-|   historia.                                                        |-|   ||
 ||   |-|                                                                    |-|   ||
 ||   |-|                                                                    |-|   ||
@@ -185,10 +185,10 @@
 ||   |-|                                                                    |-|   ||
 ||   |-|                                                                    |-|   ||
 ||   |-|                                                                    |-|   ||
-||   |-|   Bajo el diario luego de leer la ultima entrada y miro al         |-|   ||
-||   |-|   horizonte; no hay senyal alguna de que una balsa haya estado     |-|   ||
+||   |-|   Bajo el diario luego de leer la última entrada y miro al         |-|   ||
+||   |-|   horizonte; no hay señal alguna de que una balsa haya estado      |-|   ||
 ||   |-|   alguna vez en estas playas. Solo puedo desearte la mejor de      |-|   ||
-||   |-|   las suertes, extranyo, y esperar que yo tambien pueda salir      |-|   ||
+||   |-|   las suertes, extraño, y esperar que yo también pueda salir       |-|   ||
 ||   |-|   de esto.                                                         |-|   ||
 ||   |-|                                                                    |-|   ||
 ||   |-|                                                                    |-|   ||
