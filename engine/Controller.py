@@ -77,7 +77,10 @@ class Controller:
 			self.log.add_event(Player.useItem(self.inventory.getItem(1), self.inventory))
 		elif ginput == '2':
 			self.log.add_event(Player.useItem(self.inventory.getItem(2), self.inventory))
-		elif ginput == 'i':
+
+
+	def manage_log(self, ginput):
+		if ginput == 'i':
 			self.log.scroll_up()
 		elif ginput == 'k':
 			self.log.scroll_down()
@@ -85,16 +88,13 @@ class Controller:
 			self.log.prev_day()
 		elif ginput == 'l':
 			self.log.next_day()
-		elif ginput == '1':
-			self.log.increase_day()
-		elif ginput == '2':
-			self.log.add_event("Elephant")
 
 	def manage(self, ginput):
 		pxi = Player.getPlayPos()[0]
 		pyi = Player.getPlayPos()[1]
 
 		self.movement(ginput)
+		self.manage_log(ginput)
 
 		pxf = Player.getPlayPos()[0]
 		pyf = Player.getPlayPos()[1]
@@ -140,7 +140,6 @@ class Controller:
 	def deadCondition(self):
 		if(Player.getHunger()[0]<=0):
 			self.log.add_event("Creo que no me siento bien... *cae*")
-			
 			return True
 		return False
 

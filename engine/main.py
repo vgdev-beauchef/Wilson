@@ -86,9 +86,12 @@ if __name__ == '__main__':
                 debug.debug = not debug.debug
             controller.manage(q)
         while 1:
+            ui.draw()
+            
             q = get_input()
             if q == 'enter':
                 break
+            controller.manage_log(q)
         intro.game_over_screen()
         time.sleep(5)
         stop()
