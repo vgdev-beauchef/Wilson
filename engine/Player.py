@@ -45,7 +45,7 @@ class Player(Entity):
         color = 2
         passable = True
         self.name = name
-        self.position = [random.randint(0, 199), random.randint(0, 199)]
+        self.position = [77, 173]
         self.maxHunger = 100
         self.hunger = 50
         self.sanity = 10

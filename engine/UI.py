@@ -27,7 +27,6 @@ class UI:
         self.inventory = _inventory
         self.ope = _ope
 
-
     def draw(self):
         self.world.drawMap()
 
