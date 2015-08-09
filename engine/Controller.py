@@ -12,6 +12,7 @@ import Info
 import optionsUI
 import StateMachine
 import time
+import pygame.mixer as mixer
 
 class Controller:
 
@@ -36,6 +37,7 @@ class Controller:
 		self.hunger_flag_3 = False
 
 		self.info.setTimeToDusk(self.dayCountLimit)
+		self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
 
 	def movement(self, ginput):
 		px = Player.getPlayPos()[0]
@@ -46,29 +48,19 @@ class Controller:
 		up = self.world.grid[px][py - 1]
 		down = self.world.grid[px][py + 1]
 
-		if ginput == 'left' and ((left != '#' and\
-								  left != 'T' and\
-								  left != 'Y' and\
-								  left != '~') or\
-		                          debug.debug):
+		def check(key):
+			if not ((key != '#' and key != 'T' and key != 'Y' and key != '~') or debug.debug):
+				self.hit_sound.play()
+				return False
+			return True
+
+		if ginput == 'left' and check(left):
 			Player.getPlayPos()[0] -= 1
-		elif ginput == 'right' and ((right != '#' and\
-								  right != 'T' and\
-								  right != 'Y' and\
-								  right != '~') or\
-		                          debug.debug):
+		elif ginput == 'right' and check(right):
 			Player.getPlayPos()[0] += 1
-		elif ginput == 'up' and ((up != '#' and\
-								  up != 'T' and\
-								  up != 'Y' and\
-								  up != '~') or\
-		                          debug.debug):
+		elif ginput == 'up' and check(up):
 			Player.getPlayPos()[1] -= 1
-		elif ginput == 'down' and ((down != '#' and\
-								  down != 'T' and\
-								  down != 'Y' and\
-								  down != '~') or\
-		                          debug.debug):
+		elif ginput == 'down' and check(down):
 			Player.getPlayPos()[1] += 1
 		elif ginput == '[':
 			Player.modifyHunger(-1)
@@ -154,4 +146,3 @@ class Controller:
 			self.log.add_event("Creo que no me siento bien... *cae*")
 			return True
 		return False
-
