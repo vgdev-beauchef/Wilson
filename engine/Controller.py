@@ -8,11 +8,11 @@ import Log
 import Inventory
 import Item
 import Info
-#import musicPlayer
+import musicPlayer
 import optionsUI
 import StateMachine
 import time
-#import pygame.mixer as mixer
+import pygame.mixer as mixer
 
 class Controller:
 
@@ -48,7 +48,7 @@ class Controller:
 		self.cueva = False
 
 		self.info.setTimeToDusk(self.dayCountLimit)
-		#self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
+		self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
 
 		self.mapDisp = False
 
@@ -108,19 +108,19 @@ class Controller:
 		if pos!='O':
 			self.cueva = False
 
-		if pos=='A' and not self.option_flag['A']:
+		if pos=='a' and not self.option_flag['A']:
 			self.log.add_event("Encontre una manzana")
 			option = "que hacer con la manzana?"
 			yes_answer = "guardarla"
 			no_aswer = "comerla"
 			self.option_flag['A'] = True
-		elif pos=='J' and not self.option_flag['J']:
+		elif pos=='j' and not self.option_flag['J']:
 			self.log.add_event("Hay una cria de jabali alla... si la mato ahora tengo alimento facil, pero es tan solo un pequena criatura... como podria yo...? ")
 			option = "que hacer?"
 			yes_answer = "matarla"
 			no_aswer = "dejarla huir"
 			self.option_flag['J'] = True
-		elif pos=='W' and not self.option_flag['W']:
+		elif pos=='w' and not self.option_flag['W']:
 			self.log.add_event("Oh! increiblemente he encontrado un cuchillo... se ve muy antiguo, quizas sea de algun pirata. Me podria servir asi que lo guardare.")
 			self.option_flag['W'] = True
 			return
@@ -149,6 +149,10 @@ class Controller:
 				if oso:
 					if q == 'y':
 						self.log.add_event('Logre matarlo !! La cueva me servira de refugio. Ademas podre utilizar su piel como abrigo. Creo que esta noche podre dormir tranquilo. Descansare pues ha sido un dia muy agitado.')
+						c = Item.Item('comida',1,'0')
+						self.inventory.addItem(c)
+						self.inventory.addItem(c)
+						self.inventory.addItem(c)
 						break
 					elif q == 'n':
 						self.log.add_event('No puedo pelear contra ese oso. Es mejor que huya')
@@ -168,15 +172,17 @@ class Controller:
 						self.log.add_event('Decidi ocupar la palmera como balsa')
 						break
 
-					elif pos == 'J' and not flag:
+					elif pos == 'j' and not flag:
 						self.log.add_event('Decidi matar al jabali')
-						self.inventory.addItem(Item.item('comida',1,'0'))
-						self.inventory.addItem(Item.item('comida',1,'0'))
+						c = Item.Item('comida',1,'0')
+						self.inventory.addItem(c)
+						self.inventory.addItem(c)
 						break
 
-					elif pos == 'A' and not flag:
+					elif pos == 'a' and not flag:
 						self.log.add_event('Guarde la manzana')
-						self.inventory.addItem(Item.item('comida',1,'0'))
+						c = Item.Item('comida',1,'0')
+						self.inventory.addItem(c)
 						break
 					flag = True
 					
@@ -186,12 +192,13 @@ class Controller:
 						self.option_flag['O']=False
 					elif pos == 'X' and not flag:
 						self.log.add_event('Deje la palmera en la playa')
-					elif pos == 'J' and not flag:
+					elif pos == 'j' and not flag:
 						self.log.add_event('Deje a la cria tranquila')
-					elif pos == 'A' and not flag:
+					elif pos == 'a' and not flag:
 						self.log.add_event('Comi la manzana')
-						self.inventory.addItem(Item.item('comida',1,'0'))
-						Player.useItem(Item.item('comida',1, '0'), self.inventory)
+						c = Item.Item('comida',1,'0')
+						self.inventory.addItem(c)
+						Player.useItem(c, self.inventory)
 					flag = True	
 					break
 				q=''
