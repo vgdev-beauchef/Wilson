@@ -45,6 +45,19 @@ colors = {
     'metal'         : 248
 }
 
+tiles = {
+    'person' : colors['pink'],
+    'rock' : colors['gray'],
+    'sand' : colors['sand'],
+    'deep' : colors['deep-blue'],
+    'grass' : colors['grass'],
+    'obj' : colors['fucsia'],
+    'cave' : colors['dark'],
+    'shallow' : colors['shallow-blue'],
+    'palm' : colors['palm'],
+    'tree' : colors['tree']
+}
+
 
 class World(object):
 
@@ -141,31 +154,31 @@ class World(object):
                     cha = '@'
 
                 if cha == '@':          #Personaje
-                    color = colors['pink']
+                    color = tiles['person']
                 elif cha == '#':        #Roca
-                    color = colors['gray']
+                    color = tiles['rock']
                     cha = u'\u2588'
                 elif cha == '.':        #Arena
-                    color = colors['sand']
+                    color = tiles['sand']
                 elif cha == '~':        #Agua profunda
-                    color = colors['deep-blue']
+                    color = tiles['deep']
                     cha = u'\u2248'
                 elif cha == '/':        #Pasto
-                    color = colors['grass']
+                    color = tiles['grass']
                     cha = u'\u0e45'
                 elif cha == '*':        #Objeto
-                    color = colors['fucsia']
+                    color = tiles['obj']
                 elif cha == 'O':        #Cueva
-                    color = colors['dark']
+                    color = tiles['dark']
                     cha = u'\u22d2'
                 elif cha == '-':        #agua no profunda
-                    color = colors['shallow-blue']
+                    color = tiles['shallow']
                     cha = '~'
                 elif cha == 'Y':        #palmera
-                    color = colors['palm']
+                    color = tiles['palm']
                     cha = u'\u1f33'
                 elif cha == 'T':        #arbol
-                    color = colors['tree']
+                    color = tiles['tree']
                     cha = u'\u1f34'
                 elif cha == 'a':        #manzana
                     color = colors['apple']
