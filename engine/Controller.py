@@ -16,7 +16,7 @@ import time
 
 class Controller:
 
-	def __init__(self, _world, _log, _info, _inventory, _ope, _mach, _intro, _ui):
+	def __init__(self, _world, _log, _info, _inventory, _ope, _mach, _intro, _ui, _keyMap):
 		self.ui = _ui
 		self.machine = _mach
 		self.world = _world
@@ -25,6 +25,7 @@ class Controller:
 		self.inventory = _inventory
 		self.ope = _ope
 		self.intro = _intro
+		self.key_map = _keyMap
 
 
 		self.dayCount = 0
@@ -209,14 +210,15 @@ class Controller:
 		pxf = Player.getPlayPos()[0]
 		pyf = Player.getPlayPos()[1]
 
-		if self.mapDisp:
+		if self.key_map.is_visible():
 			#TODO
 			if ginput=='m':
-				self.mapDisp = False
+				self.key_map.visibility(False)
 			return
 
 		if ginput=='m':
 			#TODO
+			self.key_map.visibility(True)
 			return
 			
 		if (ginput=='left' or ginput=='right' or ginput=='up' or ginput=='down') and (pxi!=pxf or pyi!=pyf) and not debug.debug:

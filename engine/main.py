@@ -17,13 +17,14 @@ import os
 import time
 #import pygame
 import StateMachine
+import KeyMap
 
 if __name__ == '__main__':
 
     try:
         debug.debug = sys.argv[1]=="-d"
     except:
-        debug.debug = False
+        debug.debug = True
 
     os.environ["TERM"] = "xterm-256color"
 
@@ -44,11 +45,12 @@ if __name__ == '__main__':
         inventory = Inventory.Inventory()
         ope = optionsUI.optionsUI()
         intro = Screen.Screen()
+        key_map = KeyMap.KeyMap(42, 18)
 
-        machine.changeState(log);
+        machine.changeState(log)
 
-        ui = UI.UI(world, log, info, inventory, ope, machine)
-        controller = Controller.Controller(world, log, info, inventory, ope, machine, intro, ui)
+        ui = UI.UI(world, log, info, inventory, ope, machine, key_map)
+        controller = Controller.Controller(world, log, info, inventory, ope, machine, intro, ui, key_map)
 
 
         manzana = Item.Item('comida', 1, 'hola')
