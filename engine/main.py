@@ -8,14 +8,14 @@ import Log
 import Inventory
 import Item
 import Info
-#import musicPlayer
+import musicPlayer
 import optionsUI
 import UI
 import Controller
 import Screen
 import os
 import time
-#import pygame
+import pygame
 import StateMachine
 
 if __name__ == '__main__':
@@ -23,15 +23,15 @@ if __name__ == '__main__':
     try:
         debug.debug = sys.argv[1]=="-d"
     except:
-        debug.debug = False
+        debug.debug = True
 
     os.environ["TERM"] = "xterm-256color"
 
 
     try:
-        #pygame.init()
-        #pygame.mixer.music.load('resources/tracks/mainloop.wav')
-        #pygame.mixer.music.play(-1, 0.0)
+        pygame.init()
+        pygame.mixer.music.load('resources/tracks/mainloop.wav')
+        pygame.mixer.music.play(-1, 0.0)
 
         Player.initPlayer('dummy')
         start()
@@ -51,11 +51,11 @@ if __name__ == '__main__':
         controller = Controller.Controller(world, log, info, inventory, ope, machine, intro, ui)
 
 
-        manzana = Item.Item('comida', 1, 'hola')
-        cuchillo = Item.Item('cuchillo', 2, 'hola')
-        ui.inventory.addItem(manzana)
-        ui.inventory.addItem(manzana)
-        ui.inventory.addItem(cuchillo)
+        #manzana = Item.Item('comida', 1, 'hola')
+        #cuchillo = Item.Item('cuchillo', 2, 'hola')
+        #ui.inventory.addItem(manzana)
+        #ui.inventory.addItem(manzana)
+        #ui.inventory.addItem(cuchillo)
 
         wait_time = 3
         if not debug.debug:
