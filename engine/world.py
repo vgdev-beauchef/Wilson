@@ -63,7 +63,7 @@ class World(object):
     def __init__(self):
         self.grid = matrix.maptoMatrix('mapa4.txt')
 
-        self.grid[81][174]  = 'a'
+        self.grid[61][174]  = 'a'
         self.grid[93][139]  = 'j'
         self.grid[105][123] = 'w'
         self.grid[115][112] = 'O'
