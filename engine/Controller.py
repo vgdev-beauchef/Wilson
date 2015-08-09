@@ -8,11 +8,11 @@ import Log
 import Inventory
 import Item
 import Info
-import musicPlayer
+#import musicPlayer
 import optionsUI
 import StateMachine
 import time
-import pygame.mixer as mixer
+#import pygame.mixer as mixer
 
 class Controller:
 
@@ -86,6 +86,9 @@ class Controller:
 		elif ginput == '2':
 			if not self.inventory.getItem(2) is None:
 				self.log.add_event(Player.useItem(self.inventory.getItem(2), self.inventory))
+		elif ginput == '3':
+			if not self.inventory.getItem(3) is None:
+				self.log.add_event(Player.useItem(self.inventory.getItem(3), self.inventory))
 
 
 	def manage_log(self, ginput):
@@ -170,6 +173,8 @@ class Controller:
 							self.inventory.addItem(c)
 							self.inventory.addItem(c)
 							self.inventory.addItem(c)
+							self.log.add_event('El olor de la cueva me recuerda a los enormes perros que cuidaban las ovejas de mi abuelo y como yo dormia abrazado a ellos. Casi puedo sentir su agradable calor.')
+							self.dayCount = self.dayCountLimit +1 
 						break
 					elif q == 'n':
 						self.log.add_event('No puedo pelear contra ese oso. Es mejor que huya')
@@ -187,7 +192,7 @@ class Controller:
 						continue
 					elif pos == 'X' and not flag:
 						self.log.add_event('Decidi ocupar la palmera para construir una balsa')
-						c = Item.Item("balsa",3,'1')
+						c = Item.Item('balsa',3,'1')
 						self.inventory.addItem(c)
 						break
 
