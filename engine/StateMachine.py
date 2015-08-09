@@ -22,7 +22,7 @@ class StateMachine:
             texts = self.machine[self.current_state][1]
             for text in texts:
                 log.add_event(text)
-                ui.draw()
-                time.sleep(0.3)
+                #ui.draw()
+                #time.sleep(0.3)
 
             self.current_state = self.machine[self.current_state][0]
