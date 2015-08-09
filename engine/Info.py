@@ -17,6 +17,7 @@ class Info(object):
             _infoWindowXPos, _infoWindowYPos)
         self.time=0
         self.timeToDusk = 10
+        self._gameOver = False
 
     def draw(self):
         self.clearWindow()
@@ -31,7 +32,12 @@ class Info(object):
         gfx.write(0, 1, hungerBar(), self.window, hungerColor)
         gfx.write(0, 2, 'Hora', self.window)
         gfx.write(0, 3, self.timeBar(), self.window, 4)
+        if self._gameOver:
+            gfx.write(0, 5, 'Presione enter para continuar', self.window)
         self.window.refresh()
+
+    def gameOver(self):
+        self._gameOver = True
 
     def clearWindow(self):
 		clean_string = " " * 19
