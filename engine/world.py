@@ -115,7 +115,7 @@ class World(object):
                 else:
                     color = 1
 
-                if self.vgrid[x][y] and cha == '#':
+                if self.vgrid[x][y] and (cha == '#'):
                     self.memgrid[x][y] = True
 
                 if self.vgrid[x][y] or debug.debug:
