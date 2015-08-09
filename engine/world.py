@@ -15,7 +15,7 @@ _viewRadius = 10
 class World(object):
 
     def __init__(self):
-        self.grid = matrix.maptoMatrix('map.txt')
+        self.grid = matrix.maptoMatrix('mapa4.txt')
         height = len(self.grid[0])
         width = len(self.grid)
         self.vgrid = [[False for x in range(width)] for x in range(height)]
@@ -112,10 +112,14 @@ class World(object):
                     color = 6
                 elif cha == '-':        #agua no profunda
                     color = 7
+                elif cha == 'Y':        #palmera
+                    color = 2
+                elif cha == 'T':        #arbol
+                    color = 3
                 else:
                     color = 1
 
-                if self.vgrid[x][y] and cha == '#':
+                if self.vgrid[x][y] and (cha == '#'):
                     self.memgrid[x][y] = True
 
                 if self.vgrid[x][y] or debug.debug:

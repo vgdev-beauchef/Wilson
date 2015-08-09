@@ -1,6 +1,7 @@
 import curses
 import traceback
 import sys
+import locale
 
 _screen = None
 _keymap = {
@@ -26,6 +27,9 @@ def start():
         _screen.scrollok(False)
         curses.start_color()
         curses.use_default_colors()
+
+        locale.setlocale(locale.LC_ALL, '')
+        code = locale.getpreferredencoding()
 
         for i in range(0, curses.COLORS):
             curses.init_pair(i + 1, i, -1)
@@ -104,6 +108,7 @@ class Ventana:
         self.win.addch(y, 2 * x, c, curses.color_pair(color))
 
     def addstr(self, x, y, string, color=0):
+        encoded = string.encode('utf-8')
         self.win.addstr(y, x, string, curses.color_pair(color))
 
     def refresh(self):

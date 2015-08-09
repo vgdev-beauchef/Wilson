@@ -8,7 +8,8 @@ _openWindowYPos = 20
 
 class optionsUI(object):
 	def __init__(self):
-		self.window = Ventana(_opeWindowWidth,_opeWindowHeight,_opeWindowXPos,_openWindowYPos)
+		self.window = Ventana(_opeWindowWidth, _opeWindowHeight,
+							  _opeWindowXPos, _openWindowYPos)
 		self.intro = 'holahola'
 		self.yesOption = 'sisi'
 		self.noOption = 'nono'
