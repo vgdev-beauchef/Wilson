@@ -16,6 +16,8 @@ def main(infile,outfile):
             elif compare(image[x,y],(0,255,144)): a.write("/")
             elif compare(image[x,y],(127,0,0)): a.write("#")
             elif compare(image[x,y],(0,0,0)): a.write("O")
+            elif compare(image[x,y],(0,127,14)): a.write("Y")
+            elif compare(image[x,y],(255,127,127)): a.write("T")
         a.write("\n")
     a.close()
 

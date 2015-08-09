@@ -49,7 +49,7 @@ class Controller:
 		self.cueva = False
 
 		self.info.setTimeToDusk(self.dayCountLimit)
-		#self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
+		self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
 
 		self.mapDisp = False
 
@@ -151,6 +151,7 @@ class Controller:
 			self.option_flag['X'] = True
 			self.world.grid[89][101] = '.'
 
+
 		if not option=="":
 			self.ope.clearWindow()
 			self.ope.setOption(option, yes_answer, no_aswer)
@@ -185,7 +186,9 @@ class Controller:
 						oso = True
 						continue
 					elif pos == 'X' and not flag:
-						self.log.add_event('Decidi ocupar la palmera como balsa')
+						self.log.add_event('Decidi ocupar la palmera para construir una balsa')
+						c = Item.Item("balsa",3,'1')
+						self.inventory.addItem(c)
 						break
 
 					elif pos == 'j' and not flag:
