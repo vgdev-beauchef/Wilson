@@ -70,7 +70,7 @@ if __name__ == '__main__':
         start()
         ui = UI()
 
-        manzana = Item.Item('comida', 1, 'hola')
+        manzana = Item.Item('comida164', 1, 'hola')
         cuchillo = Item.Item('cuchillo', 2, 'hola')
         ui.inventory.addItem(manzana)
         ui.inventory.addItem(manzana)
