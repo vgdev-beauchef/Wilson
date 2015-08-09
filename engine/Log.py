@@ -69,6 +69,7 @@ class Log:
         self.diary.append(list())
         self.page = self.diary[len(self.diary)-1]
         self.day_displayed = self.day
+        self.diary_index = 0
 
     def scroll_up(self):
         if (self.diary_index + 1) >= len(self.page):
