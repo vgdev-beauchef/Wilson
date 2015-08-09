@@ -40,21 +40,13 @@ if __name__ == '__main__':
         ui.inventory.addItem(manzana)
         ui.inventory.addItem(cuchillo)
 
-        start_milli_time = int(round(time.time() * 1000))
-        wait_time = 3000
-        while 1:
-            intro.draw(1)
-            intro.refresh()
-            current_milli_time = int(round(time.time() * 1000))
-            if (current_milli_time - start_milli_time) >= wait_time:
-                break
-        start_milli_time = int(round(time.time() * 1000))
-        while 1:
-            intro.draw(2)
-            intro.refresh()
-            current_milli_time = int(round(time.time() * 1000))
-            if (current_milli_time - start_milli_time) >= wait_time:
-                break
+        wait_time = 3
+        intro.draw(1)
+        intro.refresh()
+        time.sleep(wait_time)
+        intro.draw(2)
+        intro.refresh()
+        time.sleep(wait_time)
         while 1:
             intro.draw(3)
             intro.refresh()
