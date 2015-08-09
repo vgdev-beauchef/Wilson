@@ -11,6 +11,27 @@ _windowX = 32
 _windowY = 18
 _viewRadius = 10
 
+colors = {
+    'black'         : 0,
+    'red'           : 1,
+    'green'         : 2,
+    'yellow'        : 3,
+    'blue'          : 4,
+    'magenta'       : 5,
+    'cyan'          : 6,
+    'white'         : 7,
+    'pink'          : 226,
+    'gray'          : 95,
+    'sand'          : 227,
+    'deep-blue'     : 21,
+    'grass'         : 83,
+    'fucsia'        : 197,
+    'dark'          : 233,
+    'shallow-blue'  : 124,
+    'palm'          : 41,
+    'tree'          : 29
+}
+
 
 class World(object):
 
@@ -97,25 +118,25 @@ class World(object):
                     cha = '@'
 
                 if cha == '@':          #Personaje
-                    color = 226
+                    color = colors['pink']
                 elif cha == '#':        #Roca
-                    color = 95
+                    color = colors['gray']
                 elif cha == '.':        #Arena
-                    color = 227
+                    color = colors['sand']
                 elif cha == '~':        #Agua profunda
-                    color = 21
+                    color = colors['deep-blue']
                 elif cha == '/':        #Pasto
-                    color = 83
+                    color = colors['grass']
                 elif cha == '*':        #Objeto
-                    color = 197
+                    color = colors['fucsia']
                 elif cha == 'O':        #Cueva
-                    color = 233
+                    color = colors['dark']
                 elif cha == '-':        #agua no profunda
-                    color = 124
+                    color = colors['shallow-blue']
                 elif cha == 'Y':        #palmera
-                    color = 41
+                    color = colors['palm']
                 elif cha == 'T':        #arbol
-                    color = 29
+                    color = colors['tree']
                 else:
                     color = 1
 
