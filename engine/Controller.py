@@ -119,8 +119,9 @@ class Controller:
 
 		percentage = Player.getHunger()[0]
 		if percentage <= 0 and not self.hunger_flag_1:
-			self.log.add_event("Creo que no me siento bien... *cae*")
+			
 			self.hunger_flag_1 = True
+			#time.sleep(3)
 		elif percentage == 25 and not self.hunger_flag_2:
 			self.hunger_flag_2 = True
 			self.log.add_event("Me esta empezando a doler el estomago")
@@ -130,7 +131,7 @@ class Controller:
 			self.hunger_flag_2 = False
 			self.log.add_event("Tengo un poco de hambre, deberia comer algo")
 
-		else:
+		elif percentage>=50:
 			self.hunger_flag_3 = False
 			self.hunger_flag_2 = False
 
@@ -138,8 +139,8 @@ class Controller:
 
 	def deadCondition(self):
 		if(Player.getHunger()[0]<=0):
-			self.intro.game_over_screen()
-			time.sleep(5)
+			self.log.add_event("Creo que no me siento bien... *cae*")
+			
 			return True
 		return False
 
