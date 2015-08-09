@@ -8,14 +8,14 @@ import Log
 import Inventory
 import Item
 import Info
-import musicPlayer
+#import musicPlayer
 import optionsUI
 import UI
 import Controller
 import Screen
 import os
 import time
-import pygame
+#import pygame
 import StateMachine
 import KeyMap
 
@@ -30,9 +30,9 @@ if __name__ == '__main__':
 
 
     try:
-        pygame.init()
-        pygame.mixer.music.load('resources/tracks/mainloop.wav')
-        pygame.mixer.music.play(-1, 0.0)
+        #pygame.init()
+        #pygame.mixer.music.load('resources/tracks/mainloop.wav')
+        #pygame.mixer.music.play(-1, 0.0)
 
         Player.initPlayer('dummy')
         start()
