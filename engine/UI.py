@@ -19,13 +19,13 @@ _inveWindowYPos = 10
 
 class UI:
 
-    def __init__(self):
-        self.world = world.World()
-        self.log = Log.Log()
+    def __init__(self, _world, _log, _info, _inventory, _ope):
+        self.world = _world
+        self.log = _log
 
-        self.info = Info.Info()
-        self.inventory = Inventory.Inventory()
-        self.ope = optionsUI.optionsUI()
+        self.info = _info
+        self.inventory = _inventory
+        self.ope = _ope
 
     def movement(self, ginput):
         px = Player.getPlayPos()[0]

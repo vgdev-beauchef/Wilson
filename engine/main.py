@@ -13,12 +13,21 @@ import optionsUI
 import UI
 
 if __name__ == '__main__':
+
     try:
         #musicPlayer.musicWrapper('resources/tracks/track_01.mid')
         Player.initPlayer('dummy')
         debug.debug = True
         start()
-        ui = UI.UI()
+
+        #Initilization
+        world = world.World()
+        log = Log.Log()
+        info = Info.Info()
+        inventory = Inventory.Inventory()
+        ope = optionsUI.optionsUI()
+
+        ui = UI.UI(world, log, info, inventory, ope)
 
         manzana = Item.Item('comida', 1, 'hola')
         cuchillo = Item.Item('cuchillo', 2, 'hola')
@@ -28,7 +37,7 @@ if __name__ == '__main__':
 
         while 1:
             ui.draw()
-            
+
             # INPUT
             q = get_input()
             if q == 'q':
