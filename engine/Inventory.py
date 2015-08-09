@@ -23,14 +23,20 @@ class Inventory:
 
         write(1, 0, '<Inventario>', self.window, 0)
 
+        k = 1
+        for key in self.items.keys():
+            string = key.name +" : "+ str(self.items[key])
+            write(1, k, string, self.window, 0)
+            k = k+2
+
     def refresh(self):
         self.window.refresh()
 
     def addItem(self, item):
         if(len(self.items)<self.max):
-            if(item in items):
-                items[item]=items[item]+1
+            if(item in self.items):
+                self.items[item]=self.items[item]+1
             else:
-                items[item]=1
+                self.items[item]=1
 
 
