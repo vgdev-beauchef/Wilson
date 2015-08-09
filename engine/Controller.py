@@ -129,7 +129,7 @@ class Controller:
 			yes_answer = "guardarla"
 			no_aswer = "comerla"
 			self.option_flag['A'] = True
-			self.world.grid[61][174]  = '-'
+			self.world.grid[80][170]  = '-'
 		elif pos=='j' and not self.option_flag['J']:
 			self.log.add_event("Hay una cria de jabali alla... si la mato ahora tengo alimento facil, pero es tan solo un pequena criatura... como podria yo...? ")
 			option = "que hacer?"
@@ -174,13 +174,16 @@ class Controller:
 							self._killedByBear = True
 						else:
 							self.log.add_event('Logre matarlo !! La cueva me servira de refugio. Ademas podre utilizar su piel como abrigo. Creo que esta noche podre dormir tranquilo. Descansare pues ha sido un dia muy agitado.')
-							self.iu.draw()
-							time.sleep(0.5)
+							self.ui.draw()
+							time.sleep(1)
 							c = Item.Item('comida',1,'0')
 							self.inventory.addItem(c)
 							self.inventory.addItem(c)
 							self.inventory.addItem(c)
 							self.log.add_event('El olor de la cueva me recuerda a los enormes perros que cuidaban las ovejas de mi abuelo y como yo dormia abrazado a ellos. Casi puedo sentir su agradable calor.')
+							self.ope.setOption("","","")
+							self.ui.draw()
+							time.sleep(3)
 							self.dayCount = self.dayCountLimit  
 						break
 					elif q == 'n':
@@ -304,10 +307,10 @@ class Controller:
 				self.dayCount=0
 				self.log.increase_day()
 
-				self.machine.changeState(self.log)
+				self.machine.changeState(self.log, self.ui)
 				self.flag = False
 			elif self.dayCount>4*self.dayCountLimit/5 and not self.flag:
-				self.machine.changeState(self.log)
+				self.machine.changeState(self.log, self.ui)
 				self.flag = True
 
 		self.showHungerMessages()
@@ -344,10 +347,12 @@ class Controller:
 	def killedByBear(self):
 		if self._killedByBear:
 			self.log.add_event("Esto fue... demasiado para ... mi")
+			self.log.add_event("Presiona enter para continuar")
 		return self._killedByBear
 
 	def deadCondition(self):
 		if(Player.getHunger()[0]<=0):
 			self.log.add_event("Creo que no me siento bien... *cae*")
+			self.log.add_event("Presiona enter para continuar")
 			return True
 		return False

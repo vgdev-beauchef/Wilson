@@ -49,9 +49,9 @@ if __name__ == '__main__':
 
         escape = False
 
-        machine.changeState(log)
 
         ui = UI.UI(world, log, info, inventory, ope, machine, key_map)
+        machine.changeState(log, ui)
         controller = Controller.Controller(world, log, info, inventory, ope, machine, intro, ui, key_map)
 
 
