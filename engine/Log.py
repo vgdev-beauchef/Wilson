@@ -30,7 +30,7 @@ class Log:
             if i >= len(self.diary) or index < 1:
                 break
             line = ">"+self.diary[i]
-            lines = parser(line)
+            lines = parser(line, 62)
 
             rows = row_number(line)
 
@@ -63,10 +63,10 @@ def row_number(line):
         n = int(len(line) // 62)+1
         return n
 
-def parser(line):
+def parser(line, line_size):
 
     size = len(line)
-    len_size = 62
+    len_size = line_size
 
     return_list = [line[i:i+len_size] for i in range(0, size, len_size)]
 
