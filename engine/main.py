@@ -13,6 +13,8 @@ import optionsUI
 import UI
 import Controller
 import os
+import IntroScreen
+import time
 
 if __name__ == '__main__':
 
@@ -32,6 +34,7 @@ if __name__ == '__main__':
         info = Info.Info()
         inventory = Inventory.Inventory()
         ope = optionsUI.optionsUI()
+        intro = IntroScreen.IntroScreen()
 
         ui = UI.UI(world, log, info, inventory, ope)
         controller = Controller.Controller(world, log, info, inventory, ope)
@@ -41,6 +44,23 @@ if __name__ == '__main__':
         ui.inventory.addItem(manzana)
         ui.inventory.addItem(manzana)
         ui.inventory.addItem(cuchillo)
+
+        wait_time = 3
+        intro.draw(1)
+        intro.refresh()
+        time.sleep(wait_time)
+        intro.draw(2)
+        intro.refresh()
+        time.sleep(wait_time)
+        while 1:
+            intro.draw(3)
+            intro.refresh()
+            q = get_input()
+            if q == 'enter':
+                intro.clean()
+                intro.refresh()
+                intro.refresh()
+                break
 
         while 1:
             ui.draw()

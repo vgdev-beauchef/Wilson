@@ -19,6 +19,11 @@ class Controller:
 		self.info = _info
 		self.inventory = _inventory
 		self.ope = _ope
+		self.dayCount = 0
+		self.dayCountLimit = 30
+		self.dayTime = 0
+
+		self.info.setTimeToDusk(self.dayCountLimit)
 
 	def movement(self, ginput):
 		px = Player.getPlayPos()[0]
@@ -51,4 +56,13 @@ class Controller:
 			self.log.increase_day()
 		elif ginput == '2':
 			self.log.add_event("Elephant")
+
+		if ginput=='left' or ginput=='right' or ginput=='up' or ginput=='down':
+			self.dayCount+=1
+			#self.log.add_event(ginput)
+			self.info.setTime(self.dayCount)
+			Player.modifyHunger(-1)
+			if self.dayCount>self.dayCountLimit:
+				self.dayCount=0
+				self.log.increase_day()
 
