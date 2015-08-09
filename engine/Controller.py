@@ -49,7 +49,7 @@ class Controller:
 		self.cueva = False
 
 		self.info.setTimeToDusk(self.dayCountLimit)
-		self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
+		#self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
 
 		self.mapDisp = False
 
@@ -98,6 +98,9 @@ class Controller:
 		elif ginput == 'l':
 			self.log.next_day()
 
+	#def reset_place(self, x, y):
+
+
 	def manage_place(self):
 		px = Player.getPlayPos()[0]
 		py = Player.getPlayPos()[1]
@@ -108,6 +111,7 @@ class Controller:
 		no_aswer = ""
 		flag = False
 
+
 		if pos!='O':
 			self.cueva = False
 
@@ -117,17 +121,20 @@ class Controller:
 			yes_answer = "guardarla"
 			no_aswer = "comerla"
 			self.option_flag['A'] = True
+			self.world.grid[81][174]  = '-'
 		elif pos=='j' and not self.option_flag['J']:
 			self.log.add_event("Hay una cria de jabali alla... si la mato ahora tengo alimento facil, pero es tan solo un pequena criatura... como podria yo...? ")
 			option = "que hacer?"
 			yes_answer = "matarla"
 			no_aswer = "dejarla huir"
 			self.option_flag['J'] = True
+			self.world.grid[93][139] = '/'
 		elif pos=='w' and not self.option_flag['W']:
 			self.log.add_event("Oh! increiblemente he encontrado un cuchillo... se ve muy antiguo, quizas sea de algun pirata. Me podria servir asi que lo guardare.")
 			c = Item.Item("cuchillo",2,'0')
 			self.inventory.addItem(c)
 			self.option_flag['W'] = True
+			self.world.grid[105][123] = '.'
 			return
 		elif pos=='O' and not self.option_flag['O'] and not self.cueva:
 			self.log.add_event("Oh, una cueva!! Se escuchan ruidos desde adentro...sera un algun animal?? un oso? Entro?")
@@ -142,6 +149,7 @@ class Controller:
 			yes_answer = "construir balsa"
 			no_aswer = "ignorar balsa"
 			self.option_flag['X'] = True
+			self.world.grid[89][101] = '.'
 
 		if not option=="":
 			self.ope.clearWindow()
