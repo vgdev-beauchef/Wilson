@@ -17,9 +17,9 @@ class Inventory:
 
     def draw(self):
         inv = ['I' * self.width] * self.height
-        for i in range(len(inv[0])):
-            for j in range(len(inv)):
-                draw(i, j, 'I', self.window, 7)
+        # for i in range(len(inv[0])):
+        #     for j in range(len(inv)):
+        #         draw(i, j, 'I', self.window, 7)
 
         write(1, 0, '<Inventario>', self.window, 0)
 
@@ -38,5 +38,3 @@ class Inventory:
                 self.items[item]=self.items[item]+1
             else:
                 self.items[item]=1
-
-
