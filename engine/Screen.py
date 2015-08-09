@@ -4,17 +4,17 @@ from gfx import *
 import codecs
 
 
-class IntroScreen:
+class Screen:
 
     def __init__(self):
-        orig = "resources/intro/ascii_art.txt"
+        orig = "resources/intro/intro.txt"
         with codecs.open(orig, 'r', "utf-8") as text:
             array = []
             index = -1
             current = []
             for line in text:
                 if len(line) > 0 and line[0] == '#':
-                    index +=1
+                    index += 1
                     array.append(list())
                     current = array[index]
                 else:
