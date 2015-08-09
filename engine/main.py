@@ -16,6 +16,7 @@ import Screen
 import os
 import time
 import pygame
+import StateMachine
 
 if __name__ == '__main__':
     if os.environ["COLORTERM"] ==  "gnome-terminal":
@@ -33,6 +34,7 @@ if __name__ == '__main__':
         start()
 
         #Initilization
+        machine = StateMachine.StateMachine()
         world = world.World()
         log = Log.Log()
         info = Info.Info()
@@ -40,8 +42,11 @@ if __name__ == '__main__':
         ope = optionsUI.optionsUI()
         intro = Screen.Screen()
 
-        ui = UI.UI(world, log, info, inventory, ope)
-        controller = Controller.Controller(world, log, info, inventory, ope, intro)
+        machine.changeState(log);
+
+        ui = UI.UI(world, log, info, inventory, ope, machine)
+        controller = Controller.Controller(world, log, info, inventory, ope, machine, intro)
+
 
         manzana = Item.Item('comida', 1, 'hola')
         cuchillo = Item.Item('cuchillo', 2, 'hola')
