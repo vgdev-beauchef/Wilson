@@ -25,10 +25,12 @@ class Inventory:
 
         newlist = sorted(self.items.keys(), key=lambda x: x.id)
         k = 1
+        i = 1
         for key in newlist:
-            string = "[" + str(k) + "] " +key.name +" : "+ str(self.items[key])
+            string = "[" + str(i) + "] " +key.name +" : "+ str(self.items[key])
             write(1, k, string, self.window, 0)
             k = k+2
+            i += 1
 
     def refresh(self):
         self.window.refresh()
@@ -38,7 +40,7 @@ class Inventory:
             if (key.id==id):
                 return key;
         return None
-        
+
     def addItem(self, item):
         if(len(self.items)<self.max):
             if(item in self.items):
