@@ -2,6 +2,7 @@ __author__ = 'Michel Llorens'
 __email__ = "mllorens@dcc.uchile.cl"
 from gfx import *
 import codecs
+import time
 
 
 class Screen:
@@ -9,6 +10,7 @@ class Screen:
     def __init__(self):
         intro_source = "resources/ascii_images/intro.txt"
         go_source = "resources/ascii_images/game_over.txt"
+        credits_source = "resources/ascii_images/credits.txt"
         with codecs.open(intro_source, 'r', "utf-8") as text:
             array = []
             index = -1
@@ -35,6 +37,11 @@ class Screen:
             for line in text:
                 self.game_over.append(line)
 
+        with codecs.open(credits_source, 'r', "utf-8") as text:
+            self.credits = []
+            for line in text:
+                self.credits.append(line)
+
     def draw(self, view):
         if view == 1:
             self.draw_array(self.vg_dev)
@@ -44,6 +51,8 @@ class Screen:
             self.draw_array(self.wilson)
         elif view == 4:
             self.draw_array(self.game_over)
+        elif view == 5:
+            self.draw_array(self.credits)
 
     def draw_array(self, array):
         for i in range(0, len(array)):
@@ -57,6 +66,12 @@ class Screen:
         self.refresh()
         self.draw(4)
         self.refresh()
+        time.sleep(2)
+        self.clean()
+        self.refresh()
+        self.draw(5)
+        self.refresh()
+
 
     def refresh(self):
         self.window.refresh()
