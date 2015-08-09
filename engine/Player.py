@@ -28,13 +28,14 @@ def modifyHunger(n): #Se le esta sumando a la cantidad de comida
            _player.hunger += n
 
 def useItem(item, inventory):
-    
     if(item.name.lower()=="comida"):
         if(inventory.getQuantity(item)>0):
             inventory.deleteItem(item)
             modifyHunger(20)
             return "Comi Algo"
         return "No me queda que comer"
+    elif(item.name.lower()=="balsa"):
+        return "Creo que he construido una balsa resistente..."
     else:
         return "Miro mi arma, podria ser util"
 
@@ -47,5 +48,5 @@ class Player(Entity):
         self.name = name
         self.position = [77, 173]
         self.maxHunger = 100
-        self.hunger = 50
+        self.hunger = 80
         self.sanity = 10
