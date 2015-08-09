@@ -114,11 +114,17 @@ if __name__ == '__main__':
 
         intro.clean()
         intro.refresh()
+        if not escape:
+            pygame.mixer.music.stop()
+            pygame.mixer.music.load('resources/tracks/end.wav')
+            pygame.mixer.music.play(1, 0.0)
         while 1 :
             if escape:
                 intro.win_screen()
             else:
                 intro.game_over_screen()
+                time.sleep(2)
+                break
             q = get_input()
             if q == 'enter':
                 break
