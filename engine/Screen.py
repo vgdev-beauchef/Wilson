@@ -52,6 +52,12 @@ class Screen:
             except curses.error:
                 pass
 
+    def game_over_screen(self):
+        self.clean()
+        self.refresh()
+        self.draw(4)
+        self.refresh()
+
     def refresh(self):
         self.window.refresh()
 
