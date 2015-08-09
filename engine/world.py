@@ -43,7 +43,7 @@ class World(object):
         self.grid[105][123] = 'w'
         self.grid[115][112] = 'O'
         self.grid[89][101]  = 'Y'
-        
+
         height = len(self.grid[0])
         width = len(self.grid)
         self.vgrid = [[False for x in range(width)] for x in range(height)]
@@ -91,7 +91,10 @@ class World(object):
         oy = getPlayPos()[1] + 0.5
         for i in range(_viewRadius):
             self.vgrid[int(ox)][int(oy)] = True
-            if self.grid[int(ox)][int(oy)] == '#':
+            pos = self.grid[int(ox)][int(oy)]
+            if pos == '#' or\
+               pos == 'T' or\
+               pos == 'Y':
                 return
             ox += x
             oy += y
