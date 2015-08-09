@@ -47,6 +47,7 @@ class Controller:
 		self.option_flag['O'] = False
 		self.option_flag['X'] = False
 		self.cueva = False
+		self.escape = False
 
 		self.info.setTimeToDusk(self.dayCountLimit)
 		self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
@@ -86,6 +87,9 @@ class Controller:
 		elif ginput == '2':
 			if not self.inventory.getItem(2) is None:
 				self.log.add_event(Player.useItem(self.inventory.getItem(2), self.inventory))
+		elif ginput == '3':
+			if not self.inventory.getItem(3) is None:
+				self.log.add_event(Player.useItem(self.inventory.getItem(3), self.inventory))
 
 
 	def manage_log(self, ginput):
@@ -111,6 +115,10 @@ class Controller:
 		no_aswer = ""
 		flag = False
 
+		if pos=='-' and self.inventory.getItem(3) != None :
+			#TODO
+			self.escape = True
+			return
 
 		if pos!='O':
 			self.cueva = False
@@ -170,6 +178,8 @@ class Controller:
 							self.inventory.addItem(c)
 							self.inventory.addItem(c)
 							self.inventory.addItem(c)
+							self.log.add_event('El olor de la cueva me recuerda a los enormes perros que cuidaban las ovejas de mi abuelo y como yo dormia abrazado a ellos. Casi puedo sentir su agradable calor.')
+							self.dayCount = self.dayCountLimit +1 
 						break
 					elif q == 'n':
 						self.log.add_event('No puedo pelear contra ese oso. Es mejor que huya')
@@ -187,7 +197,7 @@ class Controller:
 						continue
 					elif pos == 'X' and not flag:
 						self.log.add_event('Decidi ocupar la palmera para construir una balsa')
-						c = Item.Item("balsa",3,'1')
+						c = Item.Item('balsa',3,'0')
 						self.inventory.addItem(c)
 						break
 
@@ -235,6 +245,9 @@ class Controller:
 
 		pxf = Player.getPlayPos()[0]
 		pyf = Player.getPlayPos()[1]
+
+		if self.escape:
+			return
 
 		if self.key_map.is_visible():
 			#TODO

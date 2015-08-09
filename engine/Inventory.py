@@ -27,7 +27,7 @@ class Inventory:
         k = 1
         i = 1
         for key in newlist:
-            string = "[" + str(i) + "] " +key.name +" : "+ str(self.items[key])
+            string = "[" + str(key.id) + "] " +key.name +" : "+ str(self.items[key])
             write(1, k, string, self.window, 0)
             k = k+2
             i += 1

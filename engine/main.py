@@ -24,7 +24,7 @@ if __name__ == '__main__':
     try:
         debug.debug = sys.argv[1] == "-d"
     except:
-        debug.debug = False
+        debug.debug = True
 
     os.environ["TERM"] = "xterm-256color"
 
@@ -46,6 +46,8 @@ if __name__ == '__main__':
         ope = optionsUI.optionsUI()
         intro = Screen.Screen()
         key_map = KeyMap.KeyMap(42, 18)
+
+        escape = False
 
         machine.changeState(log)
 
@@ -99,6 +101,9 @@ if __name__ == '__main__':
             elif q == 'enter':
                 debug.debug = not debug.debug
             controller.manage(q)
+            escape = controller.escape
+            if escape:
+                break
         while 1:
             ui.draw()
 
@@ -106,8 +111,26 @@ if __name__ == '__main__':
             if q == 'enter':
                 break
             controller.manage_log(q)
-        intro.game_over_screen()
-        time.sleep(5)
+
+        intro.clean()
+        intro.refresh()
+        if not escape:
+            pygame.mixer.music.stop()
+            pygame.mixer.music.load('resources/tracks/end.wav')
+            pygame.mixer.music.play(1, 0.0)
+        while 1 :
+            if escape:
+                intro.win_screen()
+            else:
+                intro.game_over_screen()
+                time.sleep(2)
+                break
+            q = get_input()
+            if q == 'enter':
+                break
+        intro.clean()
+        intro.refresh()
+        intro.show_credits()
         stop()
     except:
         stop()
