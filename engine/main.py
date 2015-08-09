@@ -24,7 +24,7 @@ if __name__ == '__main__':
     try:
         debug.debug = sys.argv[1] == "-d"
     except:
-        debug.debug = False
+        debug.debug = True
 
     os.environ["TERM"] = "xterm-256color"
 
