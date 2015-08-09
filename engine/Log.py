@@ -31,7 +31,7 @@ class Log:
     def draw(self):
 
         self.clean()
-        write(1, 0, "<Dia "+str(self.day_displayed)+">", self.window, 0)
+        write(1, 0, "<Dia "+str(self.day_displayed+1)+">", self.window, 0)
         i = self.diary_index
         index = 10
         while i < self.diary_index+10:
@@ -58,13 +58,11 @@ class Log:
             i += 1
             index -= 1
 
-
     def refresh(self):
         self.window.refresh()
 
     def add_event(self, string):
         self.page.insert(0, string)
-
 
     def increase_day(self):
         self.day += 1
@@ -101,6 +99,17 @@ class Log:
             self.page = self.diary[day_index]
             self.diary_index = 0
             self.day_displayed -= 1
+
+    def to_file(self):
+        log_file = open("Wilson_log.txt", "w")
+        for i in range(0, len(self.diary)):
+            log_file.write("Day :"+str(i+1)+"\n")
+
+            day = '\n'.join(map(str, self.diary[i]))
+
+            log_file.write(day)
+            log_file.write("\n\n")
+        log_file.close()
 
 def row_number(line):
         n = int(len(line) // 62)+1

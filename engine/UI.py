@@ -8,7 +8,8 @@ import Log
 import Inventory
 import Item
 import Info
-#import musicPlayer
+import musicPlayer
+import optionsUI
 
 _inveWindowWidth = 10
 _inveWindowHeight = 10
@@ -24,6 +25,7 @@ class UI:
 
         self.info = Info.Info()
         self.inventory = Inventory.Inventory()
+        self.ope = optionsUI.optionsUI()
 
     def movement(self, ginput):
         px = Player.getPlayPos()[0]
@@ -88,12 +90,8 @@ if __name__ == '__main__':
             ui.inventory.draw()
 
             #OPERATIONS
-            ope = ['O' * _opeWindowWidth] * _opeWindowHeight
-            for i in range(len(ope[0])):
-                for j in range(len(ope)):
-                    draw(i, j, 'O', ui.operations, 8)
+            ui.ope.draw()
 
-            ui.operations.refresh()
             ui.log.refresh()
             ui.inventory.refresh()
 
