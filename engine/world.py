@@ -30,7 +30,6 @@ colors = {
     'shallow-blue'  : 124,
     'palm'          : 41,
     'tree'          : 29,
-<<<<<<< HEAD
     'gray-night'    : 236,
     'sand-night'    : 71,
     'deep-blue-night':18,
@@ -40,8 +39,6 @@ colors = {
     'shallow-blue-night': 28,
     'palm-night'    : 29,
     'tree-night'    : 23,
-=======
->>>>>>> backColor
     'apple'         : 197,
     'fallen_palm'   : 162,
     'boar'          : 167,
