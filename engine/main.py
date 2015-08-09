@@ -12,8 +12,8 @@ import musicPlayer
 import optionsUI
 import UI
 import Controller
+import Screen
 import os
-import IntroScreen
 import time
 
 if __name__ == '__main__':
@@ -34,7 +34,7 @@ if __name__ == '__main__':
         info = Info.Info()
         inventory = Inventory.Inventory()
         ope = optionsUI.optionsUI()
-        intro = IntroScreen.IntroScreen()
+        intro = Screen.Screen()
 
         ui = UI.UI(world, log, info, inventory, ope)
         controller = Controller.Controller(world, log, info, inventory, ope)
