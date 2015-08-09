@@ -20,6 +20,11 @@ import StateMachine
 
 if __name__ == '__main__':
 
+    try:
+        debug.debug = sys.argv[1]=="-d"
+    except:
+        debug.debug = False
+
     os.environ["TERM"] = "xterm-256color"
 
 
@@ -29,7 +34,6 @@ if __name__ == '__main__':
         pygame.mixer.music.play(-1, 0.0)
 
         Player.initPlayer('dummy')
-        debug.debug = True
         start()
 
         #Initilization
