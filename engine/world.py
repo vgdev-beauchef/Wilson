@@ -15,7 +15,7 @@ _viewRadius = 4
 class World(object):
 
     def __init__(self):
-        self.grid = matrix.maptoMatrix("mapa1.txt")
+        self.grid = mapGen.mapGenerator3(200, 200)
         height = len(self.grid[0])
         width = len(self.grid)
         self.vgrid = [[False for x in range(width)] for x in range(height)]
