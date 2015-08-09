@@ -11,6 +11,7 @@ import Info
 import musicPlayer
 import optionsUI
 import UI
+import Controller
 
 if __name__ == '__main__':
 
@@ -28,6 +29,7 @@ if __name__ == '__main__':
         ope = optionsUI.optionsUI()
 
         ui = UI.UI(world, log, info, inventory, ope)
+        controller = Controller.Controller(world, log, info, inventory, ope)
 
         manzana = Item.Item('comida', 1, 'hola')
         cuchillo = Item.Item('cuchillo', 2, 'hola')
@@ -44,7 +46,7 @@ if __name__ == '__main__':
                 break
             elif q == 'enter':
                 debug.debug = not debug.debug
-            ui.movement(q)
+            controller.movement(q)
         stop()
     except:
         stop()

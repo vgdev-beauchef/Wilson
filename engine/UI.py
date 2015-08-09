@@ -27,38 +27,6 @@ class UI:
         self.inventory = _inventory
         self.ope = _ope
 
-    def movement(self, ginput):
-        px = Player.getPlayPos()[0]
-        py = Player.getPlayPos()[1]
-        if ginput == 'left' and (self.world.grid[px - 1][py] != '#' or debug.debug):
-            Player.getPlayPos()[0] -= 1
-        elif ginput == 'right' and (self.world.grid[px + 1][py] != '#' or debug.debug):
-            Player.getPlayPos()[0] += 1
-        elif ginput == 'up' and (self.world.grid[px][py - 1] != '#' or debug.debug):
-            Player.getPlayPos()[1] -= 1
-        elif ginput == 'down' and (self.world.grid[px][py + 1] != '#' or debug.debug):
-            Player.getPlayPos()[1] += 1
-        elif ginput == '[':
-            Player.modifyHunger(-1)
-        elif ginput == ']':
-            Player.modifyHunger(1)
-        elif ginput == '1':
-	        self.log.add_event(Player.useItem(self.inventory.getItem(1), self.inventory))
-        elif ginput == '2':
-            self.log.add_event(Player.useItem(self.inventory.getItem(2), self.inventory))
-        elif ginput == 'i':
-            self.log.scroll_up()
-        elif ginput == 'k':
-            self.log.scroll_down()
-        elif ginput == 'j':
-            self.log.prev_day()
-        elif ginput == 'l':
-            self.log.next_day()
-
-        elif ginput == '1':
-            self.log.increase_day()
-        elif ginput == '2':
-            self.log.add_event("Elephant")
 
     def draw(self):
         self.world.drawMap()
