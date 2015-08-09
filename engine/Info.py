@@ -19,7 +19,7 @@ class Info(object):
         self.timeToDusk = 10
 
     def draw(self):
-        gfx.write(0, 0, 'Hambre', self.window)
+        gfx.write(0, 0, 'Saciedad', self.window)
         gfx.write(0, 1, hungerBar(), self.window, 2)
         gfx.write(0, 2, 'Hora', self.window)
         gfx.write(0, 3, self.timeBar(), self.window, 4)
