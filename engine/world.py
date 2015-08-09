@@ -29,7 +29,7 @@ colors = {
     'dark'          : 246,
     'shallow-blue'  : 124,
     'palm'          : 41,
-    'tree'          : 29,
+    'tree'          : 23,
     'gray-night'    : 236,
     'sand-night'    : 71,
     'deep-blue-night':18,
