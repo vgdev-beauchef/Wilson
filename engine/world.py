@@ -9,13 +9,13 @@ from entities import *
 
 _windowX = 32
 _windowY = 18
-_viewRadius = 4
+_viewRadius = 10
 
 
 class World(object):
 
     def __init__(self):
-        self.grid = mapGen.mapGenerator3(200, 200)
+        self.grid = matrix.maptoMatrix('map.txt')
         height = len(self.grid[0])
         width = len(self.grid)
         self.vgrid = [[False for x in range(width)] for x in range(height)]
@@ -96,14 +96,22 @@ class World(object):
                 if x == xCenter and y == yCenter:
                     cha = '@'
 
-                if cha == '@':
+                if cha == '@':          #Personaje
                     color = 4
-                elif cha == '#':
+                elif cha == '#':        #Roca
+                    color = 9
+                elif cha == '.':        #Arena
+                    color = 4
+                elif cha == '~':        #Agua profunda
                     color = 7
-                elif cha == '.':
+                elif cha == '/':        #Pasto
                     color = 3
-                elif cha == '~':
+                elif cha == '*':        #Objeto
+                    color = 5
+                elif cha == 'O':        #Cueva
                     color = 6
+                elif cha == '-':        #agua no profunda
+                    color = 7
                 else:
                     color = 1
 
