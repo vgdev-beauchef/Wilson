@@ -32,6 +32,11 @@ class Inventory:
     def refresh(self):
         self.window.refresh()
 
+    def getItem(self, id):
+	for key in self.items.keys():
+	    if (key.id==id):
+		return key;	
+
     def addItem(self, item):
         if(len(self.items)<self.max):
             if(item in self.items):
@@ -39,4 +44,4 @@ class Inventory:
             else:
                 self.items[item]=1
 
-
+	
