@@ -8,7 +8,7 @@ import Log
 import Inventory
 import Item
 import Info
-import musicPlayer
+#import musicPlayer
 import optionsUI
 
 _inveWindowWidth = 10
@@ -19,89 +19,28 @@ _inveWindowYPos = 10
 
 class UI:
 
-    def __init__(self):
-        self.world = world.World()
-        self.log = Log.Log()
+    def __init__(self, _world, _log, _info, _inventory, _ope):
+        self.world = _world
+        self.log = _log
 
-        self.info = Info.Info()
-        self.inventory = Inventory.Inventory()
-        self.ope = optionsUI.optionsUI()
+        self.info = _info
+        self.inventory = _inventory
+        self.ope = _ope
 
-    def movement(self, ginput):
-        px = Player.getPlayPos()[0]
-        py = Player.getPlayPos()[1]
-        if ginput == 'left' and (self.world.grid[px - 1][py] != '#' or debug.debug):
-            Player.getPlayPos()[0] -= 1
-        elif ginput == 'right' and (self.world.grid[px + 1][py] != '#' or debug.debug):
-            Player.getPlayPos()[0] += 1
-        elif ginput == 'up' and (self.world.grid[px][py - 1] != '#' or debug.debug):
-            Player.getPlayPos()[1] -= 1
-        elif ginput == 'down' and (self.world.grid[px][py + 1] != '#' or debug.debug):
-            Player.getPlayPos()[1] += 1
-        elif ginput == '[':
-            Player.modifyHunger(-1)
-        elif ginput == ']':
-            Player.modifyHunger(1)
+    def draw(self):
+        self.world.drawMap()
 
-        elif ginput == 'i':
-            self.log.scroll_up()
-        elif ginput == 'k':
-            self.log.scroll_down()
-        elif ginput == 'j':
-            self.log.prev_day()
-        elif ginput == 'l':
-            self.log.next_day()
+        # LOG
+        self.log.draw()
 
-        elif ginput == '1':
-            self.log.increase_day()
-        elif ginput == '2':
-            self.log.add_event("Elephant")
+        # INFO
+        self.info.draw()
 
+        #INVENTORY
+        self.inventory.draw()
 
+        #OPERATIONS
+        self.ope.draw()
 
-if __name__ == '__main__':
-    try:
-        #musicPlayer.musicWrapper('resources/tracks/track_01.mid')
-        Player.initPlayer('dummy')
-        debug.debug = True
-        start()
-        ui = UI()
-
-        manzana = Item.Item('comida', 1, 'hola')
-        cuchillo = Item.Item('cuchillo', 2, 'hola')
-        ui.inventory.addItem(manzana)
-        ui.inventory.addItem(manzana)
-        ui.inventory.addItem(cuchillo)
-
-        while 1:
-            ui.world.drawMap()
-
-            # LOG
-            ui.log.draw()
-
-            # INFO
-            ui.info.draw()
-
-
-            #INVENTORY
-            ui.inventory.draw()
-
-            #OPERATIONS
-            ui.ope.draw()
-
-            ui.log.refresh()
-            ui.inventory.refresh()
-
-            # INPUT
-            q = get_input()
-            if q == 'q':
-                break
-            elif q == 'enter':
-                debug.debug = not debug.debug
-            ui.movement(q)
-        stop()
-    except:
-        stop()
-        print(traceback.format_exc())
-        sys.exit(-1)
-sys.exit(0)
+        self.log.refresh()
+        self.inventory.refresh()

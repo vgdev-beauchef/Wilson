@@ -112,8 +112,8 @@ class Log:
         log_file.close()
 
 def row_number(line):
-        n = int(len(line) // 62)+1
-        return n
+    n = int(len(line) // 62)+1
+    return n
 
 def parser(line, line_size):
 
