@@ -341,11 +341,11 @@ class Controller:
 
 	def killedByBear(self):
 		if self._killedByBear:
-			self.log.add_event("Esto fue... demasiado para ... mi")
+			self.log.add_event("Esto fue... demasiado para ... mi",197)
 		return self._killedByBear
 
 	def deadCondition(self):
 		if(Player.getHunger()[0]<=0):
-			self.log.add_event("Creo que no me siento bien... *cae*")
+			self.log.add_event("Creo que no me siento bien... *cae*", 250)
 			return True
 		return False

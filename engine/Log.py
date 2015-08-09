@@ -14,6 +14,7 @@ class Log:
         self.day_displayed = 0
         self.diary_index = 0
         self.diary = list()
+        self.last_line_color = 4
         # Day zero
         self.diary.append(list())
         self.page = self.diary[0]
@@ -53,7 +54,7 @@ class Log:
             if index < 1:
                 break
             if i == 0:
-                color = 4
+                color = self.last_line_color
 
             for sub_index in range(0, rows):
                 write(1, index, lines[sub_index], self.window, color)
@@ -67,11 +68,12 @@ class Log:
     def refresh(self):
         self.window.refresh()
 
-    def add_event(self, string):
+    def add_event(self, string, color=4):
         self.page = self.diary[len(self.diary)-1]
         self.page.insert(0, string)
         self.diary_index = 0
         self.day_displayed = self.day
+        self.last_line_color = color
 
 
     def increase_day(self):
