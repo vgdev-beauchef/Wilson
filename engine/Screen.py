@@ -8,6 +8,7 @@ class Screen:
 
     def __init__(self):
         intro_source = "resources/ascii_images/intro.txt"
+        go_source = "resources/ascii_images/game_over.txt"
         with codecs.open(intro_source, 'r', "utf-8") as text:
             array = []
             index = -1
@@ -29,6 +30,10 @@ class Screen:
             self.xPos = 0
             self.yPos = 0
             self.window = Ventana(self.width, self.height, self.xPos, self.yPos)
+        with codecs.open(go_source, 'r', "utf-8") as text:
+            self.game_over = []
+            for line in text:
+                self.game_over.append(line)
 
     def draw(self, view):
         if view == 1:
@@ -37,6 +42,8 @@ class Screen:
             self.draw_array(self.vgew)
         elif view == 3:
             self.draw_array(self.wilson)
+        elif view == 4:
+            self.draw_array(self.game_over)
 
     def draw_array(self, array):
         for i in range(0, len(array)):
@@ -44,6 +51,12 @@ class Screen:
                write(0, i, array[i], self.window, 0)
             except curses.error:
                 pass
+
+    def game_over_screen(self):
+        self.clean()
+        self.refresh()
+        self.draw(4)
+        self.refresh()
 
     def refresh(self):
         self.window.refresh()
