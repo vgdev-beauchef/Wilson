@@ -8,11 +8,11 @@ import Log
 import Inventory
 import Item
 import Info
-#import musicPlayer
+import musicPlayer
 import optionsUI
 import StateMachine
 import time
-#import pygame.mixer as mixer
+import pygame.mixer as mixer
 
 class Controller:
 
@@ -30,8 +30,8 @@ class Controller:
 
 		self.dayCount = 0
 		self.stepCount = 0
-		self.dayCountLimit = 60
-		self.nightTimeLimit = 30
+		self.dayCountLimit = 80
+		self.nightTimeLimit = 40
 		self.dayTime = 0
 		self.flag = False
 		self._killedByBear = False
@@ -47,6 +47,7 @@ class Controller:
 		self.option_flag['O'] = False
 		self.option_flag['X'] = False
 		self.cueva = False
+		self.escape = False
 
 		self.info.setTimeToDusk(self.dayCountLimit)
 		self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
@@ -114,6 +115,10 @@ class Controller:
 		no_aswer = ""
 		flag = False
 
+		if pos=='-' and self.inventory.getItem(3) != None :
+			#TODO
+			self.escape = True
+			return
 
 		if pos!='O':
 			self.cueva = False
@@ -181,7 +186,7 @@ class Controller:
 						self.option_flag['O']=False
 						oso = False
 						break
-					
+
 				if q =='y':
 					if pos=='O' and not flag:
 						self.log.add_event('Entre a la cueva')
@@ -192,7 +197,7 @@ class Controller:
 						continue
 					elif pos == 'X' and not flag:
 						self.log.add_event('Decidi ocupar la palmera para construir una balsa')
-						c = Item.Item('balsa',3,'1')
+						c = Item.Item('balsa',3,'0')
 						self.inventory.addItem(c)
 						break
 
@@ -209,7 +214,7 @@ class Controller:
 						self.inventory.addItem(c)
 						break
 					flag = True
-					
+
 				elif q == 'n':
 					if pos =='O' and not flag:
 						self.log.add_event('Decidi no entrar a la cueva')
@@ -223,7 +228,7 @@ class Controller:
 						c = Item.Item('comida',1,'0')
 						self.inventory.addItem(c)
 						Player.useItem(c, self.inventory)
-					flag = True	
+					flag = True
 					break
 				q=''
 			self.ope.clearWindow()
@@ -240,6 +245,9 @@ class Controller:
 
 		pxf = Player.getPlayPos()[0]
 		pyf = Player.getPlayPos()[1]
+
+		if self.escape:
+			return
 
 		if self.key_map.is_visible():
 			#TODO

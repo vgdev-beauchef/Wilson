@@ -48,5 +48,5 @@ class Player(Entity):
         self.name = name
         self.position = [77, 173]
         self.maxHunger = 100
-        self.hunger = 50
+        self.hunger = 80
         self.sanity = 10
