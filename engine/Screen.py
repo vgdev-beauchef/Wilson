@@ -48,16 +48,18 @@ class Screen:
                 pass
 
     def game_over_screen(self):
-        self.clean()
-        self.refresh()
         self.draw(4)
         self.refresh()
-        time.sleep(2)
-        self.clean()
-        self.refresh()
-        self.draw(5)
+
+    def win_screen(self):
+        self.draw(7)
         self.refresh()
 
+
+    def show_credits(self):
+        self.draw(5)
+        self.refresh()
+        time.sleep(5)
 
     def refresh(self):
         self.window.refresh()

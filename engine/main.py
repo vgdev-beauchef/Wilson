@@ -47,6 +47,8 @@ if __name__ == '__main__':
         intro = Screen.Screen()
         key_map = KeyMap.KeyMap(42, 18)
 
+        escape = False
+
         machine.changeState(log)
 
         ui = UI.UI(world, log, info, inventory, ope, machine, key_map)
@@ -99,6 +101,9 @@ if __name__ == '__main__':
             elif q == 'enter':
                 debug.debug = not debug.debug
             controller.manage(q)
+            escape = controller.escape
+            if escape:
+                break
         while 1:
             ui.draw()
 
@@ -106,8 +111,20 @@ if __name__ == '__main__':
             if q == 'enter':
                 break
             controller.manage_log(q)
-        intro.game_over_screen()
-        time.sleep(5)
+
+        intro.clean()
+        intro.refresh()
+        while 1 :
+            if escape:
+                intro.win_screen()
+            else:
+                intro.game_over_screen()
+            q = get_input()
+            if q == 'enter':
+                break
+        intro.clean()
+        intro.refresh()
+        intro.show_credits()
         stop()
     except:
         stop()

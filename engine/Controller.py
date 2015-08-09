@@ -47,6 +47,7 @@ class Controller:
 		self.option_flag['O'] = False
 		self.option_flag['X'] = False
 		self.cueva = False
+		self.escape = False
 
 		self.info.setTimeToDusk(self.dayCountLimit)
 		self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
@@ -111,6 +112,10 @@ class Controller:
 		no_aswer = ""
 		flag = False
 
+		if pos=='-' and self.inventory.getItem(3) != None :
+			#TODO
+			self.escape = True
+			return
 
 		if pos!='O':
 			self.cueva = False
@@ -187,7 +192,7 @@ class Controller:
 						continue
 					elif pos == 'X' and not flag:
 						self.log.add_event('Decidi ocupar la palmera para construir una balsa')
-						c = Item.Item("balsa",3,'1')
+						c = Item.Item('balsa',3,'0')
 						self.inventory.addItem(c)
 						break
 
@@ -235,6 +240,9 @@ class Controller:
 
 		pxf = Player.getPlayPos()[0]
 		pyf = Player.getPlayPos()[1]
+
+		if self.escape:
+			return
 
 		if self.key_map.is_visible():
 			#TODO
