@@ -15,7 +15,8 @@ import time
 
 class Controller:
 
-	def __init__(self, _world, _log, _info, _inventory, _ope, _mach, _intro):
+	def __init__(self, _world, _log, _info, _inventory, _ope, _mach, _intro, _ui):
+		self.ui = _ui
 		self.machine = _mach
 		self.world = _world
 		self.log = _log
@@ -33,6 +34,12 @@ class Controller:
 		self.hunger_flag_1 = False
 		self.hunger_flag_2 = False
 		self.hunger_flag_3 = False
+		self.option_flag = dict()
+		self.option_flag['A'] = False
+		self.option_flag['J'] = False
+		self.option_flag['W'] = False
+		self.option_flag['O'] = False
+		self.option_flag['X'] = False
 
 		self.info.setTimeToDusk(self.dayCountLimit)
 
@@ -89,11 +96,92 @@ class Controller:
 		elif ginput == 'l':
 			self.log.next_day()
 
+	def manage_place(self):
+		px = Player.getPlayPos()[0]
+		py = Player.getPlayPos()[1]
+
+		pos = self.world.grid[px][py]
+		option = ""
+		yes_answer = ""
+		no_aswer = ""
+		flag = False
+
+		if pos=='A' and not self.option_flag['A']:
+			self.log.add_event("Encontre una manzana")
+			option = "que hacer con la manzana?"
+			yes_answer = "guardarla"
+			no_aswer = "comerla"
+			self.option_flag['A'] = True
+		elif pos=='J' and not self.option_flag['J']:
+			self.log.add_event("Hay una cria de jabali alla... si la mato ahora tengo alimento facil, pero es tan solo un pequena criatura... como podria yo...? ")
+			option = "que hacer?"
+			yes_answer = "matarla"
+			no_aswer = "dejarla huir"
+			self.option_flag['J'] = True
+		elif pos=='W' and not self.option_flag['W']:
+			self.log.add_event("Oh! increiblemente he encontrado un cuchillo... se ve muy antiguo, quizas sea de algun pirata. Me podria servir asi que lo guardare.")
+			self.option_flag['W'] = True
+			return
+		elif pos=='O' and not self.option_flag['O']:
+			self.log.add_event("Oh, una cueva!! Se escuchan ruidos desde adentro...sera un algun animal?? un oso? Entro?")
+			option = "que hacer?"
+			yes_answer = "entrar"
+			no_aswer = "ignorar"
+			self.option_flag['O'] = True
+		elif pos=='X' and not self.option_flag['X']:
+			self.log.add_event("Me encuentro junto a una enorme palmera caida. No seria muy dificil usarla para construir una balsa...")
+			option = "que hacer con la palmera?"
+			yes_answer = "construir balsa"
+			no_aswer = "ignorar balsa"
+			self.option_flag['X'] = True
+
+		if not option=="":
+			self.ope.clearWindow()
+			self.ope.setOption(option, yes_answer, no_aswer)
+
+			while 1:
+				self.ui.draw()
+				q = get_input()
+				if q =='y':
+					if pos=='O' and not flag:
+						self.log.add_event('Entre a la cueva')
+						
+					elif pos == 'X' and not flag:
+						self.log.add_event('Decidi ocupar la palmera como balsa')
+
+					elif pos == 'J' and not flag:
+						self.log.add_event('Decidi matar al jabali')
+						self.inventory.addItem(Item.item('comida',1,'0'))
+						self.inventory.addItem(Item.item('comida',1,'0'))
+
+					elif pos == 'A' and not flag:
+						self.log.add_event('Guarde la manzana')
+						self.inventory.addItem(Item.item('comida',1,'0'))
+					flag = True
+					break
+				elif q == 'n':
+					if pos =='O' and not flag:
+						self.log.add_event('Decidi no entrar a la cueva')
+					elif pos == 'X' and not flag:
+						self.log.add_event('Deje la palmera en la playa')
+					elif pos == 'J' and not flag:
+						self.log.add_event('Deje a la cria tranquila')
+					elif pos == 'A' and not flag:
+						self.log.add_event('Comi la manzana')
+						self.inventory.addItem(Item.item('comida',1,'0'))
+						Player.useItem(Item.item('comida',1, '0'), self.inventory)
+					flag = True	
+					break
+			self.ope.clearWindow()
+			self.ope.setOption("", "", "")
+			flag = False
+
 	def manage(self, ginput):
 		pxi = Player.getPlayPos()[0]
 		pyi = Player.getPlayPos()[1]
 
 		self.movement(ginput)
+		self.manage_place()
 		self.manage_log(ginput)
 
 		pxf = Player.getPlayPos()[0]

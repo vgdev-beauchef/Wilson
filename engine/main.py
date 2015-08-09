@@ -8,14 +8,14 @@ import Log
 import Inventory
 import Item
 import Info
-import musicPlayer
+#import musicPlayer
 import optionsUI
 import UI
 import Controller
 import Screen
 import os
 import time
-import pygame
+#import pygame
 import StateMachine
 
 if __name__ == '__main__':
@@ -24,9 +24,9 @@ if __name__ == '__main__':
 
 
     try:
-        pygame.init()
-        pygame.mixer.music.load('resources/tracks/mainloop.wav')
-        pygame.mixer.music.play(-1, 0.0)
+        #pygame.init()
+        #pygame.mixer.music.load('resources/tracks/mainloop.wav')
+        #pygame.mixer.music.play(-1, 0.0)
 
         Player.initPlayer('dummy')
         debug.debug = True
@@ -44,7 +44,7 @@ if __name__ == '__main__':
         machine.changeState(log);
 
         ui = UI.UI(world, log, info, inventory, ope, machine)
-        controller = Controller.Controller(world, log, info, inventory, ope, machine, intro)
+        controller = Controller.Controller(world, log, info, inventory, ope, machine, intro, ui)
 
 
         manzana = Item.Item('comida', 1, 'hola')
