@@ -24,7 +24,6 @@ if __name__ == '__main__':
 
 
     try:
-        #musicPlayer.musicWrapper('resources/tracks/track_01.mid')
         pygame.init()
         pygame.mixer.music.load('resources/tracks/mainloop.wav')
         pygame.mixer.music.play(-1, 0.0)
