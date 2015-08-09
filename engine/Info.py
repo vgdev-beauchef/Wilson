@@ -22,7 +22,13 @@ class Info(object):
         self.clearWindow()
         sc = 'Saciedad ' + str(Player.getHunger()[0]) + '/' + str(Player.getHunger()[1])
         gfx.write(0, 0, sc, self.window)
-        gfx.write(0, 1, hungerBar(), self.window, 2)
+        h = Player.getHunger()[0]
+        hungerColor = 41
+        if h <= 25:
+            hungerColor = 197
+        elif h <= 50:
+            hungerColor = 209
+        gfx.write(0, 1, hungerBar(), self.window, hungerColor)
         gfx.write(0, 2, 'Hora', self.window)
         gfx.write(0, 3, self.timeBar(), self.window, 4)
         self.window.refresh()
