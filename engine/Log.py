@@ -17,11 +17,11 @@ class Log:
         # Day zero
         self.diary.append(list())
         self.page = self.diary[0]
-        self.page.append("banana")
-        self.page.append("???")
+        #self.page.append("banana")
+        #self.page.append("???")
 
-        self.page.append("Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.")
-        self.page.append("Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.")
+        #self.page.append("No he encontrado ningun refugio... es mejor pasar la noche despierto. Me sorprende la cantidad de estrellas que se pueden ver desde aqui. Recuerdo la granja del abuelo, sus animales, sus vacas... sus cerdos... La primera manana en que mi abuelo me entrego ese oxidado azadon y me llevo a cosechar con el, el sudor de mi frente y la sonrisa de la abuela al verme regresar lleno de tierra. Como desearia poder tomar un poco de su limonada. Nunca aprendi a prepararla y me he arrepentido de ello desde el ultimo dia que la vi.")
+        #self.page.append("Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.")
 
     def clean(self):
         for i in range(0, 11):
@@ -62,13 +62,18 @@ class Log:
         self.window.refresh()
 
     def add_event(self, string):
+        self.page = self.diary[len(self.diary)-1]
         self.page.insert(0, string)
+        self.diary_index = 0
+        self.day_displayed = self.day
+
 
     def increase_day(self):
         self.day += 1
         self.diary.append(list())
         self.page = self.diary[len(self.diary)-1]
         self.day_displayed = self.day
+        self.diary_index = 0
 
     def scroll_up(self):
         if (self.diary_index + 1) >= len(self.page):

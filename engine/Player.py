@@ -20,7 +20,7 @@ def getHunger():
     if _player:
         return (_player.hunger, _player.maxHunger)
 
-def modifyHunger(n):
+def modifyHunger(n): #Se le esta sumando a la cantidad de comida
     global _player
     if _player:
         if _player.hunger + n <= _player.maxHunger and\
