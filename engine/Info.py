@@ -17,6 +17,8 @@ class Info(object):
     def draw(self):
         gfx.write(0, 0, 'Hambre', self.window)
         gfx.write(0, 1, hungerBar(), self.window, 2)
+        gfx.write(0, 2, 'Hora', self.window)
+        gfx.write(0, 3, timeBar(), self.window, 4)
         self.window.refresh()
 
 def hungerBar():
@@ -30,3 +32,16 @@ def hungerBar():
         else:
             bar += '-'
     return bar
+
+def timeBar():
+    #Hay que hacer una variable global de tiempo!
+    time = 5
+    timeToDusk = 10
+    porcentage = 100 * time / timeToDusk
+    bar = 'D'
+    for i in range(18):
+        if i * 5 == porcentage:
+             bar += '*'
+        else:
+            bar += '.'
+    return bar + 'N'
