@@ -49,7 +49,7 @@ class Controller:
 		self.cueva = False
 
 		self.info.setTimeToDusk(self.dayCountLimit)
-		#self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
+		self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
 
 		self.mapDisp = False
 
