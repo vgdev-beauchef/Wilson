@@ -57,7 +57,7 @@ class Controller:
 		elif ginput == '2':
 			self.log.add_event("Elephant")
 
-		if ginput=='left' || ginput=='right' || ginput=='up' || ginput=='down':
+		if ginput=='left' or ginput=='right' or ginput=='up' or ginput=='down':
 			self.dayCount+=1
 			#self.log.add_event(ginput)
 			self.info.setTime(self.dayCount)
