@@ -33,6 +33,7 @@ class Log:
 
         self.clean()
 
+        write(10, 0, "M: Menu",self.window,0)
         write(23, 0, "J     <Dia "+str(self.day_displayed+1)+">     L", self.window, 0)
         write(25, 0, "<-", self.window, 222)
         write(38, 0, "->", self.window, 222)

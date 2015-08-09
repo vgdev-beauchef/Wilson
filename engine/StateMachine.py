@@ -16,8 +16,7 @@ class StateMachine:
         					"Recuerdo la granja del abuelo, sus animales, sus vacas... sus cerdos... La primera manana en que mi abuelo me entrego ese oxidado azadon y me llevo a cosechar con el, el sudor de mi frente y la sonrisa de la abuela al verme regresar lleno de tierra. Como desearia poder tomar un poco de su limonada. Nunca aprendi a prepararla y me he arrepentido de ello desde el ultimo dia que la vi."]]
         self.machine[2] = [3, ["Jamas habia visto salir el sol por el mar. Es mas, no puedo recordar la ultima vez que vi salir el sol. Quizas fue cuando mi hijo era bebe y debia levantarme a darle su leche; quizas incluso antes.",
         "Seguire explorando la isla."]]
-        self.machine[3] = [4, ["Otro dia mas...He perdido la cuenta.", "El sol golpea mi curtida espalda."]]
-        self.machine[4] = [-1, ["He vuelto a la costa con mi balsa. Me ire de aqui porque estoy seguro de que encontrare a alguien. Ojala alguien mas que yo pueda leer este diario algun dia..."]]
+        self.machine[3] = [-1, ["Otro dia mas...He perdido la cuenta.", "El sol golpea mi curtida espalda."]]
 
     def changeState(self, log):
     	if not self.current_state==-1:

@@ -8,11 +8,11 @@ import Log
 import Inventory
 import Item
 import Info
-import musicPlayer
+#import musicPlayer
 import optionsUI
 import StateMachine
 import time
-import pygame.mixer as mixer
+#import pygame.mixer as mixer
 
 class Controller:
 
@@ -50,7 +50,7 @@ class Controller:
 		self.escape = False
 
 		self.info.setTimeToDusk(self.dayCountLimit)
-		self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
+		#self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
 
 		self.mapDisp = False
 
@@ -65,7 +65,7 @@ class Controller:
 
 		def check(key):
 			if not ((key != '#' and key != 'T' and key != 'Y' and key != '~') or debug.debug):
-				self.hit_sound.play()
+				#self.hit_sound.play()
 				return False
 			return True
 
@@ -116,7 +116,7 @@ class Controller:
 		flag = False
 
 		if pos=='-' and self.inventory.getItem(3) != None :
-			#TODO
+			self.log.add_event('He vuelto a la costa con mi balsa. Me ire de aqui porque estoy seguro de que encontrare a alguien. Ojala alguien mas que yo pueda leer este diario algun dia...')
 			self.escape = True
 			return
 
@@ -129,7 +129,7 @@ class Controller:
 			yes_answer = "guardarla"
 			no_aswer = "comerla"
 			self.option_flag['A'] = True
-			self.world.grid[81][174]  = '-'
+			self.world.grid[61][174]  = '-'
 		elif pos=='j' and not self.option_flag['J']:
 			self.log.add_event("Hay una cria de jabali alla... si la mato ahora tengo alimento facil, pero es tan solo un pequena criatura... como podria yo...? ")
 			option = "que hacer?"
@@ -174,12 +174,14 @@ class Controller:
 							self._killedByBear = True
 						else:
 							self.log.add_event('Logre matarlo !! La cueva me servira de refugio. Ademas podre utilizar su piel como abrigo. Creo que esta noche podre dormir tranquilo. Descansare pues ha sido un dia muy agitado.')
+							self.iu.draw()
+							time.sleep(0.5)
 							c = Item.Item('comida',1,'0')
 							self.inventory.addItem(c)
 							self.inventory.addItem(c)
 							self.inventory.addItem(c)
 							self.log.add_event('El olor de la cueva me recuerda a los enormes perros que cuidaban las ovejas de mi abuelo y como yo dormia abrazado a ellos. Casi puedo sentir su agradable calor.')
-							self.dayCount = self.dayCountLimit +1 
+							self.dayCount = self.dayCountLimit  
 						break
 					elif q == 'n':
 						self.log.add_event('No puedo pelear contra ese oso. Es mejor que huya')
