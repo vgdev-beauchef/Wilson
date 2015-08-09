@@ -6,6 +6,7 @@ import world
 import Player
 import Log
 import Inventory
+import Item
 import Info
 import musicPlayer
 
@@ -27,9 +28,7 @@ class UI:
         self.log = Log.Log()
 
         self.info = Info.Info()
-        self.inventory = Ventana(
-            _inveWindowWidth, _inveWindowHeight,
-            _inveWindowXPos, _inveWindowYPos)
+        self.inventory = Inventory.Inventory()
 
         self.operations = Ventana(
             _opeWindowWidth, _opeWindowHeight,
@@ -59,6 +58,13 @@ if __name__ == '__main__':
         debug.debug = True
         start()
         ui = UI()
+
+        manzana = Item.Item('comida', 1, 'hola')
+        cuchillo = Item.Item('cuchillo', 2, 'hola')
+        ui.inventory.addItem(manzana)
+        ui.inventory.addItem(manzana)
+        ui.inventory.addItem(cuchillo)
+
         while 1:
             ui.world.drawMap()
 
@@ -70,7 +76,7 @@ if __name__ == '__main__':
 
 
             #INVENTORY
-            # ui.inventory.draw()
+            ui.inventory.draw()
 
             #OPERATIONS
             ope = ['O' * _opeWindowWidth] * _opeWindowHeight

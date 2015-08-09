@@ -1,6 +1,7 @@
 __author__ = 'Agustin Antoine'
 __email__ = "antoineagustin@gmail.com"
 from gfx import *
+import Item
 
 class Inventory:
 
@@ -11,12 +12,10 @@ class Inventory:
         self.yPos = 10
         self.window = Ventana(self.width, self.height, self.xPos, self.yPos)
 
-        self.items = []
-        self.used = 0
+        self.items = dict()
         self.max = 5
 
     def draw(self):
-
         inv = ['I' * self.width] * self.height
         for i in range(len(inv[0])):
             for j in range(len(inv)):
@@ -24,5 +23,20 @@ class Inventory:
 
         write(1, 0, '<Inventario>', self.window, 0)
 
+        k = 1
+        for key in self.items.keys():
+            string = key.name +" : "+ str(self.items[key])
+            write(1, k, string, self.window, 0)
+            k = k+2
+
     def refresh(self):
         self.window.refresh()
+
+    def addItem(self, item):
+        if(len(self.items)<self.max):
+            if(item in self.items):
+                self.items[item]=self.items[item]+1
+            else:
+                self.items[item]=1
+
+
