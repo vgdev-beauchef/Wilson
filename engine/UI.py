@@ -7,6 +7,7 @@ import Player
 import Log
 import Inventory
 import Info
+import musicPlayer
 
 _inveWindowWidth = 10
 _inveWindowHeight = 10
@@ -53,6 +54,7 @@ class UI:
 
 if __name__ == '__main__':
     try:
+        musicPlayer.musicWrapper('resources/tracks/track_01.mid')
         Player.initPlayer('dummy')
         debug.debug = True
         start()
