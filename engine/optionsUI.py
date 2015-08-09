@@ -10,7 +10,7 @@ class optionsUI(object):
 	def __init__(self):
 		self.window = Ventana(_opeWindowWidth, _opeWindowHeight,
 							  _opeWindowXPos, _openWindowYPos)
-		self.intro = 'Decision: ¿1 o 2?'
+		self.intro = 'Decision: 1 o 2?'
 		self.yesOption = 'Si (y)'
 		self.noOption = 'No (n)'
 
