@@ -19,7 +19,7 @@ import pygame
 import StateMachine
 
 if __name__ == '__main__':
-    #if os.environ["COLORTERM"] ==  "gnome-terminal":
+
     os.environ["TERM"] = "xterm-256color"
 
 
