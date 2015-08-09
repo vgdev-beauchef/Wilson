@@ -20,7 +20,7 @@ class Log:
         self.diary.append("Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.")
 
     def clean(self):
-        for i in range(1,11):
+        for i in range(1, 11):
             empty_string = " "*63
             write(0, i, empty_string, self.window, 0)
 
@@ -30,7 +30,7 @@ class Log:
         write(1, 0, "<Dia "+str(self.day)+">", self.window, 0)
         i = self.diary_index
         index = 10
-        while i < 10:
+        while i < self.diary_index+10:
             color = 3
             if i >= len(self.diary) or index < 1:
                 break
@@ -59,7 +59,8 @@ class Log:
         self.window.refresh()
 
     def add_event(self, string):
-        self.diary.insert(string, 0)
+        self.diary.insert(0, string)
+
 
     def increase_day(self):
         self.day += 1
