@@ -23,8 +23,9 @@ class Inventory:
 
         write(1, 0, '<Inventario>', self.window, 0)
 
+        newlist = sorted(self.items.keys(), key=lambda x: x.id)
         k = 1
-        for key in self.items.keys():
+        for key in newlist:
             string = key.name +" : "+ str(self.items[key])
             write(1, k, string, self.window, 0)
             k = k+2
@@ -44,3 +45,8 @@ class Inventory:
             else:
                 self.items[item]=1
 
+    def deleteItem(self, item):
+        self.items[item] = self.items[item]-1
+
+    def getQuantity(self, item):
+        return self.items[item]
