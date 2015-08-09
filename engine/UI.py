@@ -8,7 +8,7 @@ import Log
 import Inventory
 import Item
 import Info
-import musicPlayer
+#import musicPlayer
 import optionsUI
 
 _inveWindowWidth = 10
@@ -42,7 +42,10 @@ class UI:
             Player.modifyHunger(-1)
         elif ginput == ']':
             Player.modifyHunger(1)
-
+        elif ginput == '1':
+	        self.log.add_event(Player.useItem(self.inventory.getItem(1), self.inventory))
+        elif ginput == '2':
+            self.log.add_event(Player.useItem(self.inventory.getItem(2), self.inventory))
         elif ginput == 'i':
             self.log.scroll_up()
         elif ginput == 'k':

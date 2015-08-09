@@ -27,6 +27,18 @@ def modifyHunger(n):
            _player.hunger + n >= 0:
            _player.hunger += n
 
+def useItem(item, inventory):
+    
+    if(item.name.lower()=="comida"):
+        if(inventory.getQuantity(item)>0):
+            inventory.deleteItem(item)
+            modifyHunger(20)
+            return "Comi Algo"
+        return "No me queda que comer"
+    else:
+        return "Miro mi arma, podria ser util"
+
+
 class Player(Entity):
     def __init__(self, name):
         character = '@'
