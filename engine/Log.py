@@ -31,7 +31,12 @@ class Log:
     def draw(self):
 
         self.clean()
-        write(1, 0, "<Dia "+str(self.day_displayed+1)+">", self.window, 0)
+        write(23, 0, "J     <Dia "+str(self.day_displayed+1)+">     L", self.window, 0)
+        write(25, 0, "<-", self.window, 222)
+        write(38, 0, "->", self.window, 222)
+        write(53, 0, "I     K   ", self.window, 0)
+        write(55, 0, "/\\", self.window, 222)
+        write(61, 0, "\\/", self.window, 222)
         i = self.diary_index
         index = 10
         while i < self.diary_index+10:
