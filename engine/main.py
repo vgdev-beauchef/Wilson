@@ -117,6 +117,7 @@ if __name__ == '__main__':
         if not escape:
             pygame.mixer.music.stop()
             pygame.mixer.music.load('resources/tracks/end.wav')
+            pygame.mixer.music.set_volume(1)
             pygame.mixer.music.play(1, 0.0)
         while 1 :
             if escape:
