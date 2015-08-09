@@ -19,8 +19,8 @@ import pygame
 import StateMachine
 
 if __name__ == '__main__':
-    if os.environ["COLORTERM"] ==  "gnome-terminal":
-        os.environ["TERM"] = "xterm-256color"
+    #if os.environ["COLORTERM"] ==  "gnome-terminal":
+    os.environ["TERM"] = "xterm-256color"
 
 
     try:
@@ -54,21 +54,24 @@ if __name__ == '__main__':
         ui.inventory.addItem(cuchillo)
 
         wait_time = 3
-        intro.draw(1)
-        intro.refresh()
-        time.sleep(wait_time)
-        intro.draw(2)
-        intro.refresh()
-        time.sleep(wait_time)
-        while 1:
-            intro.draw(3)
+        if not debug.debug:
+            intro.draw(1)
             intro.refresh()
-            q = get_input()
-            if q == 'enter':
-                intro.clean()
+            time.sleep(wait_time)
+            intro.draw(2)
+            intro.refresh()
+            time.sleep(wait_time)
+        while 1:
+            if not debug.debug:
+                intro.draw(3)
                 intro.refresh()
-                intro.refresh()
-                break
+                q = get_input()
+                if q == 'enter':
+                    intro.clean()
+                    intro.refresh()
+                    intro.refresh()
+                    break
+            else: break
 
         while not controller.deadCondition():
             ui.draw()
@@ -76,7 +79,8 @@ if __name__ == '__main__':
             # INPUT
             q = get_input()
             if q == 'q':
-                break
+                stop()
+                sys.exit(0)
             elif q == 'd':
                 intro.game_over_screen()
                 time.sleep(5)
@@ -87,7 +91,7 @@ if __name__ == '__main__':
             controller.manage(q)
         while 1:
             ui.draw()
-            
+
             q = get_input()
             if q == 'enter':
                 break
@@ -99,5 +103,7 @@ if __name__ == '__main__':
         stop()
         print(traceback.format_exc())
         sys.exit(-1)
+
+stop()
 pygame.mixer.music.stop()
 sys.exit(0)
