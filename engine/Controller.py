@@ -174,6 +174,8 @@ class Controller:
 							self._killedByBear = True
 						else:
 							self.log.add_event('Logre matarlo !! La cueva me servira de refugio. Ademas podre utilizar su piel como abrigo. Creo que esta noche podre dormir tranquilo. Descansare pues ha sido un dia muy agitado.')
+							self.iu.draw()
+							time.sleep(0.5)
 							c = Item.Item('comida',1,'0')
 							self.inventory.addItem(c)
 							self.inventory.addItem(c)
