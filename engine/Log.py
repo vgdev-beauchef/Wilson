@@ -34,12 +34,19 @@ class Log:
         self.clean()
 
         write(10, 0, "M: Info",self.window,0)
-        write(23, 0, "J     <Dia "+str(self.day_displayed+1)+">     L", self.window, 0)
-        write(25, 0, "<-", self.window, 222)
-        write(38, 0, "->", self.window, 222)
-        write(53, 0, "I     K   ", self.window, 0)
-        write(55, 0, "/\\", self.window, 222)
-        write(61, 0, "\\/", self.window, 222)
+        write(29, 0, "<Dia "+str(self.day_displayed+1)+">", self.window, 0)
+        if self.day_displayed != 0:
+            write(23, 0, "J", self.window, 0)
+            write(25, 0, "<-", self.window, 222)
+        if self.day_displayed != self.day:
+            write(38, 0, "->", self.window, 222)
+            write(41, 0, "L", self.window, 0)
+        if (self.diary_index + 1) < len(self.page):
+            write(53, 0, "I", self.window, 0)
+            write(55, 0, "/\\", self.window, 222)
+        if self.diary_index !=0:
+            write(59, 0, "K", self.window, 0)
+            write(61, 0, "\\/", self.window, 222)
         i = self.diary_index
         index = 10
         while i < self.diary_index+10:
@@ -155,4 +162,3 @@ def parser(line, line_size):
         return_list.append(current_line)
 
     return return_list
-
