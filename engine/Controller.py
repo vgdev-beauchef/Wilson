@@ -12,6 +12,7 @@ import musicPlayer
 import optionsUI
 import StateMachine
 import time
+import LinearStateMachine
 import pygame.mixer as mixer
 
 class Controller:
@@ -54,6 +55,8 @@ class Controller:
 
 		self.mapDisp = False
 
+		self.linearState = LinearStateMachine.LinearStateMachine(self.dayCountLimit)
+
 	def movement(self, ginput):
 		px = Player.getPlayPos()[0]
 		py = Player.getPlayPos()[1]
@@ -77,10 +80,6 @@ class Controller:
 			Player.getPlayPos()[1] -= 1
 		elif ginput == 'down' and check(down):
 			Player.getPlayPos()[1] += 1
-		elif ginput == '[':
-			Player.modifyHunger(-1)
-		elif ginput == ']':
-			Player.modifyHunger(1)
 		elif ginput == '1':
 			if not self.inventory.getItem(1) is None:
 				self.log.add_event(Player.useItem(self.inventory.getItem(1), self.inventory))
@@ -252,6 +251,8 @@ class Controller:
 		self.manage_place()
 		self.manage_log(ginput)
 
+		self.linearState.changeState(self.stepCount, self.log)
+
 		pxf = Player.getPlayPos()[0]
 		pyf = Player.getPlayPos()[1]
 
@@ -271,6 +272,7 @@ class Controller:
 
 		if (ginput=='left' or ginput=='right' or ginput=='up' or ginput=='down') and (pxi!=pxf or pyi!=pyf) and not debug.debug:
 			self.dayCount+=1
+			self.stepCount+=1
 			if self.dayCount < self.dayCountLimit/3:
 				world._viewRadius = 13
 			elif self.dayCount < self.dayCountLimit*2/3:
@@ -297,7 +299,6 @@ class Controller:
 				world.tiles['shallow']   = world.colors['shallow-blue-night']
 				world.tiles['palm']      = world.colors['palm-night']
 				world.tiles['tree']      = world.colors['tree-night']
-			self.stepCount+=1
 			#self.log.add_event(ginput)
 			self.info.setTime(self.dayCount)
 			Player.modifyHunger(-1)
