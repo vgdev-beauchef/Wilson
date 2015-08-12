@@ -12,7 +12,10 @@ import musicPlayer
 import optionsUI
 import time
 import LinearStateMachine
+import StoryStateMachine
+import Story
 import pygame.mixer as mixer
+import InputMap
 
 class Controller:
 
@@ -54,7 +57,20 @@ class Controller:
 
 		self.mapDisp = False
 
+		#StateMachine for the Time Messages
 		self.linearState = LinearStateMachine.LinearStateMachine(self.dayCountLimit)
+
+		#Create the story
+		self.story = Story.Story(self.world, self.inventory, self.dayCountLimit, self.log)
+
+		#StateMachine for the story
+		self.storyState = StoryStateMachine.StoryStateMachine(self.ui, self.log, self.ope,
+															self.story.initStoryState)
+
+		#StateMachine for the Events
+		self.eventsState = StoryStateMachine.StoryStateMachine(self.ui, self.log, self.ope,
+															self.story.initEventState)
+
 
 	def movement(self, ginput):
 		px = Player.getPlayPos()[0]
@@ -79,25 +95,25 @@ class Controller:
 			Player.getPlayPos()[1] -= 1
 		elif ginput == 'down' and check(down):
 			Player.getPlayPos()[1] += 1
-		elif ginput == '1':
+		elif ginput == 'it_1':
 			if not self.inventory.getItem(1) is None:
 				self.log.add_event(Player.useItem(self.inventory.getItem(1), self.inventory))
-		elif ginput == '2':
+		elif ginput == 'it_2':
 			if not self.inventory.getItem(2) is None:
 				self.log.add_event(Player.useItem(self.inventory.getItem(2), self.inventory))
-		elif ginput == '3':
+		elif ginput == 'it_3':
 			if not self.inventory.getItem(3) is None:
 				self.log.add_event(Player.useItem(self.inventory.getItem(3), self.inventory))
 
 
 	def manage_log(self, ginput):
-		if ginput == 'i':
+		if ginput == 'log_up':
 			self.log.scroll_up()
-		elif ginput == 'k':
+		elif ginput == 'log_down':
 			self.log.scroll_down()
-		elif ginput == 'j':
+		elif ginput == 'log_left':
 			self.log.prev_day()
-		elif ginput == 'l':
+		elif ginput == 'log_right':
 			self.log.next_day()
 
 	#def reset_place(self, x, y):
@@ -125,14 +141,15 @@ class Controller:
 		if pos!='O':
 			self.cueva = False
 
-		if pos=='a' and not self.option_flag['A']:
+		'''if pos=='a' and not self.option_flag['A']:
 			self.log.add_event("Encontre una manzana")
 			option = "Que hacer con la manzana?"
 			yes_answer = "Guardarla"
 			no_aswer = "Comerla"
 			self.option_flag['A'] = True
 			self.world.grid[80][170]  = '.'
-		elif pos=='j' and not self.option_flag['J']:
+			'''
+		if pos=='j' and not self.option_flag['J']:
 			self.log.add_event("Hay una cria de jabali alla... si la mato ahora tengo alimento facil, pero es tan solo un pequena criatura... como podria yo...? ")
 			option = "Que hacer?"
 			yes_answer = "Matarla"
@@ -169,9 +186,9 @@ class Controller:
 
 			while 1:
 				self.ui.draw()
-				q = get_input()
+				q = InputMap.key(get_input())
 				if oso:
-					if q == 'y':
+					if q == 'yes':
 						if self.inventory.getItem(2) is None:
 							self._killedByBear = True
 						else:
@@ -188,13 +205,13 @@ class Controller:
 							time.sleep(5)
 							self.dayCount = self.dayCountLimit  
 						break
-					elif q == 'n':
+					elif q == 'no':
 						self.log.add_event('No puedo pelear contra ese oso. Es mejor que huya')
 						self.option_flag['O']=False
 						oso = False
 						break
 
-				if q =='y':
+				if q =='yes':
 					if pos=='O' and not flag:
 						self.log.add_event('Entre a la cueva')
 						self.log.add_event('Aparece un oso salvaje!!!')
@@ -215,14 +232,14 @@ class Controller:
 						self.inventory.addItem(c)
 						break
 
-					elif pos == 'a' and not flag:
+					'''elif pos == 'a' and not flag:
 						self.log.add_event('Guarde la manzana')
 						c = Item.Item('comida',1,'0')
 						self.inventory.addItem(c)
-						break
+						break'''
 					flag = True
 
-				elif q == 'n':
+				elif q == 'no':
 					if pos =='O' and not flag:
 						self.log.add_event('Decidi no entrar a la cueva')
 						self.option_flag['O']=False
@@ -230,11 +247,11 @@ class Controller:
 						self.log.add_event('Deje la palmera en la playa')
 					elif pos == 'j' and not flag:
 						self.log.add_event('Deje a la cria tranquila')
-					elif pos == 'a' and not flag:
+					'''elif pos == 'a' and not flag:
 						self.log.add_event('Comi la manzana')
 						c = Item.Item('comida',1,'0')
 						self.inventory.addItem(c)
-						Player.useItem(c, self.inventory)
+						Player.useItem(c, self.inventory)'''
 					flag = True
 					break
 				q=''
@@ -258,11 +275,11 @@ class Controller:
 
 		if self.key_map.is_visible():
 			#TODO
-			if ginput=='m':
+			if ginput == 'map':
 				self.key_map.visibility(False)
 			return
 
-		if ginput=='m':
+		if ginput == 'map':
 			#TODO
 			self.key_map.visibility(True)
 			return
@@ -301,6 +318,8 @@ class Controller:
 			Player.modifyHunger(-1)
 
 			self.linearState.changeState(self.stepCount, self.log)
+			self.storyState.changeStoryState(self.dayCount, self.stepCount, pxf, pyf)
+			self.eventsState.checkIndividualStates(self.dayCount, self.stepCount, pxf, pyf)
 
 		self.showHungerMessages()
 		self.resetHungerFlags()
