@@ -15,7 +15,8 @@ def gotItemTrigger(itemPos, inv):
 def removeItem(world, itemName):
 	px = Player.getPlayPos()[0]
 	py = Player.getPlayPos()[1]
-	world.grid[gridPosX][gridPosY] = replacement
+	replacement = Item
+	world.grid[px][py] = replacement
 
 class Events:
 	def __init__(self, world, inv, dayLimit, log):
@@ -39,13 +40,13 @@ class Events:
 
 		def foodYes():
 			log.add_event("Guarde el alimento para despues")
-			Item.create('comida')
+			c = Item.create('comida')
 			inv.addItem(c)
 			removeItem(world,'comida')
 			
 		def foodNo():
 			log.add_event("Comi la manzana que encontre")
-			Item.create('comida')
+			c = Item.create('comida')
 			inv.addItem(c)
 			removeItem(80,170,world,'.')		
 			Player.useItem(c, inv)			
