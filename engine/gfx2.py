@@ -41,7 +41,50 @@ _colors = {
 }
 
 _keymap = {
-
+	TCODK_ESCAPE: 		"Escape",
+	TCODK_BACKSPACE: 	"Backspace",
+	TCODK_TAB:			"tab",
+	TCODK_ENTER:		"enter",
+	TCODK_SHIFT:		"shift",
+	TCODK_CONTROL:		"control",
+	TCODK_ALT:			"alt",
+	TCODK_PAUSE:		"pause",
+	TCODK_CAPSLOCK:		"capslock",
+	TCODK_PAGEUP:		"pageup",
+	TCODK_PAGEDOWN:		"pagedown",
+	TCODK_END:			"end",
+	TCODK_HOME:			"home",
+	TCODK_UP:			"up",
+	TCODK_LEFT:			"left",
+	TCODK_RIGHT:		"right",
+	TCODK_DOWN:			"down",
+	TCODK_PRINTSCREEN:	"printscreen",
+	TCODK_INSERT:		"insert",
+	TCODK_DELETE:		"delete",
+	TCODK_LWIN:			"lwin",
+	TCODK_RWIN:			"rwin",
+	TCODK_APPS:			"apps",
+	TCODK_KPADD:		"kpadd",
+	TCODK_KPSUB:		"kpsub",
+	TCODK_KPDIV:		"kpdiv",
+	TCODK_KPMUL:		"kpmul",
+	TCODK_KPDEC:		"kpdec",
+	TCODK_KPENTER:		"kpenter",
+	TCODK_F1:			"f1",
+	TCODK_F2:			"f2",
+	TCODK_F3:			"f3",
+	TCODK_F4:			"f4",
+	TCODK_F5:			"f5",
+	TCODK_F6:			"f6",
+	TCODK_F7:			"f7",
+	TCODK_F8:			"f8",
+	TCODK_F9:			"f9",
+	TCODK_F10:			"f10",
+	TCODK_F11:			"f11",
+	TCODK_F12:			"f12",
+	TCODK_NUMLOCK:		"numlock",
+	TCODK_SCROLLLOCK:	"scrolllock",
+	TCODK_SPACE			"space"
 }
 
 def start():
@@ -54,8 +97,14 @@ def stop():
 	pass
 
 def get_input():
-	key = ld.console_wait_for_keypress(False)
-	return key.c
+	key = ld.console_check_for_keypress()
+	if k.vk == ld.KEY_NONE:
+		return None
+	c = key.c
+	elif c > 0 and c <= 256:
+		return "%c" % c
+	elif c in _keymap:
+		return _keymap[c]
 
 def draw(x, y, char, ventana, color=7):
 	c = ord(char)
@@ -81,8 +130,8 @@ class Ventana:
 		self.h = y
 		ld.console_set_default_background(self.win, ld.black)
 		ld.console_set_background_flag(self.win, ld.TCOD_BKGND_NONE)
-		ld.console_set_background_flag(self.win, TCOD_BKGND_NONE)
-		ld.console_set_alignment(self.win, TCOD_LEFT)
+		ld.console_set_background_flag(self.win, ld.TCOD_BKGND_NONE)
+		ld.console_set_alignment(self.win, ld.TCOD_LEFT)
 
 	def addch(self, x, y, c, color=0):
 		realColor = _colors[color]
