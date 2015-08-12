@@ -42,7 +42,11 @@ class Story:
 			c = Item.create('comida')
 			inv.addItem(c)
 			inv.addItem(c)
+
 			removeItem(world, 'b_jabali')
+			Item.removeItem('b_jabali')
+			Item.addItem('b_jabali', 78, 154, '/')
+			addItem(world, 'b_jabali')
 
 		def jabaliFunN():
 			log.add_event("Esta criatura no me ha hecho nada, nada le hare yo")		
@@ -56,23 +60,89 @@ class Story:
 		jabaliN = lambda: jabaliFunN()
 		jabaliS = StoryState.StoryState(jabaliL, jabaliT, jabaliO, jabaliY, jabaliN, None, None)
 
+		##########SEGUNDA CRIA JABALI############
 
-		##########CUEVA##########
-		cuevaT = lambda day, step, x, y: posTrigger(x,y, "O", world)
-		cuevaL = "Una cria de Jabali, si la mato ahora tengo alimento facil, pero es tan solo un pequena criatura... como podria yo...?"
-		cuevaO = ("Que hacer?","Matarla","Dejarla Huir")
+		jabali2T = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('b_jabali'), world)
+		jabali2L = "Otra cria de Jabali, seguire con mi desicion anterior?"
+		jabali2O = ("Que hacer?","Matarla","Dejarla Huir")
 
-		def jabaliFunY():
-			log.add_event("Su alimento me ayudara a sobrevivir")
+		def jabali2FunY():
+			log.add_event("Mas alimento me ayudara a sobrevivir")
 			c = Item.create('comida')
 			inv.addItem(c)
 			inv.addItem(c)
+			#events.addEvent('dead_man')
+			addItem(world, 'dead_man')
+			addItem(world, 'm_jabali')
+			removeItem(world, 'b_jabali')
+			Item.removeItem('b_jabali')
+
+		def jabali2FunN():
+			log.add_event("No soy capaz, no puedo hacerlo de nuevo")		
+			#events.addEvent('fuego')
+			addItem(world, 'fuego')
+			removeItem(world, 'b_jabali')
+			Item.removeItem('b_jabali')
+
+		jabali2Y = lambda: jabali2FunY()
+		jabali2N = lambda: jabali2FunN()
+		jabali2S = StoryState.StoryState(jabali2L, jabali2T, jabali2O, jabali2Y, jabali2N, None, None)
+
+		########MAMA JABALI############
+
+		jabaliMT = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('m_jabali'), world)
+		jabaliML = "La madre de las crias! sabe lo que hice... mis manos llenas de sangre me delatan!"
+		jabaliMO = ("Que hacer?","Atacarla","Huir")
+
+		def jabaliMFunY():
+			if(inv.getItem(Item.getItemId('cuchillo')) is None):
+				log.add_event("Me muero...")	
+				#TODO morir
+			else:
+				log.add_event("Eso fue facil... creo")
+				c = Item.create('comida')
+				inv.addItem(c)
+				inv.addItem(c)
+
+			removeItem(world, 'm_jabali')
+			Item.removeItem('m_jabali')
+
+		def jabaliMFunN():
+			log.add_event("No quiero enfrentarme contra ella ahora")		
+			#events.addEvent('m_jabali')
+
+		jabaliMY = lambda: jabaliMFunY()
+		jabaliMN = lambda: jabaliMFunN()
+		jabaliMS = StoryState.StoryState(jabaliML, jabaliMT, jabaliMO, jabaliMY, jabaliMN, None, None)
+
+
+		##########CUEVA ENTRADA##########
+		cuevaT = lambda day, step, x, y: posTrigger(x,y, "o", world)
+		cuevaL = "Oh, una cueva!! Se escuchan ruidos desde adentro...sera algun animal??"
+		cuevaO = ("Que deberia hacer?","Entrar","Huir")
+
+		def cuevaFunY():
+			log.add_event('Es mejor entrar, puede ser una buena oportunidad')
+			
+
+		def cuevaFunN():
+			log.add_event("No puedo arriesgarme... Es mejor que huya")
 
 
 
-		cuevaY = lambda: jabaliFunY()
-		cuevaN = lambda: log.add_event("Esta criatura no me ha hecho nada, nada le hare yo")		
+		cuevaY = lambda: cuevaFunY()
+		cuevaN = lambda: cuevaFunN()
 		cuevaS = StoryState.StoryState(cuevaL, cuevaT, cuevaO, cuevaY, cuevaN, None, None)
 
+		#############CUEVA INTERIOR#############
+
+
+
+
+		jabaliS.next_no_state=cuevaS
+		jabaliS.next_yes_state=jabali2S
+
+		jabali2S.next_no_state=cuevaS
+		jabali2S.next_yes_state=jabaliMS
 
 		return jabaliS

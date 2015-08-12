@@ -58,6 +58,25 @@ tiles = {
     'tree' : colors['tree']
 }
 
+getColors = {
+    '@' :   tiles['person'],
+    '#' :   tiles['rock'],
+    '.' :   tiles['sand'],
+    '~' :   tiles['deep'],
+    '/' :   tiles['grass'],
+    '*' :   tiles['obj'],
+    'O' :   tiles['cave'],
+    '-' :   tiles['shallow'],
+    'Y' :   tiles['palm'],
+    'T' :   tiles['tree'],
+    'a' :   colors['apple'],
+    'X' :   colors['fallen_palm'],
+    'j' :   colors['boar'],
+    'w' :   colors['metal'],
+    '&' :   colors['apple'],
+    'B' :   colors['yellow']
+}
+
 asciiToUnicode = {
     '#' :   u'\u2588',
     '~' :   u'\u2248',
@@ -79,7 +98,8 @@ class World(object):
         self.grid[80][170]  = 'j'
         self.grid[93][139]  = 'a'
         self.grid[105][123] = 'w'
-        self.grid[115][112] = 'O'
+        self.grid[117][112] = 'O'
+        self.grid[116][112] = 'o'
         self.grid[89][101]  = 'X'
 
         height = len(self.grid[0])
@@ -164,48 +184,12 @@ class World(object):
 
                 if x == xCenter and y == yCenter:
                     cha = '@'
-
-                if cha == '@':          #Personaje
-                    color = tiles['person']
-                elif cha == '#':        #Roca
-                    color = tiles['rock']
-                    cha = u'\u2588'
-                elif cha == '.':        #Arena
-                    color = tiles['sand']
-                elif cha == '~':        #Agua profunda
-                    color = tiles['deep']
-                    cha = u'\u2248'
-                elif cha == '/':        #Pasto
-                    color = tiles['grass']
-                    cha = u'\u0e45'
-                elif cha == '*':        #Objeto
-                    color = tiles['obj']
-                elif cha == 'O':        #Cueva
-                    color = tiles['cave']
-                    cha = u'\u22d2'
-                elif cha == '-':        #agua no profunda
-                    color = tiles['shallow']
-                    cha = '~'
-                elif cha == 'Y':        #palmera
-                    color = tiles['palm']
-                    cha = u'\u1f33'
-                elif cha == 'T':        #arbol
-                    color = tiles['tree']
-                    cha = u'\u1f34'
-                elif cha == 'a':        #manzana
-                    color = colors['apple']
-                elif cha == 'X':        #evento interesante
-                    color = colors['fallen_palm']
-                elif cha == 'j':        #jabali
-                    color = colors['boar']
-                elif cha == 'w':        #cuchillo
-                    color = colors['metal']
-                elif cha == '&':
-                    color = colors['apple']
-                elif cha == 'B':
-                    color = colors['yellow']
+                if cha in getColors:
+                    color = getColors[cha]
                 else:
-                    color = 1
+                    color = 7
+                if cha in asciiToUnicode:
+                    cha = asciiToUnicode[cha]
 
                 if self.vgrid[x][y]:
                     self.memgrid[x][y] = True
