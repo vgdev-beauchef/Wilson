@@ -67,7 +67,7 @@ class Controller:
 		#Create the story
 		self.events = Events.Events(self.world, self.inventory, self.dayCountLimit, self.log, self.info)
 
-		self.story = Story.Story(self.world, self.inventory, self.dayCountLimit, self.log, self.events)
+		self.story = Story.Story(self.world, self.inventory, self.dayCountLimit, self.log, self.events, self.info)
 
 
 		#StateMachine for the story

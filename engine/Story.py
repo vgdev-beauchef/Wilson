@@ -27,10 +27,10 @@ def addItem(world, itemName):
 
 
 class Story:
-	def __init__(self, world, inv, dayLimit, log, events):
-		self.initStoryState = self.createStory(world, inv, dayLimit, log, events)
+	def __init__(self, world, inv, dayLimit, log, events, info):
+		self.initStoryState = self.createStory(world, inv, dayLimit, log, events, info)
 
-	def createStory(self, world, inv, dayLimit, log, events):
+	def createStory(self, world, inv, dayLimit, log, events, info):
 
 		#######JABALI##############
 		jabaliT = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('b_jabali'), world)
@@ -96,8 +96,9 @@ class Story:
 
 		def jabaliMFunY():
 			if(inv.getItem(Item.getItemId('cuchillo')) is None):
-				log.add_event("Me muero...", 197)	
-				#TODO morir
+				log.add_event("Esto fue demasiado para mi....", 197)
+				info.gameOver()
+
 			else:
 				log.add_event("Eso fue facil... creo")
 				c = Item.create('comida')
@@ -143,8 +144,19 @@ class Story:
 				log.add_event("Logre matar a la bestia... al menos tendre comida")
 				c = Item.create('comida')
 				inv.addItem(c)
+				#TODO radio
+			elif(not inv.getItem(Item.getItemId('fire')) is None):
+				log.add_event("Logre ahuyentar al oso con el fuego")
+				log.add_event("Y encontre comida para mi!")
+				c = Item.create('comida')
+				inv.addItem(c)
 				inv.addItem(c)
 				#TODO radio
+			else:
+				log.add_event("Esto fue demasiado para mi....", 197)
+				info.gameOver()
+                #
+
 
 			
 
