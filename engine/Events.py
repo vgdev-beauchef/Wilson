@@ -35,17 +35,17 @@ class Events:
 		foodLeyend = "Ohh... Una manzana!"
 		foodOpt = ("Que hago con la manzana?", "Guardarla", "Comerla")
 
-		def common(text):
-			log.add_event(text)
+		def foodYes():
+			log.add_event("Guarde el alimento para despues")
 			c = Item.Item('comida',1,'0')
 			inv.addItem(c)
 			removeItem(80,170,world,'.')
-
-		def foodYes():
-			common('Guarde la manzana')
 			
 		def foodNo():
-			common('Comi la manzana')			
+			log.add_event("Comi la manzana que encontre")
+			c = Item.Item('comida',1,'0')
+			inv.addItem(c)
+			removeItem(80,170,world,'.')		
 			Player.useItem(c, inv)			
 
 		yesFun1 = lambda: foodYes()
@@ -54,7 +54,7 @@ class Events:
 
 		self.allEvents['comida']=StoryState.StoryState(foodLeyend, foodTrigger, foodOpt, yesFun1, noFun1, None, None)
 
-		###################Fuego
+		###################FUEGO
 
 
 

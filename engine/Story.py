@@ -28,14 +28,33 @@ class Story:
 		jabaliL = "Una cria de Jabali, si la mato ahora tengo alimento facil, pero es tan solo un pequena criatura... como podria yo...?"
 		jabaliO = ("Que hacer?","Matarla","Dejarla Huir")
 
+		def jabaliFunY():
+			log.add_event("Su alimento me ayudara a sobrevivir")
+			c = Item.Item('comida',1,'0')
+			self.inv.addItem(c)
+			self.inv.addItem(c)
 
 
-		jabaliY = lambda: log.add_event("Decidi seguir en el agua")
-		jabaliN = lambda: log.add_event("Corre!!!")		
+		jabaliY = lambda: jabaliFunY()
+		jabaliN = lambda: log.add_event("Esta criatura no me ha hecho nada, nada le hare yo")		
 		jabaliS = StoryState.StoryState(jabaliL, jabaliT, jabaliO, jabaliY, jabaliN, None, None)
 
 
+		##########CUEVA##########
+		cuevaT = lambda day, step, x, y: posTrigger(x,y, "O", world)
+		cuevaT = "Una cria de Jabali, si la mato ahora tengo alimento facil, pero es tan solo un pequena criatura... como podria yo...?"
+		cuevaO = ("Que hacer?","Matarla","Dejarla Huir")
 
+		def jabaliFunY():
+			log.add_event("Su alimento me ayudara a sobrevivir")
+			c = Item.Item('comida',1,'0')
+			self.inv.addItem(c)
+			self.inv.addItem(c)
+
+
+		cuevaY = lambda: jabaliFunY()
+		cuevaN = lambda: log.add_event("Esta criatura no me ha hecho nada, nada le hare yo")		
+		cuevaS = StoryState.StoryState(cuevaL, cuevaT, cuevaO, cuevaY, cuevaN, None, None)
 
 
 		return jabaliS

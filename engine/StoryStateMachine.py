@@ -49,7 +49,7 @@ class StoryStateMachine:
                         s.yes_fun()
                         break
                     elif q == 'no':
-                        self.state.no_fun()
+                        s.no_fun()
                         break
                 self.opt_mod.clearWindow()
                 self.opt_mod.setOption("", "", "")
