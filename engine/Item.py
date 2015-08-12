@@ -14,3 +14,17 @@ class Item:
 
     def __eq__(self, other):
         return self.name == other.name
+
+items = {
+    'comida'  : ['a', 1, [[80, 170, '.'], [], [] ]],
+    'cuchillo': ['w', 2, [[105, 123, '.']]],
+    'balsa'   : ['X', 3, [[89, 101, '.']]],
+    'fuego'   : ['&', 4, [[], []]],
+    'banana'  : ['B', 5, [[], []]],
+    'madera'  : ['M', 6, [[], []]],
+    'cuerda'  : ['|', 7, [[], []]],
+    'radio'   : ['R', 8, [[], []]],
+    'b_jabali': ['j', 9, [[93, 139, '/'], []]],
+    'm_jabali': ['J', 10, [[], []]],
+
+}
