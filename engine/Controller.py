@@ -188,7 +188,7 @@ class Controller:
 							self.ope.setOption("","","")
 							self.ui.draw()
 							time.sleep(5)
-							self.dayCount = self.dayCountLimit  
+							self.dayCount = self.dayCountLimit
 						break
 					elif q == 'n':
 						self.log.add_event('No puedo pelear contra ese oso. Es mejor que huya')
@@ -278,21 +278,21 @@ class Controller:
 			else:
 				world._viewRadius = 7
 			if self.dayCount < self.dayCountLimit*2/3:
-				world.tiles['rock']      = world.colors['gray']
+				world.tiles['rock']      = world.colors['grey']
 				world.tiles['sand']      = world.colors['sand']
 				world.tiles['deep']      = world.colors['deep-blue']
 				world.tiles['grass']     = world.colors['grass']
-				world.tiles['obj']       = world.colors['fucsia']
+				world.tiles['obj']       = world.colors['fuchsia']
 				world.tiles['cave']      = world.colors['dark']
 				world.tiles['shallow']   = world.colors['shallow-blue']
 				world.tiles['palm']      = world.colors['palm']
 				world.tiles['tree']      = world.colors['tree']
 			else:
-				world.tiles['rock']      = world.colors['gray-night']
+				world.tiles['rock']      = world.colors['grey-night']
 				world.tiles['sand']      = world.colors['sand-night']
 				world.tiles['deep']      = world.colors['deep-blue-night']
 				world.tiles['grass']     = world.colors['grass-night']
-				world.tiles['obj']       = world.colors['fucsia-night']
+				world.tiles['obj']       = world.colors['fuchsia-night']
 				world.tiles['cave']      = world.colors['dark-night']
 				world.tiles['shallow']   = world.colors['shallow-blue-night']
 				world.tiles['palm']      = world.colors['palm-night']

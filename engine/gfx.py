@@ -71,13 +71,13 @@ def get_input():
     return None
 
 
-def draw(x, y, char, ventana, color=0):
+def draw(x, y, char, ventana, color=7):
     c = ord(char)
     h, w = _screen.getmaxyx()
     if x >= 0 and x < w and y >= 0 and y < h and (x, y) != (w - 1, h - 1):
         ventana.addch(x, y, c, color)
 
-def write(x, y, string, ventana, color=0):
+def write(x, y, string, ventana, color=7):
     h, w = _screen.getmaxyx()
     length = len(string)
     if x >= 0 and x < w and y >= 0 and y < h and (x, y) != (w - 1, h - 1):
@@ -103,14 +103,14 @@ class Ventana:
         self.width = x
         self.height = y
 
-    def addch(self, x, y, c, color=0):
+    def addch(self, x, y, c, color=7):
         if isinstance(c, unicode):
             c = c.encode(code)
             self.win.addstr(y, 2 * x, c, curses.color_pair(color))
         else:
             self.win.addch(y, 2 * x, c, curses.color_pair(color))
 
-    def addstr(self, x, y, string, color=0):
+    def addstr(self, x, y, string, color=7):
         if isinstance(string, unicode):
             string = string.encode(code)
         self.win.addstr(y, x, string, curses.color_pair(color))
