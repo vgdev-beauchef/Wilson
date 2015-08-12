@@ -58,6 +58,16 @@ tiles = {
     'tree' : colors['tree']
 }
 
+asciiToUnicode = {
+    '#' :   u'\u2588',
+    '~' :   u'\u2248',
+    '/' :   u'\u0e45',
+    'O' :   u'\u22d2',
+    '-' :   '~',
+    'Y' :   u'\u1f33',
+    'T' :   u'\u1f34'
+}
+
 
 
 
