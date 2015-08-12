@@ -1,6 +1,6 @@
 __author__ = 'Agustin Antoine'
 __email__ = "antoineagustin@gmail.com"
-from gfx import *
+from gfx2 import *
 import Item
 
 class Inventory:

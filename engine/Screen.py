@@ -1,6 +1,6 @@
 __author__ = 'Michel Llorens'
 __email__ = "mllorens@dcc.uchile.cl"
-from gfx import *
+from gfx2 import *
 import codecs
 import time
 

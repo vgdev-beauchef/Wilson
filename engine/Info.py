@@ -1,4 +1,4 @@
-import gfx
+import gfx2
 import Player
 import Controller
 import math
@@ -12,7 +12,7 @@ _infoWindowYPos = 0
 class Info(object):
 
     def __init__(self):
-        self.window = gfx.Ventana(
+        self.window = gfx2.Ventana(
             _infoWindowWidth, _infoWindowHeight,
             _infoWindowXPos, _infoWindowYPos)
         self.time=0
@@ -22,18 +22,18 @@ class Info(object):
     def draw(self):
         self.clearWindow()
         sc = 'Saciedad ' + str(Player.getHunger()[0]) + '/' + str(Player.getHunger()[1])
-        gfx.write(0, 0, sc, self.window)
+        gfx2.write(0, 0, sc, self.window)
         h = Player.getHunger()[0]
         hungerColor = 41
         if h <= 25:
             hungerColor = 197
         elif h <= 50:
             hungerColor = 209
-        gfx.write(0, 1, hungerBar(), self.window, hungerColor)
+        gfx2.write(0, 1, hungerBar(), self.window, hungerColor)
         gfx.write(0, 2, 'Hora', self.window)
-        gfx.write(0, 3, self.timeBar(), self.window, 4)
+        gfx2.write(0, 3, self.timeBar(), self.window, 4)
         if self._gameOver:
-            gfx.write(0, 5, 'Presione enter para continuar', self.window)
+            gfx2.write(0, 5, 'Presione enter para continuar', self.window)
         self.window.refresh()
 
     def gameOver(self):
@@ -42,7 +42,7 @@ class Info(object):
     def clearWindow(self):
 		clean_string = " " * 19
 		for i in range(10):
-			gfx.write(0,i,clean_string,self.window,0)
+			gfx2.write(0,i,clean_string,self.window,0)
 
     def timeBar(self):
         percentage = 100 * self.time / self.timeToDusk

@@ -1,5 +1,5 @@
 from Log import parser
-from gfx import *
+from gfx2 import *
 
 _opeWindowWidth = 10
 _opeWindowHeight = 10

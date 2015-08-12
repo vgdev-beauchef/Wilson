@@ -1,4 +1,4 @@
-from gfx import *
+from gfx2 import *
 import debug
 import sys
 import traceback
@@ -37,7 +37,7 @@ class UI:
             return
 
         self.world.drawMap()
-        
+
         # LOG
         self.log.draw()
 
@@ -52,5 +52,3 @@ class UI:
 
         self.log.refresh()
         self.inventory.refresh()
-
-

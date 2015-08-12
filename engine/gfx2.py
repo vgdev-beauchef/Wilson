@@ -84,7 +84,7 @@ _keymap = {
 	TCODK_F12:			"f12",
 	TCODK_NUMLOCK:		"numlock",
 	TCODK_SCROLLLOCK:	"scrolllock",
-	TCODK_SPACE			"space"
+	TCODK_SPACE:		"space"
 }
 
 def start():
@@ -101,30 +101,33 @@ def get_input():
 	if k.vk == ld.KEY_NONE:
 		return None
 	c = key.c
-	elif c > 0 and c <= 256:
+	if c > 0 and c <= 256:
 		return "%c" % c
 	elif c in _keymap:
 		return _keymap[c]
 
 def draw(x, y, char, ventana, color=7):
 	c = ord(char)
-	h, w = _screen.getmaxyx()
-    if x >= 0 and x < w and y >= 0 and y < h and (x, y) != (w - 1, h - 1):
-        ventana.addch(x, y, c, color)
+	h = ventana.h
+	w = ventana.w
+    #if x >= 0 and x < w and y >= 0 and y < h and (x, y) != (w - 1, h - 1):
+	ventana.addch(x, y, c, color)
+	return
 
 def write(x, y, string, ventana, color=7):
-    h, w = _screen.getmaxyx()
-    length = len(string)
-    if x >= 0 and x < w and y >= 0 and y < h and (x, y) != (w - 1, h - 1):
-        ventana.addstr(x, y, string, color)
+	h = ventana.h
+	w = ventana.w
+    #if x >= 0 and x < w and y >= 0 and y < h and (x, y) != (w - 1, h - 1):
+	ventana.addstr(x, y, string, color)
+	return
 
 def refresh():
-
+	ld.console_flush()
 def clear():
 	ld.console_clear(0)
 
 class Ventana:
-	def __init__(self, x, y, pos_x=0, pos_y=7):
+	def __init__(self, x, y, pos_x=0, pos_y=0):
 		self.win = ld.console_new(x, y)
 		self.w = x
 		self.h = y

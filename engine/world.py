@@ -1,5 +1,5 @@
 from Player import *
-import gfx
+import gfx2
 import mapGen
 import random
 import math
@@ -74,7 +74,7 @@ class World(object):
         width = len(self.grid)
         self.vgrid = [[False for x in range(width)] for x in range(height)]
         self.memgrid = [[False for x in range(width)] for x in range(height)]
-        self.window = gfx.Ventana(_windowX, _windowY)
+        self.window = gfx2.Ventana(_windowX, _windowY)
         #self.player = Player('')
 
     def scrollingMapX(self):

@@ -1,4 +1,4 @@
-from gfx import *
+from gfx2 import *
 import debug
 import sys
 import traceback
