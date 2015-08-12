@@ -91,22 +91,24 @@ class Story:
 
 		jabaliMT = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('b_jabali'), world)
 		jabaliML = "La madre de las crias! sabe lo que hice... mis manos llenas de sangre me delatan!"
-		jabaliMO = ("Que hacer?","Matarla","Dejarla Huir")
+		jabaliMO = ("Que hacer?","Atacarla","Huir")
 
 		def jabaliMFunY():
-			log.add_event("Mas alimento me ayudara a sobrevivir")
-			c = Item.create('comida')
-			inv.addItem(c)
-			inv.addItem(c)
-			removeItem(world, 'b_jabali')
-			Item.removeItem('b_jabali')
+			if(inv.getItem(Item.getItemId('cuchillo')) is None):
+				log.add_event("Me muero...")	
+				#TODO morir
+			else:
+				log.add_event("Eso fue facil... creo")
+				c = Item.create('comida')
+				inv.addItem(c)
+				inv.addItem(c)
+
+			removeItem(world, 'm_jabali')
+			Item.removeItem('m_jabali')
 
 		def jabaliMFunN():
-			log.add_event("No soy capaz, no puedo hacerlo de nuevo")		
-			#events.addEvent('fuego')
-			addItem(world, 'fuego')
-			removeItem(world, 'b_jabali')
-			Item.removeItem('b_jabali')
+			log.add_event("No quiero enfrentarme contra ella ahora")		
+			#events.addEvent('m_jabali')
 
 		jabaliMY = lambda: jabali2FunY()
 		jabaliMN = lambda: jabali2FunN()
@@ -140,5 +142,6 @@ class Story:
 		jabaliS.next_yes_state=jabali2S
 
 		jabali2S.next_no_state=cuevaS
+		jabali2S.next_yes_state=jabaliMS
 
 		return jabaliS
