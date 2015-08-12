@@ -9,24 +9,26 @@ class LinearStateMachine:
             self.message = message
             self.next_stage = next_stage
 
+
     def __init__(self, dayLimit):
 
-        messages= ["Miro el mar desde la orilla de la playa. Su olor es penetrante y deja un sabor amargo en mi boca reseca.",
-            "Comienza la manana, acaba de amanecer y debo aprovechar la luz del dia para encontrar algo de comida...",
-            "No he encontrado ningun refugio... es mejor pasar la noche despierto.",
-            "Me sorprende la cantidad de estrellas que se pueden ver desde aqui. Recuerdo la granja del abuelo, sus animales, sus vacas... sus cerdos... La sonrisa de la abuela al verme llegar, y su limonada. Como desearia poder tomar un poco de su limonada. Nunca aprendi a prepararla y me he arrepentido de ello desde el ultimo dia que la vi.",
-            "Jamas habia visto salir el sol por el mar. Es mas, no puedo recordar la ultima vez que vi salir el sol. Quizas fue cuando mi hijo era bebe y debia levantarme a darle su leche; quizas incluso antes.",
-            "Seguire explorando la isla.",
-            "Otro dia mas...He perdido la cuenta.",
-            "El sol golpea mi curtida espalda."]
+        tuples = [("Miro el mar desde la orilla de la playa. Su olor es penetrante y deja un sabor amargo en mi boca reseca.", 1),
+            ("Comienza la manana, acaba de amanecer y debo aprovechar la luz del dia para encontrar algo de comida...", 5),
+            ("No he encontrado ningun refugio... es mejor pasar la noche despierto.", dayLimit-10),
+            ("Me sorprende la cantidad de estrellas que se pueden ver desde aqui. Recuerdo la granja del abuelo, sus animales, sus vacas... sus cerdos... La sonrisa de la abuela al verme llegar, y su limonada. Como desearia poder tomar un poco de su limonada. Nunca aprendi a prepararla y me he arrepentido de ello desde el ultimo dia que la vi.", dayLimit-6), 
+            ("Jamas habia visto salir el sol por el mar. Es mas, no puedo recordar la ultima vez que vi salir el sol. Quizas fue cuando mi hijo era bebe y debia levantarme a darle su leche; quizas incluso antes.", dayLimit+1),
+            ("Seguire explorando la isla.", dayLimit+5), 
+            ("Otro dia mas...He perdido la cuenta.", (dayLimit*2)-10), 
+            ("El sol golpea mi curtida espalda.", (dayLimit*2)-6),
+            ("Uf... la ultima vez que camine tanto fue ese dia que fuimos de campamento con mi esposa. Recuerdo lo mucho que se reia al verme cojear mientras ella corria por las cuestas.", 46)]
 
-        limits = [1, 5, dayLimit-10, dayLimit-6, dayLimit+1, dayLimit+5,  (dayLimit*2)-10, (dayLimit*2)-6]
+        tuples.sort(key=lambda tup: tup[1])
 
         states = []
-        states.append(self.LinearState(lambda x: self.timeTrigger(x, limits[len(limits)-1]), messages[len(messages)-1], None))
-        for i in range(1, len(messages)):
-            k = limits[len(limits)-1-i]
-            states.append(self.LinearState(lambda x, k=k: self.timeTrigger(x, k), messages[len(messages)-1-i], states[len(states)-1]))
+        states.append(self.LinearState(lambda x: self.timeTrigger(x, tuples[len(tuples)-1][1]), tuples[len(tuples)-1][0], None))
+        for i in range(1, len(tuples)):
+            k = tuples[len(tuples)-1-i][1]
+            states.append(self.LinearState(lambda x, k=k: self.timeTrigger(x, k), tuples[len(tuples)-1-i][0], states[len(states)-1]))
 
         #secondState = self.LinearState(lambda x: self.timeTrigger(x, 20), "Hola, la maquina funciona de nuevo", None) 
         #firstState = self.LinearState(lambda x: self.timeTrigger(x, 10), "Hola, la maquina funciona", secondState)

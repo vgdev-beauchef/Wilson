@@ -10,7 +10,6 @@ import Item
 import Info
 import musicPlayer
 import optionsUI
-import StateMachine
 import time
 import LinearStateMachine
 import pygame.mixer as mixer
@@ -300,21 +299,6 @@ class Controller:
 			#self.log.add_event(ginput)
 			self.info.setTime(self.dayCount)
 			Player.modifyHunger(-1)
-			if self.stepCount==46:
-				self.log.add_event("Uf... la ultima vez que camine tanto fue ese dia que fuimos de campamento con mi esposa. Recuerdo lo mucho que se reia al verme cojear mientras ella corria por las cuestas.")
-
-			if self.dayCount>self.nightTimeLimit:
-				pass
-
-			if self.dayCount>self.dayCountLimit:
-				self.dayCount=0
-				self.log.increase_day()
-
-				#self.machine.changeState(self.log, self.ui)
-				self.flag = False
-			elif self.dayCount>4*self.dayCountLimit/5 and not self.flag:
-				#self.machine.changeState(self.log, self.ui)
-				self.flag = True
 
 			self.linearState.changeState(self.stepCount, self.log)
 
