@@ -12,6 +12,8 @@ import musicPlayer
 import optionsUI
 import time
 import LinearStateMachine
+import StoryStateMachine
+import Story
 import pygame.mixer as mixer
 
 class Controller:
@@ -54,7 +56,20 @@ class Controller:
 
 		self.mapDisp = False
 
+		#StateMachine for the Time Messages
 		self.linearState = LinearStateMachine.LinearStateMachine(self.dayCountLimit)
+
+		#Create the story
+		self.story = Story.Story(self.world, self.inventory, self.dayCountLimit, self.log)
+
+		#StateMachine for the story
+		self.storyState = StoryStateMachine.StoryStateMachine(self.ui, self.log, self.ope,
+															self.story.initStoryState)
+
+		#StateMachine for the Events
+		self.eventsState = StoryStateMachine.StoryStateMachine(self.ui, self.log, self.ope,
+															self.story.initEventState)
+
 
 	def movement(self, ginput):
 		px = Player.getPlayPos()[0]
@@ -125,14 +140,15 @@ class Controller:
 		if pos!='O':
 			self.cueva = False
 
-		if pos=='a' and not self.option_flag['A']:
+		'''if pos=='a' and not self.option_flag['A']:
 			self.log.add_event("Encontre una manzana")
 			option = "Que hacer con la manzana?"
 			yes_answer = "Guardarla"
 			no_aswer = "Comerla"
 			self.option_flag['A'] = True
 			self.world.grid[80][170]  = '.'
-		elif pos=='j' and not self.option_flag['J']:
+			'''
+		if pos=='j' and not self.option_flag['J']:
 			self.log.add_event("Hay una cria de jabali alla... si la mato ahora tengo alimento facil, pero es tan solo un pequena criatura... como podria yo...? ")
 			option = "Que hacer?"
 			yes_answer = "Matarla"
@@ -215,11 +231,11 @@ class Controller:
 						self.inventory.addItem(c)
 						break
 
-					elif pos == 'a' and not flag:
+					'''elif pos == 'a' and not flag:
 						self.log.add_event('Guarde la manzana')
 						c = Item.Item('comida',1,'0')
 						self.inventory.addItem(c)
-						break
+						break'''
 					flag = True
 
 				elif q == 'n':
@@ -230,11 +246,11 @@ class Controller:
 						self.log.add_event('Deje la palmera en la playa')
 					elif pos == 'j' and not flag:
 						self.log.add_event('Deje a la cria tranquila')
-					elif pos == 'a' and not flag:
+					'''elif pos == 'a' and not flag:
 						self.log.add_event('Comi la manzana')
 						c = Item.Item('comida',1,'0')
 						self.inventory.addItem(c)
-						Player.useItem(c, self.inventory)
+						Player.useItem(c, self.inventory)'''
 					flag = True
 					break
 				q=''
@@ -301,6 +317,8 @@ class Controller:
 			Player.modifyHunger(-1)
 
 			self.linearState.changeState(self.stepCount, self.log)
+			self.storyState.changeStoryState(self.dayCount, self.stepCount, pxf, pyf)
+			self.eventsState.checkIndividualStates(self.dayCount, self.stepCount, pxf, pyf)
 
 		self.showHungerMessages()
 		self.resetHungerFlags()
