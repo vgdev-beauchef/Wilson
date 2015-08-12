@@ -15,7 +15,7 @@ def gotItemTrigger(itemPos, inv):
 def removeItem(world, itemName):
 	px = Player.getPlayPos()[0]
 	py = Player.getPlayPos()[1]
-	replacement = Item
+	replacement = Item.getReplacement(itemName, px, py)
 	world.grid[px][py] = replacement
 
 class Events:
@@ -48,7 +48,7 @@ class Events:
 			log.add_event("Comi la manzana que encontre")
 			c = Item.create('comida')
 			inv.addItem(c)
-			removeItem(80,170,world,'.')		
+			removeItem(world,'comida')	
 			Player.useItem(c, inv)			
 
 		yesFun1 = lambda: foodYes()

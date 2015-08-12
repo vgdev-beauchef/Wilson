@@ -12,9 +12,6 @@ def posTrigger(px, py, target, world):
 def gotItemTrigger(itemPos, inv):
 	return inv.getItem(itemPos) != None
 
-def removeItem(gridPosX,gridPosY, world, replacement):
-	world.grid[gridPosX][gridPosY] = replacement
-
 
 
 class Story:
