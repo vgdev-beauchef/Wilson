@@ -184,49 +184,6 @@ class World(object):
 
                 if x == xCenter and y == yCenter:
                     cha = '@'
-
-                if cha == '@':          #Personaje
-                    color = tiles['person']
-                elif cha == '#':        #Roca
-                    color = tiles['rock']
-                    cha = u'\u2588'
-                elif cha == '.':        #Arena
-                    color = tiles['sand']
-                elif cha == 'o':        #Entrada cueva
-                    color = tiles['sand']
-                    cha = '.'
-                elif cha == '~':        #Agua profunda
-                    color = tiles['deep']
-                    cha = u'\u2248'
-                elif cha == '/':        #Pasto
-                    color = tiles['grass']
-                    cha = u'\u0e45'
-                elif cha == '*':        #Objeto
-                    color = tiles['obj']
-                elif cha == 'O':        #Cueva
-                    color = tiles['cave']
-                    cha = u'\u22d2'
-                elif cha == '-':        #agua no profunda
-                    color = tiles['shallow']
-                    cha = '~'
-                elif cha == 'Y':        #palmera
-                    color = tiles['palm']
-                    cha = u'\u1f33'
-                elif cha == 'T':        #arbol
-                    color = tiles['tree']
-                    cha = u'\u1f34'
-                elif cha == 'a':        #manzana
-                    color = colors['apple']
-                elif cha == 'X':        #evento interesante
-                    color = colors['fallen_palm']
-                elif cha == 'j':        #jabali
-                    color = colors['boar']
-                elif cha == 'w':        #cuchillo
-                    color = colors['metal']
-                elif cha == '&':
-                    color = colors['apple']
-                elif cha == 'B':
-                    color = colors['yellow']
                 if cha in getColors:
                     color = getColors[cha]
                 else:
