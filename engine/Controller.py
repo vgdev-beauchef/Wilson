@@ -65,7 +65,7 @@ class Controller:
 		self.linearState = LinearStateMachine.LinearStateMachine(self.dayCountLimit)
 
 		#Create the story
-		self.events = Events.Events(self.world, self.inventory, self.dayCountLimit, self.log)
+		self.events = Events.Events(self.world, self.inventory, self.dayCountLimit, self.log, self.info)
 
 		self.story = Story.Story(self.world, self.inventory, self.dayCountLimit, self.log, self.events)
 
@@ -360,7 +360,7 @@ class Controller:
 			self.hunger_flag_3 = False
 
 
-	def killedByBear(self):
+	def killed(self):
 		if self._killedByBear:
 			self.log.add_event("Esto fue... demasiado para ... mi",197)
 			#self.log.add_event("Presiona enter para continuar")

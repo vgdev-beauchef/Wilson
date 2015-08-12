@@ -20,8 +20,8 @@ def removeItem(world, itemName):
 	world.grid[px][py] = replacement
 
 class Events:
-    def __init__(self, world, inv, dayLimit, log):
-
+    def __init__(self, world, inv, dayLimit, log, info):
+        self.info = info
         self.world = world
         self.allEvents = dict()
         self.createEvents(world, inv, dayLimit, log)
@@ -101,9 +101,10 @@ class Events:
         boarOpt = ("Que deberia hacer?", "Atacarla", "Huir")
 
         def boarYes():
-            if Item.getItemId('cuchillo') is None:
+            if inv.getItem(Item.getItemId('cuchillo')) is None:
                 #TODO Killed
                 log.add_event("Esto fue demasiado para mi....", 197)
+                self.info.gameOver()
             else:
                 log.add_event("Por fin murio...")
                 c = Item.create('comida')
