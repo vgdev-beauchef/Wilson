@@ -33,7 +33,12 @@ def getItemPos(name):
     for coords in l:
         return (coords[0], coords[1])
 
+def addItem(name, x, y, before):
+    l = items[name][2]
+    l.append([x, y, before])
 
+def removeItem(name):
+    items[name][2] = []
 
 items = {
     'comida'  : ['a', 1, [[93, 139, '/']]],
@@ -44,7 +49,7 @@ items = {
     'banana'  : ['B', 5, [[68, 161, '/']]],
     'madera'  : ['M', 6, [[89,], [160]]],
     'cuerda'  : ['|', 7, [[89, 139, '/']]],
-    'b_jabali': ['j', 9, [[80, 170, '.'], [78, 154, '/']]],
+    'b_jabali': ['j', 9, [[80, 170, '.']]],
     'm_jabali': ['J', 10, [[81, 164, '/']]],
 
 }

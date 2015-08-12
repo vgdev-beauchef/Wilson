@@ -69,7 +69,8 @@ class World(object):
         self.grid[80][170]  = 'j'
         self.grid[93][139]  = 'a'
         self.grid[105][123] = 'w'
-        self.grid[115][112] = 'O'
+        self.grid[117][112] = 'O'
+        self.grid[116][112] = 'o'
         self.grid[89][101]  = 'X'
 
         height = len(self.grid[0])
@@ -162,6 +163,9 @@ class World(object):
                     cha = u'\u2588'
                 elif cha == '.':        #Arena
                     color = tiles['sand']
+                elif cha == 'o':        #Entrada cueva
+                    color = tiles['sand']
+                    cha = '.'
                 elif cha == '~':        #Agua profunda
                     color = tiles['deep']
                     cha = u'\u2248'
