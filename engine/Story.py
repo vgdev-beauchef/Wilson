@@ -50,10 +50,10 @@ class Story:
 
 		def jabaliFunN():
 			log.add_event("Esta criatura no me ha hecho nada, nada le hare yo")		
-			#events.addEvent('fuego')
+			events.addEvent('fuego')
 			addItem(world, 'fuego')
 			addItem(world, 'banana')
-			#events.addEvent('banana')
+			events.addEvent('banana')
 			removeItem(world, 'b_jabali')
 
 		jabaliY = lambda: jabaliFunY()
@@ -71,7 +71,7 @@ class Story:
 			c = Item.create('comida')
 			inv.addItem(c)
 			inv.addItem(c)
-			#events.addEvent('dead_man')
+			events.addEvent('dead_man')
 			addItem(world, 'dead_man')
 			addItem(world, 'm_jabali')
 			removeItem(world, 'b_jabali')
@@ -79,7 +79,7 @@ class Story:
 
 		def jabali2FunN():
 			log.add_event("No soy capaz, no puedo hacerlo de nuevo")		
-			#events.addEvent('fuego')
+			events.addEvent('fuego')
 			addItem(world, 'fuego')
 			removeItem(world, 'b_jabali')
 			Item.removeItem('b_jabali')
@@ -108,8 +108,8 @@ class Story:
 			Item.removeItem('m_jabali')
 
 		def jabaliMFunN():
-			log.add_event("No quiero enfrentarme contra ella ahora")		
-			#events.addEvent('m_jabali')
+			log.add_event("No quiero enfrentarme contra ella ahora, pero si necesito alimento se donde encontrarlo")		
+			events.addEvent('m_jabali')
 
 		jabaliMY = lambda: jabaliMFunY()
 		jabaliMN = lambda: jabaliMFunN()
@@ -144,5 +144,8 @@ class Story:
 
 		jabali2S.next_no_state=cuevaS
 		jabali2S.next_yes_state=jabaliMS
+
+		jabaliMS.next_yes_state=cuevaS
+		jabaliMS.next_no_state=cuevaS
 
 		return jabaliS
