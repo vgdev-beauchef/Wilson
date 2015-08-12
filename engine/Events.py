@@ -12,7 +12,9 @@ def posTrigger(px, py, target, world):
 def gotItemTrigger(itemPos, inv):
 	return inv.getItem(itemPos) != None
 
-def removeItem(gridPosX,gridPosY, world, replacement):
+def removeItem(world, itemName):
+	px = Player.getPlayPos()[0]
+	py = Player.getPlayPos()[1]
 	world.grid[gridPosX][gridPosY] = replacement
 
 class Events:
@@ -31,19 +33,19 @@ class Events:
 	def createEvents(self, world, inv, dayLimit, log):
 
 		############COMIDA################
-		foodTrigger = lambda day, step, x, y: posTrigger(x,y, "a", world)
+		foodTrigger = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('comida'), world)
 		foodLeyend = "Ohh... Una manzana!"
 		foodOpt = ("Que hago con la manzana?", "Guardarla", "Comerla")
 
 		def foodYes():
 			log.add_event("Guarde el alimento para despues")
-			c = Item.Item('comida',1,'0')
+			Item.create('comida')
 			inv.addItem(c)
-			removeItem(80,170,world,'.')
+			removeItem(world,'comida')
 			
 		def foodNo():
 			log.add_event("Comi la manzana que encontre")
-			c = Item.Item('comida',1,'0')
+			Item.create('comida')
 			inv.addItem(c)
 			removeItem(80,170,world,'.')		
 			Player.useItem(c, inv)			

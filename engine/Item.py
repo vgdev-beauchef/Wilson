@@ -15,8 +15,23 @@ class Item:
     def __eq__(self, other):
         return self.name == other.name
 
+def create(name):
+    index = items[name][1]
+    return Item(name,index, '0')
+
+def getAscii(name):
+    return items[name][0]  
+
+def getReplacement(name, x, y):
+    l = items[name][2]
+    for coords in l:
+        if coords[0]==x and coords[1]==y:
+            return coords[2]
+
+
+
 items = {
-    'comida'  : ['a', 1, [[93, 139, '/'], [], [] ]],
+    'comida'  : ['a', 1, [[93, 139, '/']],
     'cuchillo': ['w', 2, [[105, 123, '.']]],
     'balsa'   : ['X', 3, [[89, 101, '.']]],
     'fuego'   : ['&', 4, [[92, 90, '.']]],

@@ -24,13 +24,13 @@ class Story:
 	def createStory(self, world, inv, dayLimit, log):
 
 		#######JABALI##############
-		jabaliT = lambda day, step, x, y: posTrigger(x,y, "j", world)
+		jabaliT = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('b_jabali'), world)
 		jabaliL = "Una cria de Jabali, si la mato ahora tengo alimento facil, pero es tan solo un pequena criatura... como podria yo...?"
 		jabaliO = ("Que hacer?","Matarla","Dejarla Huir")
 
 		def jabaliFunY():
 			log.add_event("Su alimento me ayudara a sobrevivir")
-			c = Item.Item('comida',1,'0')
+			c = Item.create('comida')
 			self.inv.addItem(c)
 			self.inv.addItem(c)
 
@@ -42,12 +42,12 @@ class Story:
 
 		##########CUEVA##########
 		cuevaT = lambda day, step, x, y: posTrigger(x,y, "O", world)
-		cuevaT = "Una cria de Jabali, si la mato ahora tengo alimento facil, pero es tan solo un pequena criatura... como podria yo...?"
+		cuevaL = "Una cria de Jabali, si la mato ahora tengo alimento facil, pero es tan solo un pequena criatura... como podria yo...?"
 		cuevaO = ("Que hacer?","Matarla","Dejarla Huir")
 
 		def jabaliFunY():
 			log.add_event("Su alimento me ayudara a sobrevivir")
-			c = Item.Item('comida',1,'0')
+			c = Item.create('comida')
 			self.inv.addItem(c)
 			self.inv.addItem(c)
 
