@@ -13,6 +13,7 @@ import optionsUI
 import StateMachine
 import time
 import pygame.mixer as mixer
+import InputMap
 
 class Controller:
 
@@ -81,25 +82,25 @@ class Controller:
 			Player.modifyHunger(-1)
 		elif ginput == ']':
 			Player.modifyHunger(1)
-		elif ginput == '1':
+		elif ginput == 'it_1':
 			if not self.inventory.getItem(1) is None:
 				self.log.add_event(Player.useItem(self.inventory.getItem(1), self.inventory))
-		elif ginput == '2':
+		elif ginput == 'it_2':
 			if not self.inventory.getItem(2) is None:
 				self.log.add_event(Player.useItem(self.inventory.getItem(2), self.inventory))
-		elif ginput == '3':
+		elif ginput == 'it_3':
 			if not self.inventory.getItem(3) is None:
 				self.log.add_event(Player.useItem(self.inventory.getItem(3), self.inventory))
 
 
 	def manage_log(self, ginput):
-		if ginput == 'i':
+		if ginput == 'log_up':
 			self.log.scroll_up()
-		elif ginput == 'k':
+		elif ginput == 'log_down':
 			self.log.scroll_down()
-		elif ginput == 'j':
+		elif ginput == 'log_left':
 			self.log.prev_day()
-		elif ginput == 'l':
+		elif ginput == 'log_right':
 			self.log.next_day()
 
 	#def reset_place(self, x, y):
@@ -173,7 +174,7 @@ class Controller:
 				self.ui.draw()
 				q = get_input()
 				if oso:
-					if q == 'y':
+					if InputMap.key(q) == 'yes':
 						if self.inventory.getItem(2) is None:
 							self._killedByBear = True
 						else:
@@ -190,13 +191,13 @@ class Controller:
 							time.sleep(5)
 							self.dayCount = self.dayCountLimit  
 						break
-					elif q == 'n':
+					elif InputMap.key(q) == 'no':
 						self.log.add_event('No puedo pelear contra ese oso. Es mejor que huya')
 						self.option_flag['O']=False
 						oso = False
 						break
 
-				if q =='y':
+				if InputMap.key(q) =='yes':
 					if pos=='O' and not flag:
 						self.log.add_event('Entre a la cueva')
 						self.log.add_event('Aparece un oso salvaje!!!')
@@ -224,7 +225,7 @@ class Controller:
 						break
 					flag = True
 
-				elif q == 'n':
+				elif InputMap.key(q) == 'no':
 					if pos =='O' and not flag:
 						self.log.add_event('Decidi no entrar a la cueva')
 						self.option_flag['O']=False
@@ -260,11 +261,11 @@ class Controller:
 
 		if self.key_map.is_visible():
 			#TODO
-			if ginput=='m':
+			if ginput == 'map':
 				self.key_map.visibility(False)
 			return
 
-		if ginput=='m':
+		if ginput == 'map':
 			#TODO
 			self.key_map.visibility(True)
 			return
