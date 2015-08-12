@@ -157,6 +157,25 @@ class Events:
         noFun6 = lambda: woodNo()
         self.allEvents['madera']=StoryState.StoryState(woodLeyend, woodTrigger, woodOpt, yesFun6, noFun6, None, None)
 
+        ###################rope
+        ropeTrigger = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('cuerda'), world)
+        ropeLeyend = "Es una serpiente...?"
+        ropeOpt = ("Que deberia hacer?", "Acercarse", "Alejarse")
+
+        def ropeYes():
+            log.add_event("Es una cuerda! Que suerte tengo")
+            c = Item.create('cuerda')
+            inv.addItem(c)
+            removeItem(world,'cuerda')
+
+        def ropeNo():
+            log.add_event("Asi estare mas asalvo")
+            removeItem(world,'cuerda')
+
+        yesFun7 = lambda: ropeYes()
+        noFun7 = lambda: ropeNo()
+        self.allEvents['cuerda']=StoryState.StoryState(ropeLeyend, ropeTrigger, ropeOpt, yesFun7, noFun7, None, None)
+
     def addEvent(self, name):
         self.currentState.append(self.allEvents[name])
 
