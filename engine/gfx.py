@@ -75,7 +75,7 @@ def draw(x, y, char, ventana, color=0):
     c = ord(char)
     h, w = _screen.getmaxyx()
     if x >= 0 and x < w and y >= 0 and y < h and (x, y) != (w - 1, h - 1):
-        ventana.addstr(x, y, c, color)
+        ventana.addch(x, y, c, color)
 
 def write(x, y, string, ventana, color=0):
     h, w = _screen.getmaxyx()
