@@ -96,7 +96,7 @@ class Story:
 
 		def jabaliMFunY():
 			if(inv.getItem(Item.getItemId('cuchillo')) is None):
-				log.add_event("Me muero...")	
+				log.add_event("Me muero...", 197)	
 				#TODO morir
 			else:
 				log.add_event("Eso fue facil... creo")
@@ -126,15 +126,38 @@ class Story:
 			
 
 		def cuevaFunN():
-			log.add_event("No puedo arriesgarme... Es mejor que huya")
-
-
+			log.add_event("No puedo arriesgarme... Es mejor que no entre")
 
 		cuevaY = lambda: cuevaFunY()
 		cuevaN = lambda: cuevaFunN()
 		cuevaS = StoryState.StoryState(cuevaL, cuevaT, cuevaO, cuevaY, cuevaN, None, None)
 
 		#############CUEVA INTERIOR#############
+
+		cuevaIT = lambda day, step, x, y: posTrigger(x,y, "O", world)
+		cuevaIL = "Entre a la cueva... Aparece un oso salvaje!"
+		cuevaIO = ("Que deberia hacer?","Atacarlo","Huir")
+
+		def cuevaFunIY():
+			if(not inv.getItem(Item.getItemId('cuchillo')) is None):
+				log.add_event("Logre matar a la bestia... al menos tendre comida")
+				c = Item.create('comida')
+				inv.addItem(c)
+				inv.addItem(c)
+				#TODO radio
+
+			
+
+		def cuevaIFunN():
+			log.add_event("No me siento capaz de pelear contra una bestia como esa")
+
+		cuevaIY = lambda: cuevaFunY()
+		cuevaIN = lambda: cuevaFunN()
+		cuevaIS = StoryState.StoryState(cuevaIL, cuevaIT, cuevaIO, cuevaIY, cuevaIN, None, None)
+
+
+
+
 
 
 

@@ -97,10 +97,8 @@ class World(object):
 
         self.grid[80][170]  = 'j'
         self.grid[93][139]  = 'a'
-        self.grid[105][123] = 'w'
         self.grid[117][112] = 'O'
         self.grid[116][112] = 'o'
-        self.grid[89][101]  = 'X'
 
         height = len(self.grid[0])
         width = len(self.grid)
