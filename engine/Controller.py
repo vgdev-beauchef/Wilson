@@ -172,9 +172,9 @@ class Controller:
 
 			while 1:
 				self.ui.draw()
-				q = get_input()
+				q = InputMap.key(get_input())
 				if oso:
-					if InputMap.key(q) == 'yes':
+					if q == 'yes':
 						if self.inventory.getItem(2) is None:
 							self._killedByBear = True
 						else:
@@ -191,13 +191,13 @@ class Controller:
 							time.sleep(5)
 							self.dayCount = self.dayCountLimit  
 						break
-					elif InputMap.key(q) == 'no':
+					elif q == 'no':
 						self.log.add_event('No puedo pelear contra ese oso. Es mejor que huya')
 						self.option_flag['O']=False
 						oso = False
 						break
 
-				if InputMap.key(q) =='yes':
+				if q =='yes':
 					if pos=='O' and not flag:
 						self.log.add_event('Entre a la cueva')
 						self.log.add_event('Aparece un oso salvaje!!!')
@@ -225,7 +225,7 @@ class Controller:
 						break
 					flag = True
 
-				elif InputMap.key(q) == 'no':
+				elif q == 'no':
 					if pos =='O' and not flag:
 						self.log.add_event('Decidi no entrar a la cueva')
 						self.option_flag['O']=False

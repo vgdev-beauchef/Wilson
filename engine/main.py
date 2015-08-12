@@ -75,16 +75,16 @@ if __name__ == '__main__':
             if not debug.debug:
                 intro.draw(3)
                 intro.refresh()
-                q = get_input()
-                if InputMap.key(q) == 'enter':
+                q = InputMap.key(get_input())
+                if q == 'enter':
                     break
             else: break
         while 1:
             if not debug.debug:
                 intro.draw(6)
                 intro.refresh()
-                q = get_input()
-                if InputMap.key(q) == 'enter':
+                q = InputMap.key(get_input())
+                if q == 'enter':
                     intro.clean()
                     intro.refresh()
                     break
@@ -95,12 +95,12 @@ if __name__ == '__main__':
             ui.draw()
 
             # INPUT
-            q = get_input()
-            if InputMap.key(q) == 'quit':
+            q = InputMap.key(get_input())
+            if q == 'quit':
                 stop()
                 sys.exit(0)
 
-            elif InputMap.key(q) == 'enter':
+            elif q == 'enter':
                 debug.debug = not debug.debug
             controller.manage(q)
             escape = controller.escape
@@ -109,8 +109,8 @@ if __name__ == '__main__':
         while 1:
             ui.draw()
 
-            q = get_input()
-            if InputMap.key(q) == 'enter':
+            q = InputMap.key(get_input())
+            if q == 'enter':
                 break
             controller.manage_log(q)
 
@@ -128,8 +128,8 @@ if __name__ == '__main__':
                 intro.game_over_screen()
                 time.sleep(2)
                 break
-            q = get_input()
-            if InputMap.key(q) == 'enter':
+            q = InputMap.key(get_input())
+            if q == 'enter':
                 break
         intro.clean()
         intro.refresh()
