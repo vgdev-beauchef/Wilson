@@ -5,5 +5,13 @@ class StoryState:
         self.option = option
         self.yes_fun = yes_fun
         self.no_fun = no_fun
-        self. next_yes_state = yes_state
-        self. next_no_state = no_state
+        self.next_yes_state = yes_state
+        self.next_no_state = no_state
+        self.optFun = lambda: nothing()
+
+
+   	def computeOption():
+   		self.optFun()
+
+   	def nothing():
+   		return

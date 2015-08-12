@@ -11,9 +11,11 @@ import Info
 import musicPlayer
 import optionsUI
 import time
+
 import LinearStateMachine
 import StoryStateMachine
 import Story
+import Events
 import pygame.mixer as mixer
 import InputMap
 
@@ -36,21 +38,23 @@ class Controller:
 		self.dayCountLimit = 80
 		self.nightTimeLimit = 40
 		self.dayTime = 0
-		self.flag = False
+
 		self._killedByBear = False
+		self.escape = False
 
 		self.hunger_flag_0 = False
 		self.hunger_flag_1 = False
 		self.hunger_flag_2 = False
 		self.hunger_flag_3 = False
+		'''
+		self.flag = False
 		self.option_flag = dict()
 		self.option_flag['A'] = False
 		self.option_flag['J'] = False
 		self.option_flag['W'] = False
 		self.option_flag['O'] = False
 		self.option_flag['X'] = False
-		self.cueva = False
-		self.escape = False
+		self.cueva = False'''
 
 		self.info.setTimeToDusk(self.dayCountLimit)
 		self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
@@ -62,6 +66,7 @@ class Controller:
 
 		#Create the story
 		self.story = Story.Story(self.world, self.inventory, self.dayCountLimit, self.log)
+		self.events = Events.Events(self.world, self.inventory, self.dayCountLimit, self.log)
 
 		#StateMachine for the story
 		self.storyState = StoryStateMachine.StoryStateMachine(self.ui, self.log, self.ope,
@@ -69,7 +74,7 @@ class Controller:
 
 		#StateMachine for the Events
 		self.eventsState = StoryStateMachine.StoryStateMachine(self.ui, self.log, self.ope,
-															self.story.initEventState)
+											self.events.initEventState)
 
 
 	def movement(self, ginput):
@@ -138,17 +143,18 @@ class Controller:
 			self.escape = True
 			return
 
+		'''
 		if pos!='O':
 			self.cueva = False
 
-		'''if pos=='a' and not self.option_flag['A']:
+		if pos=='a' and not self.option_flag['A']:
 			self.log.add_event("Encontre una manzana")
 			option = "Que hacer con la manzana?"
 			yes_answer = "Guardarla"
 			no_aswer = "Comerla"
 			self.option_flag['A'] = True
 			self.world.grid[80][170]  = '.'
-			'''
+		
 		if pos=='j' and not self.option_flag['J']:
 			self.log.add_event("Hay una cria de jabali alla... si la mato ahora tengo alimento facil, pero es tan solo un pequena criatura... como podria yo...? ")
 			option = "Que hacer?"
@@ -232,11 +238,11 @@ class Controller:
 						self.inventory.addItem(c)
 						break
 
-					'''elif pos == 'a' and not flag:
+					elif pos == 'a' and not flag:
 						self.log.add_event('Guarde la manzana')
 						c = Item.Item('comida',1,'0')
 						self.inventory.addItem(c)
-						break'''
+						break
 					flag = True
 
 				elif q == 'no':
@@ -247,17 +253,17 @@ class Controller:
 						self.log.add_event('Deje la palmera en la playa')
 					elif pos == 'j' and not flag:
 						self.log.add_event('Deje a la cria tranquila')
-					'''elif pos == 'a' and not flag:
+					elif pos == 'a' and not flag:
 						self.log.add_event('Comi la manzana')
 						c = Item.Item('comida',1,'0')
 						self.inventory.addItem(c)
-						Player.useItem(c, self.inventory)'''
+						Player.useItem(c, self.inventory)
 					flag = True
 					break
 				q=''
 			self.ope.clearWindow()
 			self.ope.setOption("", "", "")
-			flag = False
+			flag = False'''
 
 	def manage(self, ginput):
 		pxi = Player.getPlayPos()[0]
@@ -318,7 +324,7 @@ class Controller:
 			Player.modifyHunger(-1)
 
 			self.linearState.changeState(self.stepCount, self.log)
-			self.storyState.changeStoryState(self.dayCount, self.stepCount, pxf, pyf)
+			self.storyState.computeStoryState(self.dayCount, self.stepCount, pxf, pyf)
 			self.eventsState.checkIndividualStates(self.dayCount, self.stepCount, pxf, pyf)
 
 		self.showHungerMessages()
