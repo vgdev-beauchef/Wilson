@@ -59,5 +59,10 @@ class Events:
 
 		###################FUEGO
 
+	def addEvent(name):
+		return
+
+	def removeEvent(name):
+		return
 
 

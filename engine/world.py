@@ -59,6 +59,8 @@ tiles = {
 }
 
 
+
+
 class World(object):
 
     def __init__(self):
@@ -188,6 +190,10 @@ class World(object):
                     color = colors['boar']
                 elif cha == 'w':        #cuchillo
                     color = colors['metal']
+                elif cha == '&':
+                    color = colors['apple']
+                elif cha == 'B':
+                    color = colors['yellow']
                 else:
                     color = 1
 

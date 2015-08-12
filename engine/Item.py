@@ -28,6 +28,11 @@ def getReplacement(name, x, y):
         if coords[0]==x and coords[1]==y:
             return coords[2]
 
+def getItemPos(name):
+    l = items[name][2]
+    for coords in l:
+        return (coords[0], coords[1])
+
 
 
 items = {
@@ -35,6 +40,7 @@ items = {
     'cuchillo': ['w', 2, [[105, 123, '.']]],
     'balsa'   : ['X', 3, [[89, 101, '.']]],
     'fuego'   : ['&', 4, [[92, 90, '.']]],
+    #'fuego'   : ['&', 4, [[83, 165, '.']]],
     'banana'  : ['B', 5, [[68, 161, '/']]],
     'madera'  : ['M', 6, [[89,], [160]]],
     'cuerda'  : ['|', 7, [[89, 139, '/']]],

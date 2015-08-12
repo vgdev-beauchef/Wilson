@@ -65,8 +65,10 @@ class Controller:
 		self.linearState = LinearStateMachine.LinearStateMachine(self.dayCountLimit)
 
 		#Create the story
-		self.story = Story.Story(self.world, self.inventory, self.dayCountLimit, self.log)
 		self.events = Events.Events(self.world, self.inventory, self.dayCountLimit, self.log)
+
+		self.story = Story.Story(self.world, self.inventory, self.dayCountLimit, self.log, self.events)
+
 
 		#StateMachine for the story
 		self.storyState = StoryStateMachine.StoryStateMachine(self.ui, self.log, self.ope,
