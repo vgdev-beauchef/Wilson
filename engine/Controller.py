@@ -327,7 +327,7 @@ class Controller:
 
 			self.linearState.changeState(self.stepCount, self.log)
 			self.storyState.computeStoryState(self.dayCount, self.stepCount, pxf, pyf)
-			self.eventsState.checkIndividualStates(self.dayCount, self.stepCount, pxf, pyf)
+			self.eventsState.checkIndividualStates(self.dayCount, self.stepCount, pxf, pyf, self.events.currentState)
 
 		self.showHungerMessages()
 		self.resetHungerFlags()

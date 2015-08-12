@@ -33,6 +33,8 @@ def getItemPos(name):
     for coords in l:
         return (coords[0], coords[1])
 
+def getItemId(name):
+    return items[name][1]
 
 
 items = {

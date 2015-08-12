@@ -4,6 +4,7 @@ import Player
 import Log
 import Inventory
 import Item
+import Story
 
 def posTrigger(px, py, target, world):
 	pos=world.grid[px][py]
@@ -20,13 +21,16 @@ def removeItem(world, itemName):
 
 class Events:
     def __init__(self, world, inv, dayLimit, log):
+
+        self.world = world
         self.allEvents = dict()
         self.createEvents(world, inv, dayLimit, log)
-        self.initEventState = self.initEvents()
+        self.currentState = self.initEvents()
 
     def initEvents(self):
         e = []
-        e.append(self.allEvents['comida'])
+
+
         return e
 
 
@@ -99,7 +103,7 @@ class Events:
         boarOpt = ("Que deberia hacer?", "Atacarla", "Huir")
 
         def boarYes():
-            if inv.getItem(2) is None:
+            if Item.getItemId('cuchillo') is None:
                 #TODO Killed
                 log.add_event("Esto fue demasiado para mi....", 197)
             else:
@@ -136,10 +140,10 @@ class Events:
         noFun5 = lambda: dmNo()
         self.allEvents['dead_man']=StoryState.StoryState(dmLeyend, dmTrigger, dmOpt, yesFun5, noFun5, None, None)
 
-	def addEvent(name):
-		return
+    def addEvent(self, name):
+        self.currentState.append(self.allEvents[name])
 
-	def removeEvent(name):
-		return
+    def removeEvent(self, name):
+        del self.allEvents[name]
 
 

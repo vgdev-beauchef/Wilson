@@ -36,8 +36,8 @@ class StoryStateMachine:
             self.opt_mod.clearWindow()
             self.opt_mod.setOption("", "", "")
 
-    def checkIndividualStates(self, current_time, step, x, y):        
-        for s in self.state:
+    def checkIndividualStates(self, current_time, step, x, y, events):
+        for s in events:
             if(s.trigger(current_time, step, x, y)):
                 self.log_mod.add_event(s.leyend)
                 self.opt_mod.clearWindow()
