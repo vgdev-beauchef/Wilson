@@ -325,6 +325,10 @@ class Controller:
 			self.info.setTime(self.dayCount)
 			Player.modifyHunger(-1)
 
+			if self.dayCount>self.dayCountLimit:
+				self.dayCount=0
+				self.log.increase_day()
+
 			self.linearState.changeState(self.stepCount, self.log)
 			self.storyState.computeStoryState(self.dayCount, self.stepCount, pxf, pyf)
 			self.eventsState.checkIndividualStates(self.dayCount, self.stepCount, pxf, pyf, self.events.currentState)
