@@ -6,6 +6,45 @@ import locale
 _SCREEN_WIDTH  = 80
 _SCREEN_HEIGHT = 40
 
+_colors = {
+#--------Standard Colors---------
+	'red'			:ld.red,
+	'flame'			:ld.flame,
+	'orange'		:ld.orange,
+	'amber'			:ld.amber,
+	'yellow'		:ld.yellow,
+	'lime'			:ld.lime,
+	'chartreuse'	:ld.chartreuse,
+	'green'			:ld.green,
+	'sea'			:ld.sea,
+	'turquoise'		:ld.turquoise,
+	'cyan'			:ld.cyan,
+	'sky'			:ld.sky,
+	'azure'			:ld.azure,
+	'blue'			:ld.blue,
+	'han'			:ld.han,
+	'violet'		:ld.violet,
+	'purple'		:ld.purple,
+	'fuchsia'		:ld.fuchsia,
+	'magenta'		:ld.magenta,
+	'pink'			:ld.magenta,
+	'crimson'		:ld.crimson,
+#--------Metallic Colors---------
+	'brass'			:ld.brass,
+	'copper'		:ld.copper,
+	'gold'			:ld.gold,
+	'silver'		:ld.silver,
+#------Miscellaneous Colors-------
+	'celadon'		:ld.celadon,
+	'peach'			:ld.peach,
+#-------Greyscale and sepia-------
+	'grey'			:ld.grey,
+	'sepia'			:ld.sepia,
+#---------Black and White---------
+	'black'			:ld.black,
+	'white'			:ld.white
+}
+
 while not ld.console_is_window_closed():
 	ld.console_set_default_foreground(0, ld.white)
 	ld.console_put_char(0, 1, 1, '@', ld.BKGND_NONE)
