@@ -28,8 +28,8 @@ class Story:
 		def jabaliFunY():
 			log.add_event("Su alimento me ayudara a sobrevivir")
 			c = Item.create('comida')
-			self.inv.addItem(c)
-			self.inv.addItem(c)
+			inv.addItem(c)
+			inv.addItem(c)
 
 
 		jabaliY = lambda: jabaliFunY()
@@ -45,8 +45,8 @@ class Story:
 		def jabaliFunY():
 			log.add_event("Su alimento me ayudara a sobrevivir")
 			c = Item.create('comida')
-			self.inv.addItem(c)
-			self.inv.addItem(c)
+			inv.addItem(c)
+			inv.addItem(c)
 
 
 		cuevaY = lambda: jabaliFunY()
