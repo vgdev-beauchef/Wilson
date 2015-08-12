@@ -17,7 +17,7 @@ class StoryStateMachine:
         #self.dayLimit = dayLimit
         self.state = init_state
 
-    def changeStoryState(self, current_time, step, x, y):
+    def computeStoryState(self, current_time, step, x, y):
         if(not self.state==None and self.state.trigger(current_time, step, x, y)):
             self.log_mod.add_event(self.state.leyend)
             self.opt_mod.clearWindow()
@@ -44,11 +44,11 @@ class StoryStateMachine:
                 self.opt_mod.setOption(s.option[0], s.option[1], s.option[2])
                 while 1:
                     self.ui.draw()
-                    q = get_input()
-                    if q == 'y':
+                    q = InputMap.key(get_input())
+                    if q == 'yes':
                         s.yes_fun()
                         break
-                    elif q == 'n':
+                    elif q == 'no':
                         self.state.no_fun()
                         break
                 self.opt_mod.clearWindow()
