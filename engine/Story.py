@@ -73,6 +73,7 @@ class Story:
 			inv.addItem(c)
 			#events.addEvent('dead_man')
 			addItem(world, 'dead_man')
+			addItem(world, 'm_jabali')
 			removeItem(world, 'b_jabali')
 			Item.removeItem('b_jabali')
 
@@ -89,7 +90,7 @@ class Story:
 
 		########MAMA JABALI############
 
-		jabaliMT = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('b_jabali'), world)
+		jabaliMT = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('m_jabali'), world)
 		jabaliML = "La madre de las crias! sabe lo que hice... mis manos llenas de sangre me delatan!"
 		jabaliMO = ("Que hacer?","Atacarla","Huir")
 
@@ -110,8 +111,8 @@ class Story:
 			log.add_event("No quiero enfrentarme contra ella ahora")		
 			#events.addEvent('m_jabali')
 
-		jabaliMY = lambda: jabali2FunY()
-		jabaliMN = lambda: jabali2FunN()
+		jabaliMY = lambda: jabaliMFunY()
+		jabaliMN = lambda: jabaliMFunN()
 		jabaliMS = StoryState.StoryState(jabaliML, jabaliMT, jabaliMO, jabaliMY, jabaliMN, None, None)
 
 

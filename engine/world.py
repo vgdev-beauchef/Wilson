@@ -58,6 +58,25 @@ tiles = {
     'tree' : colors['tree']
 }
 
+getColors = {
+    '@' :   tiles['person'],
+    '#' :   tiles['rock'],
+    '.' :   tiles['sand'],
+    '~' :   tiles['deep'],
+    '/' :   tiles['grass'],
+    '*' :   tiles['obj'],
+    'O' :   tiles['cave'],
+    '-' :   tiles['shallow'],
+    'Y' :   tiles['palm'],
+    'T' :   tiles['tree'],
+    'a' :   colors['apple'],
+    'X' :   colors['fallen_palm'],
+    'j' :   colors['boar'],
+    'w' :   colors['metal'],
+    '&' :   colors['apple'],
+    'B' :   colors['yellow']
+}
+
 asciiToUnicode = {
     '#' :   u'\u2588',
     '~' :   u'\u2248',
@@ -208,8 +227,12 @@ class World(object):
                     color = colors['apple']
                 elif cha == 'B':
                     color = colors['yellow']
+                if cha in getColors:
+                    color = getColors[cha]
                 else:
-                    color = 1
+                    color = 7
+                if cha in asciiToUnicode:
+                    cha = asciiToUnicode[cha]
 
                 if self.vgrid[x][y]:
                     self.memgrid[x][y] = True
