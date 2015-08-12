@@ -251,8 +251,6 @@ class Controller:
 		self.manage_place()
 		self.manage_log(ginput)
 
-		self.linearState.changeState(self.stepCount, self.log)
-
 		pxf = Player.getPlayPos()[0]
 		pyf = Player.getPlayPos()[1]
 
@@ -312,11 +310,13 @@ class Controller:
 				self.dayCount=0
 				self.log.increase_day()
 
-				self.machine.changeState(self.log, self.ui)
+				#self.machine.changeState(self.log, self.ui)
 				self.flag = False
 			elif self.dayCount>4*self.dayCountLimit/5 and not self.flag:
-				self.machine.changeState(self.log, self.ui)
+				#self.machine.changeState(self.log, self.ui)
 				self.flag = True
+
+			self.linearState.changeState(self.stepCount, self.log)
 
 		self.showHungerMessages()
 		self.resetHungerFlags()
