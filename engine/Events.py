@@ -25,13 +25,11 @@ class Events:
         self.world = world
         self.allEvents = dict()
         self.createEvents(world, inv, dayLimit, log)
-        self.currentState = self.initEvents()
+        self.currentState = []
+        self.initEvents()
 
     def initEvents(self):
-        e = []
-
-
-        return e
+        self.addEvent('comida')
 
 
     def createEvents(self, world, inv, dayLimit, log):
@@ -139,6 +137,25 @@ class Events:
         yesFun5 = lambda: dmYes()
         noFun5 = lambda: dmNo()
         self.allEvents['dead_man']=StoryState.StoryState(dmLeyend, dmTrigger, dmOpt, yesFun5, noFun5, None, None)
+
+        ###################wood
+        woodTrigger = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('madera'), world)
+        woodLeyend = "Encontre madera!"
+        woodOpt = ("Que deberia hacer?", "Tomarla", "Dejarla ahi")
+
+        def woodYes():
+            log.add_event("Esto me servira para muchas cosas...")
+            c = Item.create('madera')
+            inv.addItem(c)
+            removeItem(world,'madera')
+
+        def woodNo():
+            log.add_event("Solo haria vulto...")
+            removeItem(world,'madera')
+
+        yesFun6 = lambda: woodYes()
+        noFun6 = lambda: woodNo()
+        self.allEvents['madera']=StoryState.StoryState(woodLeyend, woodTrigger, woodOpt, yesFun6, noFun6, None, None)
 
     def addEvent(self, name):
         self.currentState.append(self.allEvents[name])
