@@ -76,7 +76,7 @@ class Controller:
 
 		#StateMachine for the Events
 		self.eventsState = StoryStateMachine.StoryStateMachine(self.ui, self.log, self.ope,
-											self.events.initEventState)
+											self.events.currentState)
 
 
 	def movement(self, ginput):
