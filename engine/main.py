@@ -91,7 +91,7 @@ if __name__ == '__main__':
             else: break
 
 
-        while not controller.deadCondition() and not controller.killedByBear():
+        while not controller.deadCondition() and not info._gameOver:
             ui.draw()
 
             # INPUT

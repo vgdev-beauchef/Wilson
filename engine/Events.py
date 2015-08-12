@@ -20,8 +20,8 @@ def removeItem(world, itemName):
 	world.grid[px][py] = replacement
 
 class Events:
-    def __init__(self, world, inv, dayLimit, log):
-
+    def __init__(self, world, inv, dayLimit, log, info):
+        self.info = info
         self.world = world
         self.allEvents = dict()
         self.createEvents(world, inv, dayLimit, log)
@@ -101,9 +101,10 @@ class Events:
         boarOpt = ("Que deberia hacer?", "Atacarla", "Huir")
 
         def boarYes():
-            if Item.getItemId('cuchillo') is None:
+            if inv.getItem(Item.getItemId('cuchillo')) is None:
                 #TODO Killed
                 log.add_event("Esto fue demasiado para mi....", 197)
+                self.info.gameOver()
             else:
                 log.add_event("Por fin murio...")
                 c = Item.create('comida')
@@ -156,6 +157,25 @@ class Events:
         yesFun6 = lambda: woodYes()
         noFun6 = lambda: woodNo()
         self.allEvents['madera']=StoryState.StoryState(woodLeyend, woodTrigger, woodOpt, yesFun6, noFun6, None, None)
+
+        ###################rope
+        ropeTrigger = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('cuerda'), world)
+        ropeLeyend = "Es una serpiente...?"
+        ropeOpt = ("Que deberia hacer?", "Acercarse", "Alejarse")
+
+        def ropeYes():
+            log.add_event("Es una cuerda! Que suerte tengo")
+            c = Item.create('cuerda')
+            inv.addItem(c)
+            removeItem(world,'cuerda')
+
+        def ropeNo():
+            log.add_event("Asi estare mas asalvo")
+            removeItem(world,'cuerda')
+
+        yesFun7 = lambda: ropeYes()
+        noFun7 = lambda: ropeNo()
+        self.allEvents['cuerda']=StoryState.StoryState(ropeLeyend, ropeTrigger, ropeOpt, yesFun7, noFun7, None, None)
 
     def addEvent(self, name):
         self.currentState.append(self.allEvents[name])
