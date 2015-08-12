@@ -1,21 +1,13 @@
 __author__ = 'Agustin Antoine'
 __email__ = "antoineagustin@gmail.com"
 
-class StoryStateMachine:
+import StoryState
+from gfx import *
 
-    class StoryState:
-        def __init__(self, leyend, trigger, option, yes_fun, no_fun, yes_state, no_state):
-            self.trigger = trigger
-            self.leyend = leyend
-            self.option = option
-            self.yes_fun = yes_fun
-            self.no_fun = no_fun
-            self. next_yes_state = yes_state
-            self. next_no_state = no_state
-            
+class StoryStateMachine:           
 
 
-    def __init__(self, ui, log, ope, inv, world, dayLimit, init_state):
+    def __init__(self, ui, log, ope, init_state):
         self.log_mod = log
         self.opt_mod = ope
         #self.inv_mod = inv
@@ -25,9 +17,9 @@ class StoryStateMachine:
         #self.dayLimit = dayLimit
         self.state = init_state
 
-    def changeState(self, current_time, step, pos):
-        if(not self.state==None and self.state.trigger(step, current_time, pos)):
-            log.add_event(self.state.leyend)
+    def computeStoryState(self, current_time, step, x, y):
+        if(not self.state==None and self.state.trigger(current_time, step, x, y)):
+            self.log_mod.add_event(self.state.leyend)
             self.opt_mod.clearWindow()
             self.opt_mod.setOption(self.state.option[0], self.state.option[1], self.state.option[2])
             while 1:
@@ -35,10 +27,29 @@ class StoryStateMachine:
                 q = get_input()
                 if q == 'y':
                     self.state.yes_fun()
-                    self.state=self.next_yes_state
+                    self.state=self.state.next_yes_state
                     break
                 elif q == 'n':
                     self.state.no_fun()
-                    self.state=self.next_no_state
+                    self.state=self.state.next_no_state
                     break
             self.opt_mod.clearWindow()
+            self.opt_mod.setOption("", "", "")
+
+    def checkIndividualStates(self, current_time, step, x, y):        
+        for s in self.state:
+            if(s.trigger(current_time, step, x, y)):
+                self.log_mod.add_event(s.leyend)
+                self.opt_mod.clearWindow()
+                self.opt_mod.setOption(s.option[0], s.option[1], s.option[2])
+                while 1:
+                    self.ui.draw()
+                    q = InputMap.key(get_input())
+                    if q == 'yes':
+                        s.yes_fun()
+                        break
+                    elif q == 'no':
+                        s.no_fun()
+                        break
+                self.opt_mod.clearWindow()
+                self.opt_mod.setOption("", "", "")

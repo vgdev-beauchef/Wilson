@@ -16,8 +16,10 @@ import Screen
 import os
 import time
 import pygame
+from pygame.locals import *
 import StateMachine
 import KeyMap
+import InputMap
 
 if __name__ == '__main__':
 
@@ -60,8 +62,8 @@ if __name__ == '__main__':
         #ui.inventory.addItem(manzana)
         #ui.inventory.addItem(manzana)
         #ui.inventory.addItem(cuchillo)
-
         wait_time = 3
+
         if not debug.debug:
             intro.draw(1)
             intro.refresh()
@@ -73,7 +75,7 @@ if __name__ == '__main__':
             if not debug.debug:
                 intro.draw(3)
                 intro.refresh()
-                q = get_input()
+                q = InputMap.key(get_input())
                 if q == 'enter':
                     break
             else: break
@@ -81,7 +83,7 @@ if __name__ == '__main__':
             if not debug.debug:
                 intro.draw(6)
                 intro.refresh()
-                q = get_input()
+                q = InputMap.key(get_input())
                 if q == 'enter':
                     intro.clean()
                     intro.refresh()
@@ -93,8 +95,8 @@ if __name__ == '__main__':
             ui.draw()
 
             # INPUT
-            q = get_input()
-            if q == 'q':
+            q = InputMap.key(get_input())
+            if q == 'quit':
                 stop()
                 sys.exit(0)
 
@@ -107,7 +109,7 @@ if __name__ == '__main__':
         while 1:
             ui.draw()
 
-            q = get_input()
+            q = InputMap.key(get_input())
             if q == 'enter':
                 break
             controller.manage_log(q)
@@ -126,7 +128,7 @@ if __name__ == '__main__':
                 intro.game_over_screen()
                 time.sleep(2)
                 break
-            q = get_input()
+            q = InputMap.key(get_input())
             if q == 'enter':
                 break
         intro.clean()

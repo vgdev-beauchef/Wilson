@@ -69,13 +69,15 @@ asciiToUnicode = {
 }
 
 
+
+
 class World(object):
 
     def __init__(self):
         self.grid = matrix.maptoMatrix('mapa4.txt')
 
-        self.grid[80][170]  = 'a'
-        self.grid[93][139]  = 'j'
+        self.grid[80][170]  = 'j'
+        self.grid[93][139]  = 'a'
         self.grid[105][123] = 'w'
         self.grid[115][112] = 'O'
         self.grid[89][101]  = 'X'
@@ -198,6 +200,10 @@ class World(object):
                     color = colors['boar']
                 elif cha == 'w':        #cuchillo
                     color = colors['metal']
+                elif cha == '&':
+                    color = colors['apple']
+                elif cha == 'B':
+                    color = colors['yellow']
                 else:
                     color = 1
 
