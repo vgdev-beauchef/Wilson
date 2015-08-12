@@ -2,6 +2,7 @@ import curses
 import traceback
 import sys
 import locale
+import InputMap
 
 _screen = None
 _keymap = {
@@ -132,8 +133,8 @@ if __name__ == '__main__':
             draw(myPosition[0], myPosition[1], '@', win)
             win.refresh()
             refresh()
-            q = get_input()
-            if q == 'q':
+            q = InputMap.key(get_input())
+            if q == 'quit':
                 break
             elif q == 'right':
                 myPosition[0] += 1
