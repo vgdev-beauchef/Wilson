@@ -84,13 +84,13 @@ class Events:
             log.add_event("Guarde la banana para despues")
             c = Item.create('comida')
             inv.addItem(c)
-            removeItem(world,'comida')
+            removeItem(world,'banana')
 
         def bananaNo():
             log.add_event("Comi la banana que encontre")
             c = Item.create('comida')
             inv.addItem(c)
-            removeItem(world,'comida')
+            removeItem(world,'banana')
             Player.useItem(c, inv)
 
         yesFun3 = lambda: bananaYes()
