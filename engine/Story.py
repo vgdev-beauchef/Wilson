@@ -24,6 +24,11 @@ def addItem(world, itemName):
 	replacement = Item.getAscii(itemName)
 	world.grid[pos[0]][pos[1]] = replacement
 
+def addNewItem(world, itemName, x, y):
+	replacement = Item.getAscii(itemName)
+	Item.addItem(itemName, x, y, world.grid[x][y])
+	world.grid[x][y] = replacement
+
 
 
 class Story:
@@ -53,6 +58,8 @@ class Story:
 			events.addEvent('fuego')
 			addItem(world, 'fuego')
 			addItem(world, 'banana')
+			addNewItem(world, 'comida', 60, 145)
+			#addNewItem(world, 'comida', 70, 80)
 			events.addEvent('banana')
 			removeItem(world, 'b_jabali')
 
