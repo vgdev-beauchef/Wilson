@@ -58,6 +58,25 @@ tiles = {
     'tree' : colors['tree']
 }
 
+def refreshColors():
+    getColors['@'] = tiles['person']
+    getColors['#'] = tiles['rock']
+    getColors['.'] = tiles['sand']
+    getColors['o'] = tiles['sand']
+    getColors['~'] = tiles['deep']
+    getColors['/'] = tiles['grass']
+    getColors['*'] = tiles['obj']
+    getColors['O'] = tiles['cave']
+    getColors['-'] = tiles['shallow']
+    getColors['Y'] = tiles['palm']
+    getColors['T'] = tiles['tree']
+    getColors['a'] = colors['apple']
+    getColors['X'] = colors['fallen_palm']
+    getColors['j'] = colors['boar']
+    getColors['w'] = colors['metal']
+    getColors['&'] = colors['apple']
+    getColors['B'] = colors['yellow']
+
 getColors = {
     '@' :   tiles['person'],
     '#' :   tiles['rock'],
@@ -208,3 +227,4 @@ class World(object):
                 else:
                     self.window.addch(i, j, ' ')
         self.window.refresh()
+        refreshColors()
