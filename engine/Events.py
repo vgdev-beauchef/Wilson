@@ -337,6 +337,7 @@ class Events:
             log.add_event("Debo seguir y encontrar una forma de recuperar mi sanidad, algo de calor deberia servir")
             self.addEvent('fuego')
             self.addEvent('palmera')
+            removeItem(world,'radio')
             Story.addItem(self.world, 'fuego')
             Story.addItem(self.world, 'palmera')
             Story.addNewItem(self.world, 'comida', 70, 125)
