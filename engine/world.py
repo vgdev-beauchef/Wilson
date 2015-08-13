@@ -176,7 +176,7 @@ class World(object):
                pos == 'Y':
                 return
             elif pos == '/':
-                j += 2
+                j += 1
             ox += x
             oy += y
             j += 1
