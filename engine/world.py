@@ -62,6 +62,7 @@ getColors = {
     '@' :   tiles['person'],
     '#' :   tiles['rock'],
     '.' :   tiles['sand'],
+    'o' :   tiles['sand'],
     '~' :   tiles['deep'],
     '/' :   tiles['grass'],
     '*' :   tiles['obj'],
@@ -84,7 +85,8 @@ asciiToUnicode = {
     'O' :   u'\u22d2',
     '-' :   '~',
     'Y' :   u'\u1f33',
-    'T' :   u'\u1f34'
+    'T' :   u'\u1f34',
+    'o' : '.'
 }
 
 
