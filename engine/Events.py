@@ -35,6 +35,8 @@ class Events:
     def initEvents(self):
         self.addEvent('comida')
         self.addEvent('cueva')
+        for i in range(5):
+            Item.addNextFood(self.world)
 
 
     def createEvents(self, world, inv, dayLimit, log):
@@ -295,8 +297,8 @@ class Events:
             log.add_event("Creo haber visto algo que puede servirme...")
             self.addEvent('palmera')
             Story.addItem(self.world, 'palmera')
-            Story.addNewItem(self.world, 'comida', 70, 125)
-            Story.addNewItem(self.world, 'comida', 100, 112)
+            #Story.addNewItem(self.world, 'comida', 70, 125)
+            #Story.addNewItem(self.world, 'comida', 100, 112)
 
         def surviveNo():
             global survive_count
@@ -340,7 +342,7 @@ class Events:
             removeItem(world,'radio')
             Story.addItem(self.world, 'fuego')
             Story.addItem(self.world, 'palmera')
-            Story.addNewItem(self.world, 'comida', 70, 125)
+            #Story.addNewItem(self.world, 'comida', 70, 125)
 
         def surviveRNo():
             log.add_event("A pesar de mis esfuerzos, no puedo mas...")

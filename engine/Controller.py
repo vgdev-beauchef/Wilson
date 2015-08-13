@@ -183,7 +183,8 @@ class Controller:
 				world.tiles['tree']      = world.colors['tree-night']
 			#self.log.add_event(ginput)
 			self.info.setTime(self.dayCount)
-			Player.modifyHunger(-1)
+			if(self.stepCount%2==0):
+				Player.modifyHunger(-1)
 
 			if self.dayCount>self.dayCountLimit:
 				self.dayCount=0
@@ -192,6 +193,9 @@ class Controller:
 			self.linearState.changeState(self.stepCount, self.log)
 			self.storyState.computeStoryState(self.dayCount, self.stepCount, pxf, pyf)
 			self.eventsState.checkIndividualStates(self.dayCount, self.stepCount, pxf, pyf, self.events.getCurrentList())
+
+		if (ginput=='left' or ginput=='right' or ginput=='up' or ginput=='down') and (pxi!=pxf or pyi!=pyf) and debug.debug:
+			self.info.setPos(pxf, pyf)
 
 		self.showHungerMessages()
 		self.resetHungerFlags()
@@ -204,15 +208,15 @@ class Controller:
 			#time.sleep(3)
 		if percentage ==5 and not self.hunger_flag_0:
 			self.hunger_flag_0 = True
-			self.log.add_event("No se cuanto mas me pueda mover... necesito comer algo")
+			self.log.add_event("No se cuanto mas me pueda mover... necesito comer algo", 197)
 
 		elif percentage == 25 and not self.hunger_flag_2:
 			self.hunger_flag_2 = True
-			self.log.add_event("Me esta empezando a doler el estomago")
+			self.log.add_event("Me esta empezando a doler el estomago", 167)
 
 		elif percentage == 49 and not self.hunger_flag_3:
 			self.hunger_flag_3 = True
-			self.log.add_event("Tengo un poco de hambre, deberia comer algo")
+			self.log.add_event("Tengo un poco de hambre, deberia comer algo", 167)
 
 	def resetHungerFlags(self):
 		percentage = Player.getHunger()[0]

@@ -60,8 +60,6 @@ class Story:
 			events.addEvent('fuego')
 			addItem(world, 'fuego')
 			addItem(world, 'banana')
-			addNewItem(world, 'comida', 60, 145)
-			#addNewItem(world, 'comida', 70, 80)
 			events.addEvent('banana')
 			removeItem(world, 'b_jabali')
 
@@ -93,6 +91,8 @@ class Story:
 			addItem(world, 'fuego')
 			removeItem(world, 'b_jabali')
 			Item.removeItem('b_jabali')
+			Item.addNextFood(world)
+			Item.addNextFood(world)
 
 		jabali2Y = lambda: jabali2FunY()
 		jabali2N = lambda: jabali2FunN()
@@ -122,6 +122,7 @@ class Story:
 		def jabaliMFunN():
 			log.add_event("No quiero enfrentarme contra ella ahora, pero si necesito alimento se donde encontrarlo")		
 			events.addEvent('m_jabali')
+			Item.addNextFood(world)
 
 		jabaliMY = lambda: jabaliMFunY()
 		jabaliMN = lambda: jabaliMFunN()
@@ -142,6 +143,8 @@ class Story:
 			addItem(world, 'cuerda')
 			events.addEvent('madera')
 			addItem(world, 'madera')
+			Item.addNextFood(world)
+			Item.addNextFood(world)
 			
 
 		def cuevaFunN():
@@ -166,10 +169,14 @@ class Story:
 				inv.clean()
 				addItem(world, 'radio')
 				events.addEvent('radio_survive')
+				Item.addNextFood(world)
+				Item.addNextFood(world)
 			elif(not inv.getItem(Item.getItemId('fuego')) is None):
 				log.add_event("Logre ahuyentar al oso con el fuego")
 				log.add_event("Y encontre comida para mi!")
 				c = Item.create('comida')
+				Item.addNextFood(world)
+				Item.addNextFood(world)
 				inv.addItem(c)
 				inv.addItem(c)
 				inv.clean()
