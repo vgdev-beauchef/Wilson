@@ -150,6 +150,8 @@ class Events:
             c = Item.create('madera')
             inv.addItem(c)
             removeItem(world,'madera')
+            if not (inv.getItem(Item.getItemId('cuerda')) is None):
+                Story.addItem(self.world, 'balsa')
 
         def woodNo():
             log.add_event("Solo haria vulto...")
@@ -169,6 +171,8 @@ class Events:
             c = Item.create('cuerda')
             inv.addItem(c)
             removeItem(world,'cuerda')
+            if not (inv.getItem(Item.getItemId('madera')) is None):
+                Story.addItem(self.world, 'balsa')
 
         def ropeNo():
             log.add_event("Asi estare mas asalvo")
