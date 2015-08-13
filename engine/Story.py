@@ -139,7 +139,7 @@ class Story:
 		cuevaIL = "Entre a la cueva... Aparece un oso salvaje!"
 		cuevaIO = ("Que deberia hacer?","Atacarlo","Huir")
 
-		def cuevaFunIY():
+		def cuevaIFunY():
 			if(not inv.getItem(Item.getItemId('cuchillo')) is None):
 				log.add_event("Logre matar a la bestia... al menos tendre comida")
 				c = Item.create('comida')
@@ -155,16 +155,13 @@ class Story:
 			else:
 				log.add_event("Esto fue demasiado para mi....", 197)
 				info.gameOver()
-                #
-
-
 			
 
 		def cuevaIFunN():
 			log.add_event("No me siento capaz de pelear contra una bestia como esa")
 
-		cuevaIY = lambda: cuevaFunY()
-		cuevaIN = lambda: cuevaFunN()
+		cuevaIY = lambda: cuevaIFunY()
+		cuevaIN = lambda: cuevaIFunN()
 		cuevaIS = StoryState.StoryState(cuevaIL, cuevaIT, cuevaIO, cuevaIY, cuevaIN, None, None)
 
 
@@ -182,5 +179,7 @@ class Story:
 
 		jabaliMS.next_yes_state=cuevaS
 		jabaliMS.next_no_state=cuevaS
+
+		cuevaS.next_yes_state=cuevaIS
 
 		return jabaliS
