@@ -130,7 +130,7 @@ if __name__ == '__main__':
             elif info.final2:
                 intro.win_screen(2)
             elif info.final3:
-                intro.win_screen(3)
+                intro.win_screen(2)
             else:
                 intro.game_over_screen()
                 time.sleep(2)
