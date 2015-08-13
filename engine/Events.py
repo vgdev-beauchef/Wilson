@@ -233,7 +233,7 @@ class Events:
             inv.deleteItem(Item.create('madera'))
             inv.deleteItem(Item.create('cuerda'))
             inv.addItem(Item.create('balsa'))
-            self.add_event('final_balsa')
+            self.addEvent('final_balsa')
 
         def balsaCFunN():
             log.add_event("Puede que guardar estos recursos sea util despues...")
