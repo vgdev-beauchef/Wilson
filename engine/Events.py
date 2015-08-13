@@ -30,6 +30,7 @@ class Events:
 
     def initEvents(self):
         self.addEvent('comida')
+        self.addEvent('cueva')
 
 
     def createEvents(self, world, inv, dayLimit, log):
@@ -180,7 +181,7 @@ class Events:
         ###################cave
         caveTrigger = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('cueva'), world)
         caveLeyend = "Una cueva."
-        caveOpt = ("Que deberia hacer?", "Acercarse a mirar", "Alejarse")
+        caveOpt = ("Que deberia hacer?", "Mirare dentro", "Alejarse")
 
         def caveYes():
             log.add_event("No hay nada interesante aqui...")
