@@ -317,7 +317,7 @@ class Events:
 
         ######Radio Survive
         def surviveR(step):
-            time = 30
+            time = 50
             global radio_time
             if(radio_time is None):
                 radio_time = step

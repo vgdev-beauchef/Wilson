@@ -24,9 +24,13 @@ def getAscii(name):
 
 def getReplacement(name, x, y):
     l = items[name][2]
+    elem = None
     for coords in l:
         if coords[0]==x and coords[1]==y:
-            return coords[2]
+            elem = coords[2]
+    if elem == None:
+        elem = '.'
+    return elem
 
 def getItemPos(name):
     l = items[name][2]
