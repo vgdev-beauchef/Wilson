@@ -281,7 +281,7 @@ class Events:
 
         ######Survive
         def survive(step):
-            time = 20
+            time = 100
             global survive_time
             if(survive_time is None):
                 survive_time = step
@@ -294,7 +294,7 @@ class Events:
         surviveOpt = ("Que deberia hacer?", "Usar lo obtenido", "Explorar")
 
         def surviveYes():
-            log.add_event("Creo haber visto algo que puede servirme...")
+            log.add_event("Creo haber visto algo que puede servirme cerca de la orilla...")
             self.addEvent('palmera')
             Story.addItem(self.world, 'palmera')
             #Story.addNewItem(self.world, 'comida', 70, 125)
@@ -317,7 +317,7 @@ class Events:
 
         ######Radio Survive
         def surviveR(step):
-            time = 50
+            time = 100
             global radio_time
             if(radio_time is None):
                 radio_time = step

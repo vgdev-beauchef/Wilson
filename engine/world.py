@@ -75,7 +75,7 @@ def refreshColors():
     getColors['j'] = colors['boar']
     getColors['w'] = colors['metal']
     getColors['&'] = colors['apple']
-    getColors['B'] = colors['yellow']
+    getColors['B'] = colors['sand']
 
 getColors = {
     '@' :   tiles['person'],
@@ -94,7 +94,9 @@ getColors = {
     'j' :   colors['boar'],
     'w' :   colors['metal'],
     '&' :   colors['apple'],
-    'B' :   colors['yellow']
+    'B' :   colors['yellow'],
+    'F' :   colors['grass'],
+    'J' :   colors['boar']
 }
 
 asciiToUnicode = {
@@ -106,7 +108,14 @@ asciiToUnicode = {
     'Y' :   u'\u1f33',
     'T' :   u'\u1f34',
     'o' :   '.',
-    'R' :   u'\u22d2'
+    'R' :   u'\u22d2',
+    'F' :   u'\u0407',
+    '&' :   u'\u0496',
+    'a' :   'a',
+    '|' :   u'\u060F',
+    'M' :   u'\u229F',
+    'j' :   u'\u0B33',
+    'J' :   u'\u0B32'
 }
 
 
