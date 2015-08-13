@@ -25,11 +25,12 @@ class Events:
         self.world = world
         self.allEvents = dict()
         self.createEvents(world, inv, dayLimit, log)
-        self.currentState = []
+        self.currentEvents = dict()
         self.initEvents()
 
     def initEvents(self):
         self.addEvent('comida')
+        self.addEvent('cueva')
 
 
     def createEvents(self, world, inv, dayLimit, log):
@@ -193,9 +194,12 @@ class Events:
         self.allEvents['cueva']=StoryState.StoryState(caveLeyend, caveTrigger, caveOpt, yesFun8, noFun8, None, None)
 
     def addEvent(self, name):
-        self.currentState.append(self.allEvents[name])
+        self.currentEvents[name]=self.allEvents[name]
 
     def removeEvent(self, name):
-        del self.allEvents[name]
+        del self.currentEvents[name]
+
+    def getCurrentList(self):
+        return self.currentEvents.values()
 
 

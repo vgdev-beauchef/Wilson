@@ -46,15 +46,6 @@ class Controller:
 		self.hunger_flag_1 = False
 		self.hunger_flag_2 = False
 		self.hunger_flag_3 = False
-		'''
-		self.flag = False
-		self.option_flag = dict()
-		self.option_flag['A'] = False
-		self.option_flag['J'] = False
-		self.option_flag['W'] = False
-		self.option_flag['O'] = False
-		self.option_flag['X'] = False
-		self.cueva = False'''
 
 		self.info.setTimeToDusk(self.dayCountLimit)
 		self.hit_sound = mixer.Sound("resources/tracks/hit.wav")
@@ -76,7 +67,7 @@ class Controller:
 
 		#StateMachine for the Events
 		self.eventsState = StoryStateMachine.StoryStateMachine(self.ui, self.log, self.ope,
-											self.events.currentState)
+											self.events.getCurrentList())
 
 
 	def movement(self, ginput):
@@ -145,128 +136,6 @@ class Controller:
 			self.escape = True
 			return
 
-		'''
-		if pos!='O':
-			self.cueva = False
-
-		if pos=='a' and not self.option_flag['A']:
-			self.log.add_event("Encontre una manzana")
-			option = "Que hacer con la manzana?"
-			yes_answer = "Guardarla"
-			no_aswer = "Comerla"
-			self.option_flag['A'] = True
-			self.world.grid[80][170]  = '.'
-		
-		if pos=='j' and not self.option_flag['J']:
-			self.log.add_event("Hay una cria de jabali alla... si la mato ahora tengo alimento facil, pero es tan solo un pequena criatura... como podria yo...? ")
-			option = "Que hacer?"
-			yes_answer = "Matarla"
-			no_aswer = "Dejarla huir"
-			self.option_flag['J'] = True
-			self.world.grid[93][139] = '/'
-		elif pos=='w' and not self.option_flag['W']:
-			self.log.add_event("Oh! increiblemente he encontrado un cuchillo... se ve muy antiguo, quizas sea de algun pirata. Me podria servir asi que lo guardare.")
-			c = Item.Item("cuchillo",2,'0')
-			self.inventory.addItem(c)
-			self.option_flag['W'] = True
-			self.world.grid[105][123] = '.'
-			return
-		elif pos=='O' and not self.option_flag['O'] and not self.cueva:
-			self.log.add_event("Oh, una cueva!! Se escuchan ruidos desde adentro...sera un algun animal?? Un oso? Entro?")
-			option = "Que hacer?"
-			yes_answer = "Entrar"
-			no_aswer = "Ignorar"
-			self.option_flag['O'] = True
-			self.cueva = True
-		elif pos=='X' and not self.option_flag['X']:
-			self.log.add_event("Me encuentro junto a una enorme palmera caida. No seria muy dificil usarla para construir una balsa...")
-			option = "Que hacer con la palmera?"
-			yes_answer = "Construir balsa"
-			no_aswer = "Ignorar balsa"
-			self.option_flag['X'] = True
-			self.world.grid[89][101] = '.'
-
-
-		if not option=="":
-			self.ope.clearWindow()
-			self.ope.setOption(option, yes_answer, no_aswer)
-			oso = False
-
-			while 1:
-				self.ui.draw()
-				q = InputMap.key(get_input())
-				if oso:
-					if q == 'yes':
-						if self.inventory.getItem(2) is None:
-							self._killedByBear = True
-						else:
-							self.log.add_event('Logre matarlo !! La cueva me servira de refugio. Ademas podre utilizar su piel como abrigo. Creo que esta noche podre dormir tranquilo. Descansare pues ha sido un dia muy agitado.')
-							self.ui.draw()
-							time.sleep(1)
-							c = Item.Item('comida',1,'0')
-							self.inventory.addItem(c)
-							self.inventory.addItem(c)
-							self.inventory.addItem(c)
-							self.log.add_event('El olor de la cueva me recuerda a los enormes perros que cuidaban las ovejas de mi abuelo y como yo dormia abrazado a ellos. Casi puedo sentir su agradable calor.')
-							self.ope.setOption("","","")
-							self.ui.draw()
-							time.sleep(5)
-							self.dayCount = self.dayCountLimit  
-						break
-					elif q == 'no':
-						self.log.add_event('No puedo pelear contra ese oso. Es mejor que huya')
-						self.option_flag['O']=False
-						oso = False
-						break
-
-				if q =='yes':
-					if pos=='O' and not flag:
-						self.log.add_event('Entre a la cueva')
-						self.log.add_event('Aparece un oso salvaje!!!')
-						self.ope.clearWindow()
-						self.ope.setOption('Que hacer?', 'Atacar', 'Huir')
-						oso = True
-						continue
-					elif pos == 'X' and not flag:
-						self.log.add_event('Decidi ocupar la palmera para construir una balsa')
-						c = Item.Item('balsa',3,'0')
-						self.inventory.addItem(c)
-						break
-
-					elif pos == 'j' and not flag:
-						self.log.add_event('Decidi matar al jabali')
-						c = Item.Item('comida',1,'0')
-						self.inventory.addItem(c)
-						self.inventory.addItem(c)
-						break
-
-					elif pos == 'a' and not flag:
-						self.log.add_event('Guarde la manzana')
-						c = Item.Item('comida',1,'0')
-						self.inventory.addItem(c)
-						break
-					flag = True
-
-				elif q == 'no':
-					if pos =='O' and not flag:
-						self.log.add_event('Decidi no entrar a la cueva')
-						self.option_flag['O']=False
-					elif pos == 'X' and not flag:
-						self.log.add_event('Deje la palmera en la playa')
-					elif pos == 'j' and not flag:
-						self.log.add_event('Deje a la cria tranquila')
-					elif pos == 'a' and not flag:
-						self.log.add_event('Comi la manzana')
-						c = Item.Item('comida',1,'0')
-						self.inventory.addItem(c)
-						Player.useItem(c, self.inventory)
-					flag = True
-					break
-				q=''
-			self.ope.clearWindow()
-			self.ope.setOption("", "", "")
-			flag = False'''
-
 	def manage(self, ginput):
 		pxi = Player.getPlayPos()[0]
 		pyi = Player.getPlayPos()[1]
@@ -331,7 +200,7 @@ class Controller:
 
 			self.linearState.changeState(self.stepCount, self.log)
 			self.storyState.computeStoryState(self.dayCount, self.stepCount, pxf, pyf)
-			self.eventsState.checkIndividualStates(self.dayCount, self.stepCount, pxf, pyf, self.events.currentState)
+			self.eventsState.checkIndividualStates(self.dayCount, self.stepCount, pxf, pyf, self.events.getCurrentList())
 
 		self.showHungerMessages()
 		self.resetHungerFlags()

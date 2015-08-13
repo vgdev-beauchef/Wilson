@@ -131,6 +131,7 @@ class Story:
 
 		def cuevaFunY():
 			log.add_event('Es mejor entrar, puede ser una buena oportunidad')
+			events.removeEvent('cueva')
 			
 
 		def cuevaFunN():
@@ -152,7 +153,7 @@ class Story:
 				c = Item.create('comida')
 				inv.addItem(c)
 				#TODO radio
-			elif(not inv.getItem(Item.getItemId('fire')) is None):
+			elif(not inv.getItem(Item.getItemId('fuego')) is None):
 				log.add_event("Logre ahuyentar al oso con el fuego")
 				log.add_event("Y encontre comida para mi!")
 				c = Item.create('comida')
