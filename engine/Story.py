@@ -164,9 +164,13 @@ class Story:
 		def cuevaIFunY():
 			if(not inv.getItem(Item.getItemId('cuchillo')) is None):
 				log.add_event("Logre matar a la bestia... al menos tendre comida")
+				log.add_event("Ademas encontre una radio!.. pero esta rota, igual la guardare")
 				c = Item.create('comida')
 				inv.addItem(c)
-				inv.clean()
+
+				r = Item.create('radio')
+				inv.addItem(r)
+				#inv.clean()
 				addItem(world, 'radio')
 				events.addEvent('radio_survive')
 				Item.addNextFood(world)
@@ -179,7 +183,7 @@ class Story:
 				Item.addNextFood(world)
 				inv.addItem(c)
 				inv.addItem(c)
-				inv.clean()
+				#inv.clean()
 				events.addEvent('sobrevivir')
 			else:
 				log.add_event("Esto fue demasiado para mi....", 197)
