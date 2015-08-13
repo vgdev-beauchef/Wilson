@@ -7,6 +7,8 @@ import Item
 import Story
 
 survive_time = None
+radio_time = None
+survive_count = 0
 
 def posTrigger(px, py, target, world):
 	pos=world.grid[px][py]
@@ -257,7 +259,10 @@ class Events:
         self.allEvents['final_balsa'] = StoryState.StoryState(balsaL, balsaT, balsaO, balsaY, balsaN, None, None)
 
         ###################fire_palm
-        fire_palmTrigger = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('palmera'), world)
+        def fireTrigger(day, step, x, y):
+            return posTrigger(x,y, Item.getAscii('palmera'), world) and (not inv.getItem(Item.getItemId('fuego')) is None)
+
+        fire_palmTrigger = lambda day, step, x, y: fireTrigger(day, step, x, y)
         fire_palmLeyend = "Podria usar esta palmera como senyal de humo..."
         fire_palmOpt = ("Que deberia hacer?", "Prenderle fuego", "No hacerlo")
 
@@ -294,13 +299,55 @@ class Events:
             Story.addNewItem(self.world, 'comida', 100, 112)
 
         def surviveNo():
-            log.add_event("Seguir explorando es lo mejor, aun me queda isla por recorrer")
-            global survive_time
-            survive_time = None
+            global survive_count
+            if(survive_count>1):
+                log.add_event("A pesar de todos mis esfuerzos, nunca encontre nada en esta isla que me ayudase")
+                self.info.gameOver()
+            else:
+                survive_count += 1
+                log.add_event("Seguir explorando es lo mejor, aun me queda isla por recorrer")
+                global survive_time
+                survive_time = None
 
         yesFun11 = lambda: surviveYes()
         noFun11 = lambda: surviveNo()
         self.allEvents['sobrevivir']=StoryState.StoryState(surviveLeyend, surviveTrigger, surviveOpt, yesFun11, noFun11, None, None)
+
+        ######Radio Survive
+        def surviveR(step):
+            time = 30
+            global radio_time
+            if(radio_time is None):
+                radio_time = step
+                return False
+            else:
+                if radio_time+(time/4)==step:
+                    log.add_event("Esta radio esta sonando...")
+                elif radio_time+(time/2)==step:
+                    log.add_event("No se si mi mente aguante mucho mas... esta radio...")
+                elif radio_time+(time*3/4)==step:
+                    log.add_event("Me estoy volviendo loco!!")
+                return radio_time+time == step
+
+        surviveRTrigger = lambda day, step, x, y: surviveR(step)
+        surviveRLeyend = "No aguanto mas!! debo hacer algo con esta radio!"
+        surviveROpt = ("Que deberia hacer?", "Seguir", "Lanzarla")
+
+        def surviveRYes():
+            log.add_event("Debo seguir y encontrar una forma de recuperar mi sanidad, algo de calor deberia servir")
+            self.addEvent('fuego')
+            self.addEvent('palmera')
+            Story.addItem(self.world, 'fuego')
+            Story.addItem(self.world, 'palmera')
+            Story.addNewItem(self.world, 'comida', 70, 125)
+
+        def surviveRNo():
+            log.add_event("A pesar de mis esfuerzos, no puedo mas...")
+            self.info.gameOver()
+
+        yesFun12 = lambda: surviveRYes()
+        noFun12 = lambda: surviveRNo()
+        self.allEvents['radio_survive']=StoryState.StoryState(surviveRLeyend, surviveRTrigger, surviveROpt, yesFun12, noFun12, None, None)
 
     def addEvent(self, name):
         self.currentEvents[name]=self.allEvents[name]

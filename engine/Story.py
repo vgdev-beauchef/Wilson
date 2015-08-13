@@ -5,6 +5,7 @@ import Log
 import Inventory
 import Item
 import Events
+import time
 
 def posTrigger(px, py, target, world):
 	pos=world.grid[px][py]
@@ -163,7 +164,8 @@ class Story:
 				c = Item.create('comida')
 				inv.addItem(c)
 				inv.clean()
-				#TODO radio
+				addItem(world, 'radio')
+				events.addEvent('radio_survive')
 			elif(not inv.getItem(Item.getItemId('fuego')) is None):
 				log.add_event("Logre ahuyentar al oso con el fuego")
 				log.add_event("Y encontre comida para mi!")
@@ -210,6 +212,34 @@ class Story:
 		balsaN = lambda: balsaFunN()
 		balsaS = StoryState.StoryState(balsaL, balsaT, balsaO, balsaY, balsaN, None, None)
 
+		###############RADIO
+
+		radioT = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('radio'), world)
+		radioL = "Otra cueva, puede que no tenga tanta suerte como antes..."
+		radioO = ("Que deberia hacer?","Entrar","Huir")
+
+		def radioFunY():
+			log.add_event("Increible, quien diria que encontraria respuestos para la radio")
+			log.add_event("... ... .. Alo? ... ...")
+			log.refresh()
+			#time.sleep(1)
+			log.add_event("... ...")
+			log.refresh()
+			#time.sleep(1)
+			log.add_event("Si! Alo!? Vengan a recatarme!")
+			info.gameOver()
+			info.gameFinal3()
+
+
+		def radioFunN():
+			log.add_event("No creo correr tanta suerte dos veces")
+			#log.add_event("Lo siento... No logre encontrar una salida...")
+			#self.info.gameOver()
+			#Because, because yes
+
+		radioY = lambda: radioFunY()
+		radioN = lambda: radioFunN()
+		radioS = StoryState.StoryState(radioL, radioT, radioO, radioY, radioN, None, None)
 
 
 
@@ -230,5 +260,6 @@ class Story:
 		cuevaS.next_no_state=balsaS
 
 		cuevaIS.next_no_state=balsaS
+		cuevaIS.next_yes_state=radioS
 
 		return jabaliS
