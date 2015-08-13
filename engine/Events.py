@@ -177,6 +177,21 @@ class Events:
         noFun7 = lambda: ropeNo()
         self.allEvents['cuerda']=StoryState.StoryState(ropeLeyend, ropeTrigger, ropeOpt, yesFun7, noFun7, None, None)
 
+        ###################cave
+        caveTrigger = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('cueva'), world)
+        caveLeyend = "Una cueva."
+        caveOpt = ("Que deberia hacer?", "Acercarse a mirar", "Alejarse")
+
+        def caveYes():
+            log.add_event("No hay nada interesante aqui...")
+
+        def caveNo():
+            log.add_event("Vere si hay algo mas interesante en otro lado..")
+
+        yesFun8 = lambda: caveYes()
+        noFun8 = lambda: caveNo()
+        self.allEvents['cueva']=StoryState.StoryState(caveLeyend, caveTrigger, caveOpt, yesFun8, noFun8, None, None)
+
     def addEvent(self, name):
         self.currentState.append(self.allEvents[name])
 
