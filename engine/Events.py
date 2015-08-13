@@ -154,7 +154,7 @@ class Events:
                 Story.addItem(self.world, 'balsa')
 
         def woodNo():
-            log.add_event("Solo haria vulto...")
+            log.add_event("Solo haria bulto...")
             removeItem(world,'madera')
 
         yesFun6 = lambda: woodYes()
