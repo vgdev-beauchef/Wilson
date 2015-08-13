@@ -19,6 +19,10 @@ class Info(object):
         self.timeToDusk = 10
         self._gameOver = False
 
+        self.final1 = False
+        self.final2 = False
+        self.final3 = False
+
     def draw(self):
         self.clearWindow()
         sc = 'Saciedad ' + str(Player.getHunger()[0]) + '/' + str(Player.getHunger()[1])
@@ -38,6 +42,15 @@ class Info(object):
 
     def gameOver(self):
         self._gameOver = True
+
+    def gameFinal1(self):
+        self.final1 = True
+
+    def gameFinal2(self):
+        self.final2 = True
+
+    def gameFinal3(self):
+        self.final3 = True
 
     def clearWindow(self):
 		clean_string = " " * 19

@@ -125,7 +125,7 @@ if __name__ == '__main__':
             pygame.mixer.music.set_volume(1)
             pygame.mixer.music.play(1, 0.0)
         while 1 :
-            if escape:
+            if info.final1:
                 intro.win_screen()
             else:
                 intro.game_over_screen()

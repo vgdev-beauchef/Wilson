@@ -132,10 +132,17 @@ class Story:
 		def cuevaFunY():
 			log.add_event('Es mejor entrar, puede ser una buena oportunidad')
 			events.removeEvent('cueva')
+
+		def huirCueva():
+			events.addEvent('cuerda')
+			addItem(world, 'cuerda')
+			events.addEvent('madera')
+			addItem(world, 'madera')
 			
 
 		def cuevaFunN():
-			log.add_event("No puedo arriesgarme... Es mejor que no entre")
+			log.add_event("No puedo arriesgarme... Es mejor que no siga")
+			huirCueva()
 
 		cuevaY = lambda: cuevaFunY()
 		cuevaN = lambda: cuevaFunN()
@@ -167,6 +174,7 @@ class Story:
 
 		def cuevaIFunN():
 			log.add_event("No me siento capaz de pelear contra una bestia como esa")
+			huirCueva()
 
 		cuevaIY = lambda: cuevaIFunY()
 		cuevaIN = lambda: cuevaIFunN()

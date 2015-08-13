@@ -211,6 +211,26 @@ class Events:
         noFun9 = lambda: radioNo()
         self.allEvents['radio']=StoryState.StoryState(radioLeyend, radioTrigger, radioOpt, yesFun9, noFun9, None, None)
 
+        ##################Balsa
+        def balsaTrigger(day, step, x, y):
+            posTrigger(x,y, "-", world) and gotItemTrigger(Item.getItemId('balsa'), inv)
+
+        balsaT = lambda day, step, x, y: balsaTrigger(day,step,x,y)
+        balsaL = "Podria usar la balsa para tratar de salir de aqui"
+        balsaO = ("Que deberia hacer?","Zarpar","Quedarse")
+
+        def balsaFunY():
+            log.add_event("Me ire de aqui, estoy seguro de que encontrare a alguien. Ojala alguien mas pueda leer este diario algun dia...")
+            self.info.gameFinal1()
+            self.info.gameOver()
+
+        def balsaFunN():
+            log.add_event("Puede que sea sensato darme otra vuelta a ver si encuentro mas opciones")
+
+        balsaY = lambda: balsaFunY()
+        balsaN = lambda: balsaFunN()
+        self.allEvents['final'] = StoryState.StoryState(balsaL, balsaT, balsaO, balsaY, balsaN, None, None)
+
     def addEvent(self, name):
         self.currentEvents[name]=self.allEvents[name]
 
