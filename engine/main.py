@@ -25,8 +25,10 @@ if __name__ == '__main__':
 
     try:
         debug.debug = sys.argv[1] == "-d"
+        music = sys.argv[2] != "-m"
     except:
         debug.debug = False
+        music = True
 
     os.environ["TERM"] = "xterm-256color"
 
@@ -34,7 +36,8 @@ if __name__ == '__main__':
     try:
         pygame.init()
         pygame.mixer.music.load('resources/tracks/mainloop.wav')
-        pygame.mixer.music.play(-1, 0.0)
+        if(music):
+            pygame.mixer.music.play(-1, 0.0)
 
         Player.initPlayer('dummy')
         start()
