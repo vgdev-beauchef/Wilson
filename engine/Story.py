@@ -180,6 +180,27 @@ class Story:
 		cuevaIN = lambda: cuevaIFunN()
 		cuevaIS = StoryState.StoryState(cuevaIL, cuevaIT, cuevaIO, cuevaIY, cuevaIN, None, None)
 
+		###########CONSTRUIR BALSA
+
+        balsaT = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('balsa'))
+        balsaL = "Ohh, con estos materiales mas la cuerda y madera que llevo podria construir una balsa"
+        balsaO = ("Que deberia hacer?","Construir","Reservar recursos")
+
+        def balsaFunY():
+            log.add_event("No tengo nada mejor que hacer con estos recursos, mejor los uso")
+            inv.deleteItem(Item.create('madera'))
+            inv.deleteItem(Item.create('cuerda'))
+			inv.addItem(Item.create('balsa'))
+            events.add_event('final_balsa')
+
+        def balsaFunN():
+            log.add_event("Puede que guardar estos recursos sea util despues")
+
+        balsaY = lambda: balsaFunY()
+        balsaN = lambda: balsaFunN()
+        balsaS = StoryState.StoryState(balsaL, balsaT, balsaO, balsaY, balsaN, None, None)
+
+
 
 
 

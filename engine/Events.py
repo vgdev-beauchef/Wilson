@@ -211,7 +211,7 @@ class Events:
         noFun9 = lambda: radioNo()
         self.allEvents['radio']=StoryState.StoryState(radioLeyend, radioTrigger, radioOpt, yesFun9, noFun9, None, None)
 
-        ##################Balsa
+        ##################Balsa Final (acercarse a la orilla)
         def balsaTrigger(day, step, x, y):
             posTrigger(x,y, "-", world) and gotItemTrigger(Item.getItemId('balsa'), inv)
 
@@ -229,7 +229,7 @@ class Events:
 
         balsaY = lambda: balsaFunY()
         balsaN = lambda: balsaFunN()
-        self.allEvents['final'] = StoryState.StoryState(balsaL, balsaT, balsaO, balsaY, balsaN, None, None)
+        self.allEvents['final_balsa'] = StoryState.StoryState(balsaL, balsaT, balsaO, balsaY, balsaN, None, None)
 
     def addEvent(self, name):
         self.currentEvents[name]=self.allEvents[name]
