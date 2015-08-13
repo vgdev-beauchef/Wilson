@@ -13,7 +13,7 @@ class Inventory:
         self.window = Ventana(self.width, self.height, self.xPos, self.yPos)
 
         self.items = dict()
-        self.max = 5
+        self.max = 10
 
     def draw(self):
         #inv = ['I' * self.width] * self.height

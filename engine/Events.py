@@ -31,6 +31,10 @@ class Events:
     def initEvents(self):
         self.addEvent('comida')
         self.addEvent('cueva')
+        Story.addItem(self.world, 'madera')
+        Story.addItem(self.world, 'cuerda')
+        self.addEvent('madera')
+        self.addEvent('cuerda')
 
 
     def createEvents(self, world, inv, dayLimit, log):
@@ -140,6 +144,8 @@ class Events:
         noFun5 = lambda: dmNo()
         self.allEvents['dead_man']=StoryState.StoryState(dmLeyend, dmTrigger, dmOpt, yesFun5, noFun5, None, None)
 
+
+
         ###################wood
         woodTrigger = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('madera'), world)
         woodLeyend = "Encontre madera!"
@@ -215,9 +221,28 @@ class Events:
         noFun9 = lambda: radioNo()
         self.allEvents['radio']=StoryState.StoryState(radioLeyend, radioTrigger, radioOpt, yesFun9, noFun9, None, None)
 
+        ##################CONSTRUIR BALSA
+        balsaCT = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('balsa'))
+        balsaCL = "Aun puedo construir la balsa con lo que tengo..."
+        balsaCO = ("Que deberia hacer?","Construir","Reservar recursos")
+
+        def balsaCFunY():
+            log.add_event("No tengo nada mejor que hacer con estos recursos, mejor los uso")
+            inv.deleteItem(Item.create('madera'))
+            inv.deleteItem(Item.create('cuerda'))
+            inv.addItem(Item.create('balsa'))
+            self.add_event('final_balsa')
+
+        def balsaCFunN():
+            log.add_event("Puede que guardar estos recursos sea util despues...")
+
+        balsaCY = lambda: balsaFunY()
+        balsaCN = lambda: balsaFunN()
+        self.allEvents['construir_balsa'] = StoryState.StoryState(balsaCL, balsaCT, balsaCO, balsaCY, balsaCN, None, None)
+
         ##################Balsa Final (acercarse a la orilla)
         def balsaTrigger(day, step, x, y):
-            posTrigger(x,y, "-", world) and gotItemTrigger(Item.getItemId('balsa'), inv)
+            posTrigger(x,y, "-", world)
 
         balsaT = lambda day, step, x, y: balsaTrigger(day,step,x,y)
         balsaL = "Podria usar la balsa para tratar de salir de aqui"

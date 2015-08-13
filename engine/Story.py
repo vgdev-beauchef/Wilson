@@ -182,24 +182,24 @@ class Story:
 
 		###########CONSTRUIR BALSA
 
-        balsaT = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('balsa'))
-        balsaL = "Ohh, con estos materiales mas la cuerda y madera que llevo podria construir una balsa"
-        balsaO = ("Que deberia hacer?","Construir","Reservar recursos")
+		balsaT = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('balsa'), world)
+		balsaL = "Ohh, con estos materiales mas la cuerda y madera que llevo podria construir una balsa"
+		balsaO = ("Que deberia hacer?","Construir","Reservar recursos")
 
-        def balsaFunY():
-            log.add_event("No tengo nada mejor que hacer con estos recursos, mejor los uso")
-            inv.deleteItem(Item.create('madera'))
-            inv.deleteItem(Item.create('cuerda'))
+		def balsaFunY():
+			log.add_event("No tengo nada mejor que hacer con estos recursos, mejor los uso")
+			inv.deleteItem(Item.create('madera'))
+			inv.deleteItem(Item.create('cuerda'))
 			inv.addItem(Item.create('balsa'))
-            events.add_event('final_balsa')
+			events.addEvent('final_balsa')
 
-        def balsaFunN():
-            log.add_event("Puede que guardar estos recursos sea util despues")
+		def balsaFunN():
+			log.add_event("Puede que guardar estos recursos sea util despues")
+			events.addEvent('construir_balsa')
 
-        balsaY = lambda: balsaFunY()
-        balsaN = lambda: balsaFunN()
-        balsaS = StoryState.StoryState(balsaL, balsaT, balsaO, balsaY, balsaN, None, None)
-
+		balsaY = lambda: balsaFunY()
+		balsaN = lambda: balsaFunN()
+		balsaS = StoryState.StoryState(balsaL, balsaT, balsaO, balsaY, balsaN, None, None)
 
 
 
@@ -218,5 +218,8 @@ class Story:
 		jabaliMS.next_no_state=cuevaS
 
 		cuevaS.next_yes_state=cuevaIS
+		cuevaS.next_no_state=balsaS
 
-		return jabaliS
+		cuevaIS.next_no_state=balsaS
+
+		return balsaS

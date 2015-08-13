@@ -17,7 +17,7 @@ class Item:
 
 def create(name):
     index = items[name][1]
-    return Item(name,index, '0')
+    return Item(name, index, '0')
 
 def getAscii(name):
     return items[name][0]  

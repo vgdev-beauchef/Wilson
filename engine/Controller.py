@@ -127,15 +127,6 @@ class Controller:
 		no_aswer = ""
 		flag = False
 
-		if pos=='-' and self.inventory.getItem(3) != None :
-			self.log.add_event('He vuelto a la costa con mi balsa. Me ire de aqui porque estoy seguro de que encontrare a alguien. Ojala alguien mas que yo pueda leer este diario algun dia...')
-			#self.ui.draw()
-			#time.sleep(0.5)
-			#self.log.add_event("Presione enter para continuar")
-			self.info.gameOver()
-			self.escape = True
-			return
-
 	def manage(self, ginput):
 		pxi = Player.getPlayPos()[0]
 		pyi = Player.getPlayPos()[1]
