@@ -260,6 +260,21 @@ class Events:
         balsaN = lambda: balsaFunN()
         self.allEvents['final_balsa'] = StoryState.StoryState(balsaL, balsaT, balsaO, balsaY, balsaN, None, None)
 
+        ###################fire_palm
+        fire_palmTrigger = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('palmera'), world)
+        fire_palmLeyend = "Deberia hacer una señal de humo"
+        fire_palmOpt = ("Que deberia hacer?", "Prenderle fuego", "Irse")
+
+        def fire_palmYes():
+            log.add_event("Con esto deberian lograr verme!!")
+            #TODO WIN
+        def fire_palmNo():
+            log.add_event("Buscare otras formas...")
+
+        yesFun10 = lambda: fire_palmYes()
+        noFun10 = lambda: fire_palmNo()
+        self.allEvents['palmera']=StoryState.StoryState(radioLeyend, radioTrigger, radioOpt, yesFun10, noFun10, None, None)
+
     def addEvent(self, name):
         self.currentEvents[name]=self.allEvents[name]
 
