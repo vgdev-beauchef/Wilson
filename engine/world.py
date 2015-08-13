@@ -148,6 +148,7 @@ class World(object):
     def doFov(self, x, y):
         ox = getPlayPos()[0] + 0.5
         oy = getPlayPos()[1] + 0.5
+        j = 0
         for i in range(_viewRadius):
             self.vgrid[int(ox)][int(oy)] = True
             pos = self.grid[int(ox)][int(oy)]
@@ -155,8 +156,13 @@ class World(object):
                pos == 'T' or\
                pos == 'Y':
                 return
+            elif pos == '/':
+                j += 2
             ox += x
             oy += y
+            j += 1
+            if j >= _viewRadius:
+                break
 
     def drawMap(self):
         xCenter = getPlayPos()[0]
