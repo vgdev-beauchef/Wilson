@@ -13,7 +13,7 @@ class Item:
         return hash(self.name)
 
     def __eq__(self, other):
-        return self.name == other.name
+        return self.id == other.id
 
 def create(name):
     index = items[name][1]
@@ -49,7 +49,7 @@ items = {
     'balsa'   : ['X', 3, [[89, 101, '.']]],
     'fuego'   : ['&', 4, [[92, 90, '.']]],
     'banana'  : ['B', 5, [[68, 161, '/']]],
-    'madera'  : ['M', 6, [[89, 160, '/']]],
+    'madera'  : ['M', 6, [[89, 160, '.']]],
     'cuerda'  : ['|', 7, [[89, 139, '/']]],
     'b_jabali': ['j', 9, [[80, 170, '.']]],
     'm_jabali': ['J', 10, [[65, 148, '/']]],

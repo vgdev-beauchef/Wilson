@@ -47,6 +47,7 @@ class Story:
 			c = Item.create('comida')
 			inv.addItem(c)
 			inv.addItem(c)
+			inv.clean()
 
 			removeItem(world, 'b_jabali')
 			Item.removeItem('b_jabali')
@@ -78,6 +79,7 @@ class Story:
 			c = Item.create('comida')
 			inv.addItem(c)
 			inv.addItem(c)
+			inv.clean()
 			events.addEvent('dead_man')
 			addItem(world, 'dead_man')
 			addItem(world, 'm_jabali')
@@ -111,6 +113,7 @@ class Story:
 				c = Item.create('comida')
 				inv.addItem(c)
 				inv.addItem(c)
+				inv.clean()
 
 			removeItem(world, 'm_jabali')
 			Item.removeItem('m_jabali')
@@ -159,6 +162,7 @@ class Story:
 				log.add_event("Logre matar a la bestia... al menos tendre comida")
 				c = Item.create('comida')
 				inv.addItem(c)
+				inv.clean()
 				#TODO radio
 			elif(not inv.getItem(Item.getItemId('fuego')) is None):
 				log.add_event("Logre ahuyentar al oso con el fuego")
@@ -166,6 +170,7 @@ class Story:
 				c = Item.create('comida')
 				inv.addItem(c)
 				inv.addItem(c)
+				inv.clean()
 				#TODO radio
 			else:
 				log.add_event("Esto fue demasiado para mi....", 197)
@@ -184,14 +189,18 @@ class Story:
 
 		balsaT = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('balsa'), world)
 		balsaL = "Ohh, con estos materiales mas la cuerda y madera que llevo podria construir una balsa"
-		balsaO = ("Que deberia hacer?","Construir","Reservar recursos")
+		balsaO = ("Que deberia hacer?","Construir","Reservar")
 
 		def balsaFunY():
 			log.add_event("No tengo nada mejor que hacer con estos recursos, mejor los uso")
+			events.addEvent('final_balsa')
+			c = Item.create('balsa')
+			inv.addItem(c)
 			inv.deleteItem(Item.create('madera'))
 			inv.deleteItem(Item.create('cuerda'))
-			inv.addItem(Item.create('balsa'))
-			events.addEvent('final_balsa')
+			inv.clean()
+			removeItem(world, 'balsa')
+
 
 		def balsaFunN():
 			log.add_event("Puede que guardar estos recursos sea util despues")

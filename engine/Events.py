@@ -181,7 +181,7 @@ class Events:
                 Story.addItem(self.world, 'balsa')
 
         def ropeNo():
-            log.add_event("Asi estare mas asalvo")
+            log.add_event("Asi estare mas a salvo")
             removeItem(world,'cuerda')
 
         yesFun7 = lambda: ropeYes()
@@ -222,7 +222,7 @@ class Events:
         self.allEvents['radio']=StoryState.StoryState(radioLeyend, radioTrigger, radioOpt, yesFun9, noFun9, None, None)
 
         ##################CONSTRUIR BALSA
-        balsaCT = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('balsa'))
+        balsaCT = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('balsa'), world)
         balsaCL = "Aun puedo construir la balsa con lo que tengo..."
         balsaCO = ("Que deberia hacer?","Construir","Reservar recursos")
 
@@ -236,15 +236,13 @@ class Events:
         def balsaCFunN():
             log.add_event("Puede que guardar estos recursos sea util despues...")
 
-        balsaCY = lambda: balsaFunY()
-        balsaCN = lambda: balsaFunN()
+        balsaCY = lambda: balsaCFunY()
+        balsaCN = lambda: balsaCFunN()
         self.allEvents['construir_balsa'] = StoryState.StoryState(balsaCL, balsaCT, balsaCO, balsaCY, balsaCN, None, None)
 
         ##################Balsa Final (acercarse a la orilla)
-        def balsaTrigger(day, step, x, y):
-            posTrigger(x,y, "-", world)
 
-        balsaT = lambda day, step, x, y: balsaTrigger(day,step,x,y)
+        balsaT = lambda day, step, x, y: posTrigger(x,y, '-', world)
         balsaL = "Podria usar la balsa para tratar de salir de aqui"
         balsaO = ("Que deberia hacer?","Zarpar","Quedarse")
 
@@ -262,7 +260,7 @@ class Events:
 
         ###################fire_palm
         fire_palmTrigger = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('palmera'), world)
-        fire_palmLeyend = "Deberia hacer una señal de humo"
+        fire_palmLeyend = "Deberia hacer una senyal de humo"
         fire_palmOpt = ("Que deberia hacer?", "Prenderle fuego", "Irse")
 
         def fire_palmYes():
