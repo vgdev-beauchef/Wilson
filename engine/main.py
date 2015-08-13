@@ -126,7 +126,11 @@ if __name__ == '__main__':
             pygame.mixer.music.play(1, 0.0)
         while 1 :
             if info.final1:
-                intro.win_screen()
+                intro.win_screen(1)
+            elif info.final2:
+                intro.win_screen(2)
+            elif info.final3:
+                intro.win_screen(3)
             else:
                 intro.game_over_screen()
                 time.sleep(2)

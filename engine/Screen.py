@@ -51,8 +51,13 @@ class Screen:
         self.draw(4)
         self.refresh()
 
-    def win_screen(self):
-        self.draw(7)
+    def win_screen(self, ending):
+        if(ending==1):
+            self.draw(7)
+        elif(ending==2):
+            pass
+        else:
+            pass
         self.refresh()
 
 

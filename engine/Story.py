@@ -171,7 +171,7 @@ class Story:
 				inv.addItem(c)
 				inv.addItem(c)
 				inv.clean()
-				#TODO radio
+				events.addEvent('sobrevivir')
 			else:
 				log.add_event("Esto fue demasiado para mi....", 197)
 				info.gameOver()
@@ -231,4 +231,4 @@ class Story:
 
 		cuevaIS.next_no_state=balsaS
 
-		return balsaS
+		return jabaliS

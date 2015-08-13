@@ -6,6 +6,8 @@ import Inventory
 import Item
 import Story
 
+survive_time = None
+
 def posTrigger(px, py, target, world):
 	pos=world.grid[px][py]
 	return pos==target
@@ -31,10 +33,6 @@ class Events:
     def initEvents(self):
         self.addEvent('comida')
         self.addEvent('cueva')
-        Story.addItem(self.world, 'madera')
-        Story.addItem(self.world, 'cuerda')
-        self.addEvent('madera')
-        self.addEvent('cuerda')
 
 
     def createEvents(self, world, inv, dayLimit, log):
@@ -260,18 +258,49 @@ class Events:
 
         ###################fire_palm
         fire_palmTrigger = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('palmera'), world)
-        fire_palmLeyend = "Deberia hacer una senyal de humo"
-        fire_palmOpt = ("Que deberia hacer?", "Prenderle fuego", "Irse")
+        fire_palmLeyend = "Podria usar esta palmera como senyal de humo..."
+        fire_palmOpt = ("Que deberia hacer?", "Prenderle fuego", "No hacerlo")
 
         def fire_palmYes():
             log.add_event("Con esto deberian lograr verme!!")
-            #TODO WIN
+            self.info.gameOver()
+            self.info.gameFinal2()
         def fire_palmNo():
-            log.add_event("Buscare otras formas...")
+            log.add_event("Es muy peligroso, buscare otras formas...")
 
         yesFun10 = lambda: fire_palmYes()
         noFun10 = lambda: fire_palmNo()
-        self.allEvents['palmera']=StoryState.StoryState(radioLeyend, radioTrigger, radioOpt, yesFun10, noFun10, None, None)
+        self.allEvents['palmera']=StoryState.StoryState(fire_palmLeyend, fire_palmTrigger, fire_palmOpt, yesFun10, noFun10, None, None)
+
+        ######Survive
+        def survive(step):
+            time = 20
+            global survive_time
+            if(survive_time is None):
+                survive_time = step
+                return False
+            else:
+                return survive_time+time == step
+
+        surviveTrigger = lambda day, step, x, y: survive(step)
+        surviveLeyend = "He sobrevivido mucho tiempo solo... creo que es momentos de tomar una decision"
+        surviveOpt = ("Que deberia hacer?", "Usar lo obtenido", "Explorar")
+
+        def surviveYes():
+            log.add_event("Creo haber visto algo que puede servirme...")
+            self.addEvent('palmera')
+            Story.addItem(self.world, 'palmera')
+            Story.addNewItem(self.world, 'comida', 70, 125)
+            Story.addNewItem(self.world, 'comida', 100, 112)
+
+        def surviveNo():
+            log.add_event("Seguir explorando es lo mejor, aun me queda isla por recorrer")
+            global survive_time
+            survive_time = None
+
+        yesFun11 = lambda: surviveYes()
+        noFun11 = lambda: surviveNo()
+        self.allEvents['sobrevivir']=StoryState.StoryState(surviveLeyend, surviveTrigger, surviveOpt, yesFun11, noFun11, None, None)
 
     def addEvent(self, name):
         self.currentEvents[name]=self.allEvents[name]
