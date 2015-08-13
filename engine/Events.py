@@ -193,6 +193,24 @@ class Events:
         noFun8 = lambda: caveNo()
         self.allEvents['cueva']=StoryState.StoryState(caveLeyend, caveTrigger, caveOpt, yesFun8, noFun8, None, None)
 
+        ###################radio
+        radioTrigger = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('radio'), world)
+        radioLeyend = "Aquello no es la pieza que necesito?"
+        radioOpt = ("Que deberia hacer?", "Entrar por ella", "Debo estar loco...")
+
+        def radioYes():
+            log.add_event("Si! Esto me sacara de aqui!")
+            c = Item.create('radio')
+            inv.addItem(c)
+            removeItem(world,'radio')
+        def radioNo():
+            log.add_event("Me pregunto si habra otra forma de arreglar ese aparato...")
+            removeItem(world,'radio')
+
+        yesFun9 = lambda: radioYes()
+        noFun9 = lambda: radioNo()
+        self.allEvents['radio']=StoryState.StoryState(radioLeyend, radioTrigger, radioOpt, yesFun9, noFun9, None, None)
+
     def addEvent(self, name):
         self.currentEvents[name]=self.allEvents[name]
 
