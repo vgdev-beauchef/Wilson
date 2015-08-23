@@ -58,17 +58,78 @@ tiles = {
     'tree' : colors['tree']
 }
 
+def refreshColors():
+    getColors['@'] = tiles['person']
+    getColors['#'] = tiles['rock']
+    getColors['.'] = tiles['sand']
+    getColors['o'] = tiles['sand']
+    getColors['~'] = tiles['deep']
+    getColors['/'] = tiles['grass']
+    getColors['*'] = tiles['obj']
+    getColors['O'] = tiles['cave']
+    getColors['-'] = tiles['shallow']
+    getColors['Y'] = tiles['palm']
+    getColors['T'] = tiles['tree']
+    getColors['a'] = colors['apple']
+    getColors['X'] = colors['fallen_palm']
+    getColors['j'] = colors['boar']
+    getColors['w'] = colors['metal']
+    getColors['&'] = colors['apple']
+    getColors['B'] = colors['sand']
+
+getColors = {
+    '@' :   tiles['person'],
+    '#' :   tiles['rock'],
+    '.' :   tiles['sand'],
+    'o' :   tiles['sand'],
+    '~' :   tiles['deep'],
+    '/' :   tiles['grass'],
+    '*' :   tiles['obj'],
+    'O' :   tiles['cave'],
+    '-' :   tiles['shallow'],
+    'Y' :   tiles['palm'],
+    'T' :   tiles['tree'],
+    'a' :   colors['apple'],
+    'X' :   colors['fallen_palm'],
+    'j' :   colors['boar'],
+    'w' :   colors['metal'],
+    '&' :   colors['apple'],
+    'B' :   colors['yellow'],
+    'F' :   colors['grass'],
+    'J' :   colors['boar']
+}
+
+asciiToUnicode = {
+    '#' :   u'\u2588',
+    '~' :   u'\u2248',
+    '/' :   u'\u0e45',
+    'O' :   u'\u22d2',
+    '-' :   '~',
+    'Y' :   u'\u1f33',
+    'T' :   u'\u1f34',
+    'o' :   '.',
+    'R' :   u'\u22d2',
+    'F' :   u'\u0407',
+    '&' :   u'\u0496',
+    '|' :   u'\u060F',
+    'M' :   u'\u229F',
+    'j' :   u'\u0B33',
+    '1' :   u'\u0B89',
+    'J' :   u'\u0B32'
+}
+
+
+
 
 class World(object):
 
     def __init__(self):
         self.grid = matrix.maptoMatrix('mapa4.txt')
 
-        self.grid[80][170]  = 'a'
-        self.grid[93][139]  = 'j'
-        self.grid[105][123] = 'w'
-        self.grid[115][112] = 'O'
-        self.grid[89][101]  = 'X'
+        self.grid[80][170]  = 'j'
+        self.grid[93][139]  = 'a'
+        self.grid[117][112] = 'O'
+        self.grid[116][112] = 'o'
 
         height = len(self.grid[0])
         width = len(self.grid)
@@ -115,6 +176,7 @@ class World(object):
     def doFov(self, x, y):
         ox = getPlayPos()[0] + 0.5
         oy = getPlayPos()[1] + 0.5
+        j = 0
         for i in range(_viewRadius):
             self.vgrid[int(ox)][int(oy)] = True
             pos = self.grid[int(ox)][int(oy)]
@@ -122,8 +184,13 @@ class World(object):
                pos == 'T' or\
                pos == 'Y':
                 return
+            elif pos == '/':
+                j += 1
             ox += x
             oy += y
+            j += 1
+            if j >= _viewRadius:
+                break
 
     def drawMap(self):
         xCenter = getPlayPos()[0]
@@ -152,44 +219,12 @@ class World(object):
 
                 if x == xCenter and y == yCenter:
                     cha = '@'
-
-                if cha == '@':          #Personaje
-                    color = tiles['person']
-                elif cha == '#':        #Roca
-                    color = tiles['rock']
-                    cha = u'\u2588'
-                elif cha == '.':        #Arena
-                    color = tiles['sand']
-                elif cha == '~':        #Agua profunda
-                    color = tiles['deep']
-                    cha = u'\u2248'
-                elif cha == '/':        #Pasto
-                    color = tiles['grass']
-                    cha = u'\u0e45'
-                elif cha == '*':        #Objeto
-                    color = tiles['obj']
-                elif cha == 'O':        #Cueva
-                    color = tiles['cave']
-                    cha = u'\u22d2'
-                elif cha == '-':        #agua no profunda
-                    color = tiles['shallow']
-                    cha = '~'
-                elif cha == 'Y':        #palmera
-                    color = tiles['palm']
-                    cha = u'\u1f33'
-                elif cha == 'T':        #arbol
-                    color = tiles['tree']
-                    cha = u'\u1f34'
-                elif cha == 'a':        #manzana
-                    color = colors['apple']
-                elif cha == 'X':        #evento interesante
-                    color = colors['fallen_palm']
-                elif cha == 'j':        #jabali
-                    color = colors['boar']
-                elif cha == 'w':        #cuchillo
-                    color = colors['metal']
+                if cha in getColors:
+                    color = getColors[cha]
                 else:
-                    color = 1
+                    color = 7
+                if cha in asciiToUnicode:
+                    cha = asciiToUnicode[cha]
 
                 if self.vgrid[x][y]:
                     self.memgrid[x][y] = True
@@ -201,3 +236,4 @@ class World(object):
                 else:
                     self.window.addch(i, j, ' ')
         self.window.refresh()
+        refreshColors()

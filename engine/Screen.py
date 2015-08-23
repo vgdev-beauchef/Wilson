@@ -39,6 +39,8 @@ class Screen:
             self.draw_array(self.ascii_art["prologo"])
         elif view == 7:
             self.draw_array(self.ascii_art["epilogo"])
+        elif view == 8:
+            self.draw_array(self.ascii_art["epilogo2"])
 
     def draw_array(self, array):
         for i in range(0, len(array)):
@@ -51,8 +53,13 @@ class Screen:
         self.draw(4)
         self.refresh()
 
-    def win_screen(self):
-        self.draw(7)
+    def win_screen(self, ending):
+        if(ending==1):
+            self.draw(7)
+        elif(ending==2):
+            self.draw(8)
+        else:
+            pass
         self.refresh()
 
 

@@ -21,7 +21,8 @@ class StateMachine:
     	if not self.current_state==-1:
             texts = self.machine[self.current_state][1]
             for text in texts:
-                log.add_event(text)
+                pass
+                #log.add_event(text)
                 #ui.draw()
                 #time.sleep(0.3)
 
