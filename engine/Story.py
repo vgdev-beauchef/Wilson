@@ -70,7 +70,7 @@ class Story:
 		##########SEGUNDA CRIA JABALI############
 
 		jabali2T = lambda day, step, x, y: posTrigger(x,y, Item.getAscii('b_jabali'), world)
-		jabali2L = "Otra cria de Jabali, seguire con mi desicion anterior?"
+		jabali2L = "Otra cria de Jabali, seguire con mi decision anterior?"
 		jabali2O = ("Que hacer?","Matarla","Dejarla Huir")
 
 		def jabali2FunY():
